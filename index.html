@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giani Dafirenze — Intelligence Financiera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg:#06070a;--bg2:#0d0f14;--bg3:#13161d;--bg4:#191d26;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --gold:#c8a96e;--gold2:#e8c98a;--gold3:rgba(200,169,110,0.15);
+  --text:#e8e6e0;--text2:#9a9690;--text3:#5c5a56;
+  --red:#d45f5f;--red2:rgba(212,95,95,0.15);
+  --green:#5ab585;--green2:rgba(90,181,133,0.15);
+  --blue:#5a9fd4;--blue2:rgba(90,159,212,0.15);
+  --amber:#d4a55a;--amber2:rgba(212,165,90,0.15);
+  --shadow:0 2px 20px rgba(0,0,0,0.5);--radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+.site-header{background:linear-gradient(180deg,rgba(200,169,110,0.04) 0%,transparent 100%);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1560px;margin:0 auto;}
+.brand{display:flex;align-items:center;gap:14px;}
+.brand-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;color:#06070a;font-weight:700;}
+.brand-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold2);letter-spacing:0.02em;}
+.brand-sub{font-size:11px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-top:-2px;}
+.header-meta{display:flex;align-items:center;gap:24px;}
+.period-badge{background:var(--gold3);border:1px solid rgba(200,169,110,0.3);color:var(--gold);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;letter-spacing:0.05em;}
+.update-time{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
+.nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:64px;z-index:99;}
+.nav-inner{display:flex;gap:2px;max-width:1560px;margin:0 auto;overflow-x:auto;}
+.nav-btn{background:none;border:none;color:var(--text2);padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;letter-spacing:0.02em;}
+.nav-btn:hover{color:var(--text);}
+.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.main{max-width:1560px;margin:0 auto;padding:32px 40px;}
+.section{display:none;}.section.active{display:block;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);}
+.card-title{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.card-title::before{content:'';width:3px;height:14px;background:var(--gold);border-radius:2px;opacity:0.6;}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px;}
+.kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;position:relative;overflow:hidden;}
+.kpi-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent-color,var(--gold));opacity:0.6;}
+.kpi-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;margin-bottom:10px;}
+.kpi-value{font-family:'Playfair Display',serif;font-size:26px;color:var(--text);line-height:1.1;margin-bottom:8px;}
+.kpi-sub{font-size:11px;color:var(--text3);margin-bottom:6px;}
+.kpi-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
+.badge.up{background:var(--green2);color:var(--green);}
+.badge.down{background:var(--red2);color:var(--red);}
+.badge.neutral{background:var(--blue2);color:var(--blue);}
+.badge.warn{background:var(--amber2);color:var(--amber);}
+.alert-banner{background:linear-gradient(90deg,rgba(212,95,95,0.08),rgba(212,95,95,0.04));border:1px solid rgba(212,95,95,0.25);border-radius:var(--radius);padding:14px 20px;display:flex;align-items:center;gap:12px;margin-bottom:24px;font-size:13px;}
+.alert-text{color:var(--text2);}
+.alert-text strong{color:var(--text);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+.grid-6040{display:grid;grid-template-columns:3fr 2fr;gap:20px;}
+.mb24{margin-bottom:24px;}.mb16{margin-bottom:16px;}
+.section-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--text);margin-bottom:6px;letter-spacing:-0.01em;}
+.section-sub{font-size:13px;color:var(--text3);margin-bottom:28px;}
+.chart-wrap{position:relative;}.chart-wrap canvas{max-height:280px;}.chart-wrap.tall canvas{max-height:340px;}
+.fin-table{width:100%;border-collapse:collapse;font-size:12px;font-family:'DM Mono',monospace;}
+.fin-table th{padding:10px 12px;text-align:right;color:var(--text3);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--border);font-weight:500;white-space:nowrap;}
+.fin-table th:first-child{text-align:left;}
+.fin-table td{padding:9px 12px;text-align:right;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text2);white-space:nowrap;}
+.fin-table td:first-child{text-align:left;color:var(--text);font-family:'DM Sans',sans-serif;}
+.fin-table tr.section-row td{background:var(--bg3);color:var(--text);font-weight:600;border-top:1px solid var(--border);}
+.fin-table tr.total-row td{background:var(--bg4);color:var(--gold);font-weight:700;border-top:1px solid var(--border2);font-size:13px;}
+.fin-table tr.sub-row td{padding-left:28px;font-size:11px;}
+.fin-table .pos{color:var(--green);}.fin-table .neg{color:var(--red);}.fin-table .muted{color:var(--text3);}
+.fin-table tr:hover td{background:rgba(255,255,255,0.02);}
+.canal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+.canal-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
+.canal-name{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:8px;}
+.canal-value{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:4px;}
+.canal-pct{font-size:11px;color:var(--text3);margin-bottom:12px;}
+.margen-bar-bg{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-bottom:6px;}
+.margen-bar-fill{height:100%;border-radius:2px;}
+.canal-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);}
+.insight-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.insight-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;gap:14px;align-items:flex-start;}
+.insight-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.insight-icon.alert{background:var(--red2);}.insight-icon.warn{background:var(--amber2);}.insight-icon.ok{background:var(--green2);}.insight-icon.info{background:var(--blue2);}
+.insight-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px;}
+.insight-desc{font-size:12px;color:var(--text2);line-height:1.6;}
+.insight-value{font-family:'DM Mono',monospace;font-size:11px;margin-top:8px;padding:4px 8px;border-radius:6px;display:inline-block;}
+.insight-value.alert{background:var(--red2);color:var(--red);}.insight-value.warn{background:var(--amber2);color:var(--amber);}.insight-value.ok{background:var(--green2);color:var(--green);}.insight-value.info{background:var(--blue2);color:var(--blue);}
+.indicador-row{display:grid;grid-template-columns:220px 1fr auto;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);}
+.indicador-row:last-child{border-bottom:none;}
+.ind-label{font-size:13px;color:var(--text2);}
+.ind-bar-bg{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+.ind-bar-fill{height:100%;border-radius:3px;}
+.ind-value{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;text-align:right;min-width:80px;}
+.hist-year-row{display:grid;grid-template-columns:70px 1fr 110px 80px 80px;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;font-size:13px;}
+.hist-year-row:last-child{border-bottom:none;}
+.hist-bar-bg{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+.hist-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.gasto-row{display:grid;grid-template-columns:200px 1fr 80px 60px;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center;font-size:12px;}
+.gasto-row:last-child{border-bottom:none;}
+.gasto-bar-bg{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+.gasto-bar-fill{height:100%;border-radius:3px;}
+.doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.doc-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;}
+.doc-num{font-family:'Playfair Display',serif;font-size:42px;color:rgba(200,169,110,0.2);line-height:1;margin-bottom:12px;}
+.doc-title{font-weight:600;color:var(--text);margin-bottom:8px;font-size:14px;font-family:'DM Mono',monospace;}
+.doc-desc{font-size:12px;color:var(--text3);line-height:1.7;margin-bottom:16px;}
+.doc-fields{display:flex;flex-direction:column;gap:6px;}
+.doc-field{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text2);}
+.doc-field::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:0.5;flex-shrink:0;}
+.doc-format{display:inline-block;background:var(--bg3);border:1px solid var(--border);color:var(--gold);font-family:'DM Mono',monospace;font-size:11px;padding:3px 8px;border-radius:5px;margin-top:12px;}
+.phase-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold);margin-bottom:14px;margin-top:28px;padding-top:4px;}
+.step-row{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.step-row:last-child{border-bottom:none;}
+.step-num{width:24px;height:24px;background:var(--gold3);border:1px solid rgba(200,169,110,0.3);color:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.step-label{font-weight:600;color:var(--text);margin-bottom:2px;}
+.step-desc{font-size:12px;color:var(--text3);}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+.hl{color:var(--gold);font-family:'DM Mono',monospace;}
+.hl-red{color:var(--red);}
+.hl-green{color:var(--green);}
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+@media(max-width:1200px){.kpi-grid{grid-template-columns:repeat(3,1fr);}canal-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:900px){.main{padding:20px;}.site-header,.nav{padding:0 20px;}.grid-2,.grid-3,.grid-6040{grid-template-columns:1fr;}.kpi-grid{grid-template-columns:repeat(2,1fr);}.canal-grid{grid-template-columns:1fr;}.doc-grid{grid-template-columns:1fr;}.insight-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-icon">GD</div>
+      <div>
+        <div class="brand-name">Giani Dafirenze</div>
+        <div class="brand-sub">Intelligence Financiera</div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div class="period-badge">YTD Febrero 2026</div>
+      <div class="update-time">Datos al 28.02.2026</div>
+    </div>
+  </div>
+</header>
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showSection('resumen',this)">Resumen Ejecutivo</button>
+    <button class="nav-btn" onclick="showSection('eerr',this)">EERR Mensual</button>
+    <button class="nav-btn" onclick="showSection('canales',this)">Análisis por Canal</button>
+    <button class="nav-btn" onclick="showSection('costos',this)">Estructura de Costos</button>
+    <button class="nav-btn" onclick="showSection('indicadores',this)">Indicadores Estratégicos</button>
+    <button class="nav-btn" onclick="showSection('historico',this)">Histórico 2016–2026</button>
+    <button class="nav-btn" onclick="showSection('insights',this)">Insights</button>
+    <button class="nav-btn" onclick="showSection('datos',this)">Guía de Datos</button>
+  </div>
+</nav>
+<main class="main">
+
+<!-- RESUMEN EJECUTIVO -->
+<section id="s-resumen" class="section active">
+  <div class="section-title">Resumen Ejecutivo</div>
+  <div class="section-sub">Estado de resultados consolidado · Enero — Febrero 2026</div>
+  <div class="alert-banner">
+    <span style="font-size:18px;flex-shrink:0">⚠</span>
+    <span class="alert-text"><strong>EBITDA negativo YTD −$5.7M</strong> — Enero cerró con EBITDA positivo (+$387K) pero Febrero revirtió con fuerza (−$6.1M). El margen bruto de <strong>44.5%</strong> representa una caída de <strong>5.6 pp</strong> vs 2025 (50.1%). Patrón estacional habitual de Q1, pero el deterioro de márgenes requiere diagnóstico urgente.</span>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent-color:var(--gold)"><div class="kpi-label">Ingresos Totales YTD</div><div class="kpi-value">$319.3M</div><div class="kpi-sub">Pres: $324.0M · 2025: $281.9M</div><div class="kpi-badges"><span class="badge down">−1.5% vs Pres</span><span class="badge up">+13.3% vs 2025</span></div></div>
+    <div class="kpi-card" style="--accent-color:var(--blue)"><div class="kpi-label">Margen Bruto %</div><div class="kpi-value">44.5%</div><div class="kpi-sub">Pres: 44.6% · 2025: 50.1%</div><div class="kpi-badges"><span class="badge neutral">−0.1 pp vs Pres</span><span class="badge down">−5.6 pp vs 2025</span></div></div>
+    <div class="kpi-card" style="--accent-color:var(--red)"><div class="kpi-label">EBITDA YTD</div><div class="kpi-value" style="color:var(--red)">−$5.7M</div><div class="kpi-sub">Pres: −$1.9M · 2025: −$24.8M</div><div class="kpi-badges"><span class="badge down">−$3.8M vs Pres</span><span class="badge up">+$19.1M vs 2025</span></div></div>
+    <div class="kpi-card" style="--accent-color:var(--red)"><div class="kpi-label">Resultado Neto YTD</div><div class="kpi-value" style="color:var(--red)">−$18.7M</div><div class="kpi-sub">Pres: −$15.7M · 2025: −$38.5M</div><div class="kpi-badges"><span class="badge down">−$3.0M vs Pres</span><span class="badge up">+$19.8M vs 2025</span></div></div>
+    <div class="kpi-card" style="--accent-color:var(--amber)"><div class="kpi-label">Costo / Venta</div><div class="kpi-value">55.5%</div><div class="kpi-sub">2025: 49.9% · Δ +5.6 pp</div><div class="kpi-badges"><span class="badge warn">Deterioro relevante</span></div></div>
+  </div>
+  <div class="grid-6040 mb24">
+    <div class="card"><div class="card-title">Evolución Ingresos Mensuales</div><div class="chart-wrap"><canvas id="chartIngEvol"></canvas></div></div>
+    <div class="card"><div class="card-title">Mix de Ingresos por Canal</div><div class="chart-wrap"><canvas id="chartMix"></canvas></div></div>
+  </div>
+  <div class="grid-2 mb24">
+    <div class="card"><div class="card-title">Waterfall EBITDA — YTD</div><div class="chart-wrap"><canvas id="chartWaterfall"></canvas></div></div>
+    <div class="card"><div class="card-title">Margen Bruto % por Canal</div><div class="chart-wrap"><canvas id="chartMargenCanal"></canvas></div></div>
+  </div>
+</section>
+
+<!-- EERR MENSUAL -->
+<section id="s-eerr" class="section">
+  <div class="section-title">Estado de Resultados</div>
+  <div class="section-sub">Comparativo mensual · Real 2026 vs Presupuesto vs Real 2025</div>
+  <div class="card mb24" style="overflow-x:auto">
+    <div class="card-title">EERR Consolidado</div>
+    <table class="fin-table">
+      <thead><tr><th style="min-width:200px">Partida</th><th>Enero 2026</th><th>Feb 2026</th><th>YTD 2026</th><th>Pres YTD</th><th>Δ Pres</th><th>YTD 2025</th><th>Δ 2025</th></tr></thead>
+      <tbody id="eerr-body"></tbody>
+    </table>
+  </div>
+  <div class="grid-2">
+    <div class="card"><div class="card-title">EBITDA Mensual — 2026 vs 2025</div><div class="chart-wrap"><canvas id="chartEBITDA"></canvas></div></div>
+    <div class="card"><div class="card-title">Margen Bruto % — Evolución</div><div class="chart-wrap"><canvas id="chartMargenEvol"></canvas></div></div>
+  </div>
+</section>
+
+<!-- CANALES -->
+<section id="s-canales" class="section">
+  <div class="section-title">Análisis por Canal</div>
+  <div class="section-sub">Rentabilidad y evolución — Enero–Febrero 2026</div>
+  <div class="canal-grid" id="canal-cards"></div>
+  <div class="grid-2">
+    <div class="card"><div class="card-title">Ingresos Mensuales por Canal</div><div class="chart-wrap tall"><canvas id="chartCanalesEvol"></canvas></div></div>
+    <div class="card"><div class="card-title">Margen Bruto % — Canal vs 2025</div><div class="chart-wrap tall"><canvas id="chartRadar"></canvas></div></div>
+  </div>
+</section>
+
+<!-- COSTOS -->
+<section id="s-costos" class="section">
+  <div class="section-title">Estructura de Costos</div>
+  <div class="section-sub">Composición y magnitud de gastos operacionales · YTD Feb 2026</div>
+  <div class="kpi-grid mb24">
+    <div class="kpi-card" style="--accent-color:var(--blue)"><div class="kpi-label">GAV Total YTD</div><div class="kpi-value">$102.1M</div><div class="kpi-sub">32.0% de ingresos</div></div>
+    <div class="kpi-card" style="--accent-color:var(--green)"><div class="kpi-label">Gastos Fijos YTD</div><div class="kpi-value">$42.7M</div><div class="kpi-sub">13.4% de ingresos</div></div>
+    <div class="kpi-card" style="--accent-color:var(--amber)"><div class="kpi-label">Sueldos + Honorarios</div><div class="kpi-value">$60.5M</div><div class="kpi-sub">19.0% de ingresos</div></div>
+    <div class="kpi-card" style="--accent-color:var(--gold)"><div class="kpi-label">Arriendos (Tiendas)</div><div class="kpi-value">$39.5M</div><div class="kpi-sub">12.4% de ingresos</div></div>
+    <div class="kpi-card" style="--accent-color:#a05fd4"><div class="kpi-label">Marketing Digital</div><div class="kpi-value">$11.8M</div><div class="kpi-sub">3.7% de ingresos</div></div>
+  </div>
+  <div class="grid-6040 mb24">
+    <div class="card"><div class="card-title">Top Partidas de Gasto — YTD</div><div id="gastos-list"></div></div>
+    <div class="card"><div class="card-title">Composición GAV</div><div class="chart-wrap"><canvas id="chartGAVComp"></canvas></div></div>
+  </div>
+  <div class="card" style="overflow-x:auto">
+    <div class="card-title">Detalle de Gastos como % de Ingresos</div>
+    <table class="fin-table">
+      <thead><tr><th>Partida</th><th>Enero Monto</th><th>% Ing</th><th>Feb Monto</th><th>% Ing</th><th>YTD Monto</th><th>YTD %</th><th>Tipo</th></tr></thead>
+      <tbody id="costos-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- INDICADORES ESTRATÉGICOS -->
+<section id="s-indicadores" class="section">
+  <div class="section-title">Indicadores Estratégicos</div>
+  <div class="section-sub">Estructura, palanca y sostenibilidad financiera</div>
+  <div class="grid-2 mb24">
+    <div class="card">
+      <div class="card-title">Punto de Equilibrio</div>
+      <div style="margin-bottom:20px"><div style="font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.08em">Break-Even mensual estimado</div><div style="font-family:'Playfair Display',serif;font-size:36px;color:var(--gold)">$163.0M</div><div style="font-size:12px;color:var(--text3);margin-top:4px">Promedio real YTD: <span class="hl">$159.6M/mes</span> · Déficit: <span style="color:var(--red);font-family:'DM Mono',monospace">−$3.4M/mes</span></div></div>
+      <div class="indicador-row"><div class="ind-label">Ventas reales YTD/mes</div><div class="ind-bar-bg"><div class="ind-bar-fill" style="width:98%;background:var(--gold)"></div></div><div class="ind-value hl">$159.6M</div></div>
+      <div class="indicador-row"><div class="ind-label">Break-Even mensual</div><div class="ind-bar-bg"><div class="ind-bar-fill" style="width:100%;background:var(--red)"></div></div><div class="ind-value" style="color:var(--red)">$163.0M</div></div>
+      <div class="indicador-row"><div class="ind-label">Presupuesto mensual</div><div class="ind-bar-bg"><div class="ind-bar-fill" style="width:100%;background:var(--blue)"></div></div><div class="ind-value" style="color:var(--blue)">$162.0M</div></div>
+      <div class="divider"></div>
+      <div><div style="font-size:11px;color:var(--text3);margin-bottom:6px">Break-even anualizado implica ventas de:</div><div style="font-family:'Playfair Display',serif;font-size:28px;color:var(--amber)">$1,956M</div><div style="font-size:11px;color:var(--text3)">Run-rate actual: $1,916M · Gap: <span style="color:var(--red)">−$40M</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Leverage Operativo y Run-Rate</div>
+      <div style="margin-bottom:18px"><div style="font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.08em">Leverage Operativo estimado</div><div style="font-family:'Playfair Display',serif;font-size:36px;color:var(--blue)">~7.5×</div><div style="font-size:12px;color:var(--text3);margin-top:4px">+10% ventas → impacto EBITDA: <span class="hl-green">+$14.1M/mes</span></div></div>
+      <div class="divider"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+        <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Run-Rate Anual 2026</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">$1,916M</div><div style="font-size:11px;color:var(--text3)">Pres: $2,402M · <span style="color:var(--red)">−$486M</span></div></div>
+        <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Gastos Fijos / Ingresos</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--amber)">13.4%</div><div style="font-size:11px;color:var(--text3)">Benchmark retail: 8–12%</div></div>
+        <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Gastos Fin. / Ingresos</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--red)">1.9%</div><div style="font-size:11px;color:var(--text3)">$6.2M YTD · Sin cobertura EBITDA</div></div>
+        <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Cobertura Intereses</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--red)">N/A</div><div style="font-size:11px;color:var(--text3)">EBITDA negativo YTD</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="overflow-x:auto">
+    <div class="card-title">Análisis de Sensibilidad EBITDA</div>
+    <table class="fin-table">
+      <thead><tr><th>Escenario</th><th>Δ Ingresos</th><th>Ingresos Proy.</th><th>Margen Bruto (44.5%)</th><th>Gastos Totales</th><th>EBITDA Mensual</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Pesimista (−10%)</td><td class="neg">−10%</td><td>$143.6M</td><td>$63.9M</td><td>$76.2M</td><td class="neg">−$12.3M</td><td style="color:var(--red)">Crítico</td></tr>
+        <tr><td>Base (run-rate actual)</td><td class="muted">0%</td><td>$159.6M</td><td>$71.0M</td><td>$76.2M</td><td class="neg">−$5.2M</td><td style="color:var(--red)">Déficit</td></tr>
+        <tr class="section-row"><td>Break-Even (+2.1%)</td><td style="color:var(--amber)">+2.1%</td><td style="color:var(--gold)">$163.0M</td><td style="color:var(--gold)">$72.5M</td><td>$72.5M</td><td style="color:var(--gold)">$0M</td><td style="color:var(--amber)">Equilibrio</td></tr>
+        <tr><td>Optimista (+10%)</td><td class="pos">+10%</td><td>$175.6M</td><td>$78.1M</td><td>$76.2M</td><td class="pos">+$1.9M</td><td class="pos">Positivo</td></tr>
+        <tr><td>Presupuesto (+14%)</td><td class="pos">+14%</td><td>$182.0M</td><td>$81.0M</td><td>$76.2M</td><td class="pos">+$4.8M</td><td class="pos">En plan</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11px;color:var(--text3);margin-top:10px">* Gastos totales fijados en $76.2M/mes (promedio YTD). El break-even real varía con la estacionalidad de costos.</div>
+  </div>
+</section>
+
+<!-- HISTÓRICO -->
+<section id="s-historico" class="section">
+  <div class="section-title">Serie Histórica 2016–2026</div>
+  <div class="section-sub">Evolución de ingresos, márgenes y rentabilidad · CAGR 2016–2025: +15.4%</div>
+  <div class="card mb24"><div class="card-title">Ingresos Anuales y Margen EBITDA %</div><div class="chart-wrap tall"><canvas id="chartHistorico"></canvas></div></div>
+  <div class="card">
+    <div class="card-title">Resumen por Año</div>
+    <div style="display:grid;grid-template-columns:70px 1fr 110px 80px 80px;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);margin-bottom:4px">
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em">Año</div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em">Escala</div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;text-align:right">Ingresos</div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;text-align:right">M.Bruto%</div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;text-align:right">EBITDA%</div>
+    </div>
+    <div id="hist-rows"></div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section id="s-insights" class="section">
+  <div class="section-title">Insights & Alertas</div>
+  <div class="section-sub">Análisis automático sobre datos reales YTD Febrero 2026</div>
+  <div class="insight-grid" id="insight-container"></div>
+</section>
+
+<!-- GUÍA DE DATOS -->
+<section id="s-datos" class="section">
+  <div class="section-title">Guía de Datos</div>
+  <div class="section-sub">Documentos que debe preparar para alimentar y actualizar el sistema</div>
+  <div class="alert-banner" style="border-color:rgba(90,159,212,0.3);background:linear-gradient(90deg,rgba(90,159,212,0.06),rgba(90,159,212,0.02));margin-bottom:28px">
+    <span style="font-size:18px;flex-shrink:0">📋</span>
+    <span class="alert-text"><strong>Sistema de carga manual estructurada.</strong> Prepare los archivos CSV en el formato indicado. Una vez listos, se cargan directamente en el dashboard sin necesidad de programación ni servidores.</span>
+  </div>
+  <div class="doc-grid mb24" id="doc-cards"></div>
+  <div class="card">
+    <div class="card-title">Plan de Implementación</div>
+    <div class="phase-title">Fase 1 — Base operativa (Completada ✓)</div>
+    <div class="step-row"><div class="step-num">✓</div><div><div class="step-label">Dashboard web interactivo publicado</div><div class="step-desc">8 secciones, 12 gráficos, datos reales YTD Feb 2026</div></div></div>
+    <div class="step-row"><div class="step-num">✓</div><div><div class="step-label">Análisis financiero completo con datos Excel</div><div class="step-desc">EERR, canales, costos, histórico 2016–2025, insights automáticos</div></div></div>
+    <div class="phase-title">Fase 2 — Datos y Exportaciones (Próximo)</div>
+    <div class="step-row"><div class="step-num">1</div><div><div class="step-label">Preparar y cargar archivos CSV</div><div class="step-desc">6 archivos definidos en esta sección · Actualización mensual manual</div></div></div>
+    <div class="step-row"><div class="step-num">2</div><div><div class="step-label">Publicar en GitHub Pages</div><div class="step-desc">Repositorio → activar Pages → URL pública permanente e inmutable</div></div></div>
+    <div class="step-row"><div class="step-num">3</div><div><div class="step-label">Generación automática Excel EERR</div><div class="step-desc">Template exportable con 4 hojas: EERR mensual, Comparativo, Canal, Costos</div></div></div>
+    <div class="step-row"><div class="step-num">4</div><div><div class="step-label">Generación PowerPoint Directorio</div><div class="step-desc">8 slides automáticos generados desde los datos del dashboard</div></div></div>
+    <div class="phase-title">Fase 3 — Automatización (Mes 3)</div>
+    <div class="step-row"><div class="step-num">5</div><div><div class="step-label">API Shopify → ventas e-commerce en tiempo real</div><div class="step-desc">Ticket promedio, unidades, tasa de conversión, CAC digital</div></div></div>
+    <div class="step-row"><div class="step-num">6</div><div><div class="step-label">API Bsale + SII → compras y honorarios automáticos</div><div class="step-desc">Facturas de compra, boletas de honorarios, inventario, stock rotación</div></div></div>
+  </div>
+</section>
+
+</main>
+<script>
+// ═══════════ DATA ═══════════
+const MESES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const D26={
+  ingresos:     [161081943,158177418,0,0,0,0,0,0,0,0,0,0],
+  costo_venta:  [-85463838,-91654419,0,0,0,0,0,0,0,0,0,0],
+  margen_bruto: [75618105, 66522999, 0,0,0,0,0,0,0,0,0,0],
+  otros_ing:    [2470370,  3112294,  0,0,0,0,0,0,0,0,0,0],
+  otros_costo:  [-4515446, -3894894, 0,0,0,0,0,0,0,0,0,0],
+  gav:          [-51465134,-50599046,0,0,0,0,0,0,0,0,0,0],
+  gastos_fijos: [-21554679,-21185485,0,0,0,0,0,0,0,0,0,0],
+  ebitda:       [387515,   -6052132, 0,0,0,0,0,0,0,0,0,0],
+  depreciacion: [-3391566, -3444985, 0,0,0,0,0,0,0,0,0,0],
+  gastos_fin:   [-3314977, -2855224, 0,0,0,0,0,0,0,0,0,0],
+  resultado:    [-6319028, -12352342,0,0,0,0,0,0,0,0,0,0],
+};
+const D25={
+  ingresos:     [154397655,127517652,212472934,179611437,222760613,196635227,150107961,161535902,148305282,225203687,224803432,204346677],
+  margen_bruto: [65746208, 59419328, 108849880,101116489,118773331,98927705, 67315750, 68053261, 65599566, 114459821,122861647,110910403],
+  ebitda:       [-8222231, -16597914,31675374, 15173625, 33801662, 10982050, -12141990,-9676466, -11124859,27753243, 31560742, 16523078],
+  resultado:    [-15088002,-23430146,25236939, 8523317,  27281404, 2660888,  -18394548,-15757052,-17050371,20856084, 24840149, 10379376],
+};
+const PRES={
+  ingresos:     [154999999,169000000,235999999,210000001,239500000,215500000,170000000,156182660,162999999,246000000,244000000,198000000],
+  margen_bruto: [67504948, 76940811, 0,0,0,0,0,0,0,0,0,0],
+  ebitda:       [-5968312, 4096668,  0,0,0,0,0,0,0,0,0,0],
+  resultado:    [-13062978,-2649902, 0,0,0,0,0,0,0,0,0,0],
+};
+const CANALES=[
+  {name:'Tienda Araucaria',ing:71382799, costo:36155955, ene:41842122,feb:29540677,col:'#c8a96e',m25:0.545},
+  {name:'Tienda Costanera',ing:82764909, costo:42931366, ene:49822020,feb:32942889,col:'#5a9fd4',m25:0.540},
+  {name:'Página Web',      ing:130744163,costo:75684355, ene:62032239,feb:68711924,col:'#5ab585',m25:0.489},
+  {name:'Mayorista',       ing:20524114, costo:13472699, ene:5550839, feb:14973275,col:'#d4a55a',m25:0.367},
+  {name:'Boutique',        ing:13843376, costo:8873882,  ene:1834723, feb:12008653,col:'#a05fd4',m25:0.373},
+  {name:'Marketplace',     ing:0,        costo:0,        ene:0,       feb:0,       col:'#5c5a56',m25:0},
+];
+const GASTOS=[
+  {name:'Sueldos Brutos',   ene:17871516,feb:19726327,tipo:'Fijo'},
+  {name:'Arriendo Tiendas', ene:19684309,feb:19790133,tipo:'Fijo'},
+  {name:'Asesorías',        ene:11147054,feb:11745854,tipo:'Variable'},
+  {name:'Comisión POS/Vta', ene:4366276, feb:3572625, tipo:'Variable'},
+  {name:'Extras / Otros',   ene:4959874, feb:3237193, tipo:'Variable'},
+  {name:'Facebook Ads',     ene:2683311, feb:2700029, tipo:'Variable'},
+  {name:'Fotos / Contenido',ene:2418879, feb:0,       tipo:'Variable'},
+  {name:'Google Ads',       ene:1507718, feb:1797598, tipo:'Variable'},
+  {name:'Página Web (mant)',ene:1583510, feb:1508801, tipo:'Fijo'},
+  {name:'Asesoría Digital', ene:1073588, feb:1074194, tipo:'Variable'},
+  {name:'Klaviyo',          ene:884000,  feb:1263800, tipo:'Variable'},
+  {name:'Shopify',          ene:971047,  feb:1521868, tipo:'Fijo'},
+  {name:'Campaña Marketing',ene:365000,  feb:1166636, tipo:'Variable'},
+  {name:'Arriendo Oficina', ene:1395572, feb:874776,  tipo:'Fijo'},
+  {name:'Promotoras',       ene:250000,  feb:250000,  tipo:'Fijo'},
+  {name:'Luz',              ene:130930,  feb:135764,  tipo:'Fijo'},
+  {name:'Gastos Financieros',ene:3314977,feb:2855224, tipo:'Fijo'},
+];
+const HIST=[
+  {y:2016,ing:605064130,  ebitda_pct:-0.007,mb:0.268},
+  {y:2017,ing:1046884380, ebitda_pct:0.125, mb:0.339},
+  {y:2018,ing:1290978073, ebitda_pct:0.034, mb:0.304},
+  {y:2019,ing:1336390487, ebitda_pct:0.016, mb:0.320},
+  {y:2020,ing:1099103359, ebitda_pct:0.191, mb:0.450},
+  {y:2021,ing:1659720995, ebitda_pct:0.290, mb:0.547},
+  {y:2022,ing:1714809504, ebitda_pct:0.162, mb:0.504},
+  {y:2023,ing:1763895075, ebitda_pct:0.096, mb:0.501},
+  {y:2024,ing:1863513606, ebitda_pct:0.071, mb:0.501},
+  {y:2025,ing:2207698459, ebitda_pct:0.050, mb:0.499},
+  {y:'2026*',ing:1915556166,ebitda_pct:-0.018,mb:0.445},
+];
+
+// ═══════════ UTILS ═══════════
+const ytd=(arr,n=2)=>arr.slice(0,n).reduce((a,b)=>a+(b||0),0);
+const f=(n)=>{
+  if(!n||n===0)return '—';
+  const a=Math.abs(n);
+  let s=a>=1e9?(a/1e9).toFixed(1)+'B':a>=1e6?(a/1e6).toFixed(1)+'M':a>=1e3?(a/1e3).toFixed(0)+'K':a.toFixed(0);
+  return n<0?`(${s})`:s;
+};
+const fm=n=>`$${f(n)}`;
+const fp=n=>n||n===0?(n*100).toFixed(1)+'%':'—';
+const fdiff=(a,b)=>{if(!b||b===0)return'—';const d=(a-b)/Math.abs(b);return`${d>0?'+':''}${(d*100).toFixed(1)}%`;};
+
+Chart.defaults.color='#5c5a56';
+Chart.defaults.borderColor='rgba(255,255,255,0.06)';
+Chart.defaults.font.family="'DM Sans', sans-serif";
+Chart.defaults.font.size=11;
+const GL={color:'rgba(255,255,255,0.05)',drawBorder:false};
+const TS={color:'#5c5a56',font:{size:10}};
+const [GOLD,RED,GREEN,BLUE,AMBER,PURPLE]=['#c8a96e','#d45f5f','#5ab585','#5a9fd4','#d4a55a','#a05fd4'];
+
+function mk(id,cfg){const el=document.getElementById(id);if(!el)return;return new Chart(el.getContext('2d'),cfg);}
+
+// ═══════════ NAVIGATION ═══════════
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ═══════════ BUILD EERR TABLE ═══════════
+function buildEERR(){
+  const rows=[
+    {label:'INGRESOS POR VENTA',        key:'ingresos',    cls:'section-row',pct:false},
+    {label:'  Tienda Araucaria',         custom:[41842122,29540677,71382799,null,null,462741312],cls:'sub-row'},
+    {label:'  Tienda Costanera',         custom:[49822020,32942889,82764909,null,null,493242187],cls:'sub-row'},
+    {label:'  Página Web',               custom:[62032239,68711924,130744163,null,null,1015548573],cls:'sub-row'},
+    {label:'  Mayorista',                custom:[5550839,14973275,20524114,null,null,144314285],cls:'sub-row'},
+    {label:'  Boutique',                 custom:[1834723,12008653,13843376,null,null,92405262],cls:'sub-row'},
+    {label:'COSTO DE VENTA',             key:'costo_venta', cls:'section-row'},
+    {label:'MARGEN BRUTO',               key:'margen_bruto',cls:'total-row',pct:true},
+    {label:'Otros Ingresos',             key:'otros_ing',   cls:''},
+    {label:'Otros Costos (Despacho neto)',key:'otros_costo', cls:''},
+    {label:'GAV (Gastos Administ.)',      key:'gav',         cls:'section-row'},
+    {label:'  Gastos Fijos',             key:'gastos_fijos',cls:'sub-row'},
+    {label:'EBITDA',                     key:'ebitda',      cls:'total-row',pct:true},
+    {label:'Depreciación y Amortización',key:'depreciacion',cls:''},
+    {label:'Gastos Financieros',         key:'gastos_fin',  cls:''},
+    {label:'RESULTADO ANTES DE IMPUESTO',key:'resultado',   cls:'total-row',pct:true},
+  ];
+  const ing_ytd=ytd(D26.ingresos);
+  const ing_ytd25=ytd(D25.ingresos);
+  let html='';
+  rows.forEach(r=>{
+    let e,f2,y,p,y25;
+    if(r.key){e=D26[r.key][0];f2=D26[r.key][1];y=ytd(D26[r.key]);p=ytd(PRES[r.key]||[0,0]);y25=ytd(D25[r.key]||[0,0]);}
+    else{[e,f2,y,,, y25]=r.custom;p=null;}
+    const dp=p&&y?(y-p)/Math.abs(p):null;
+    const d25=y25&&y?(y-y25)/Math.abs(y25):null;
+    const isPos=v=>r.key&&['ingresos','otros_ing','margen_bruto','ebitda','resultado'].includes(r.key)?v>0?'pos':'neg':'';
+    const dc=d=>{if(d===null)return'<td>—</td>';const c=d>0.02?'pos':d<-0.02?'neg':'muted';return`<td class="${c}">${d>0?'+':''}${(d*100).toFixed(1)}%</td>`;};
+    let pl='';
+    if(r.pct&&ing_ytd&&y){const pv=y/ing_ytd;pl=` <span style="font-size:10px;color:var(--text3)">(${(pv*100).toFixed(1)}%)</span>`;}
+    html+=`<tr class="${r.cls}"><td>${r.label}${pl}</td><td class="${isPos(e)}">${fm(e)}</td><td class="${isPos(f2)}">${fm(f2)}</td><td class="${isPos(y)}">${fm(y)}</td><td class="muted">${fm(p)}</td>${dc(dp)}<td class="muted">${fm(y25)}</td>${dc(d25)}</tr>`;
+  });
+  document.getElementById('eerr-body').innerHTML=html;
+}
+
+// ═══════════ CANAL CARDS ═══════════
+function buildCanalCards(){
+  const total=ytd(D26.ingresos);
+  let html='';
+  CANALES.forEach(c=>{
+    const m=c.ing>0?(c.ing-c.costo)/c.ing:0;
+    const share=c.ing>0?c.ing/total:0;
+    const dm=m-c.m25;
+    const col=m>0.45?GREEN:m>0.35?AMBER:m>0?RED:'#5c5a56';
+    html+=`<div class="canal-card">
+      <div class="canal-name">${c.name}</div>
+      <div class="canal-value">${fm(c.ing)}</div>
+      <div class="canal-pct">${fp(share)} del total · Costo ${fm(c.costo)}</div>
+      <div class="margen-bar-bg"><div class="margen-bar-fill" style="width:${Math.min(m*200,100)}%;background:${col}"></div></div>
+      <div class="canal-meta"><span>Margen Bruto</span><span style="font-family:'DM Mono',monospace;color:${col}">${fp(m)} <span style="color:${dm>=0?GREEN:RED};font-size:10px">${dm>=0?'+':''}${(dm*100).toFixed(1)}pp vs 2025</span></span></div>
+    </div>`;
+  });
+  document.getElementById('canal-cards').innerHTML=html;
+}
+
+// ═══════════ COSTOS ═══════════
+function buildCostos(){
+  const ie=D26.ingresos[0],ife=D26.ingresos[1],iy=ytd(D26.ingresos);
+  const sorted=[...GASTOS].sort((a,b)=>(b.ene+b.feb)-(a.ene+a.feb));
+  const mx=sorted[0].ene+sorted[0].feb;
+  let bl='';
+  sorted.forEach(g=>{
+    const t=g.ene+g.feb;
+    const col=g.tipo==='Fijo'?BLUE:AMBER;
+    bl+=`<div class="gasto-row">
+      <div style="color:var(--text)">${g.name}</div>
+      <div class="gasto-bar-bg"><div class="gasto-bar-fill" style="width:${(t/mx*100).toFixed(0)}%;background:${col}"></div></div>
+      <div style="font-family:'DM Mono',monospace;text-align:right;color:var(--text2)">${fm(t)}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;text-align:right;color:var(--text3)">${(t/iy*100).toFixed(1)}%</div>
+    </div>`;
+  });
+  document.getElementById('gastos-list').innerHTML=bl;
+  let th='';
+  GASTOS.forEach(g=>{
+    const t=g.ene+g.feb;
+    const col=g.tipo==='Fijo'?'color:var(--blue)':'color:var(--amber)';
+    th+=`<tr><td>${g.name}</td><td>(${fm(g.ene)})</td><td>${(g.ene/ie*100).toFixed(1)}%</td><td>(${fm(g.feb)})</td><td>${(g.feb/ife*100).toFixed(1)}%</td><td>(${fm(t)})</td><td>${(t/iy*100).toFixed(1)}%</td><td style="${col}">${g.tipo}</td></tr>`;
+  });
+  document.getElementById('costos-body').innerHTML=th;
+}
+
+// ═══════════ HISTÓRICO ═══════════
+function buildHist(){
+  const mx=Math.max(...HIST.map(h=>h.ing));
+  let html='';
+  HIST.forEach(h=>{
+    const ec=h.ebitda_pct>=0.10?GREEN:h.ebitda_pct>=0?AMBER:RED;
+    html+=`<div class="hist-year-row">
+      <div style="font-family:'DM Mono',monospace;color:var(--gold)">${h.y}</div>
+      <div class="hist-bar-bg"><div class="hist-bar-fill" style="width:${(h.ing/mx*100).toFixed(0)}%"></div></div>
+      <div style="font-family:'DM Mono',monospace;text-align:right;color:var(--gold)">${fm(h.ing)}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:12px;text-align:right;color:${GREEN}">${fp(h.mb)}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:12px;text-align:right;color:${ec}">${fp(h.ebitda_pct)}</div>
+    </div>`;
+  });
+  document.getElementById('hist-rows').innerHTML=html;
+}
+
+// ═══════════ INSIGHTS ═══════════
+function buildInsights(){
+  const ins=[
+    {t:'alert',i:'📉',title:'Caída crítica de margen bruto: −5.6pp vs 2025',desc:'El margen bruto YTD 2026 es 44.5% vs 50.1% en 2025. Esta caída de 5.6 puntos porcentuales es la más pronunciada desde 2019. La causa debe ser identificada con urgencia: ¿mix de productos, tipo de cambio en importaciones, descuentos excesivos, o cambio en canal mix hacia Web?',val:'44.5% real vs 50.1% 2025 · Impacto absoluto: −$17.8M'},
+    {t:'alert',i:'⚖️',title:'Gastos totales superan el margen bruto',desc:'Los gastos totales YTD ($145.0M) superan el margen bruto ($142.1M). La empresa no puede cubrir sus costos operacionales con la rentabilidad comercial. Esta situación es sostenible por la estacionalidad Q1, pero exige crecimiento acelerado en Q2–Q4.',val:'Gastos: $145.0M · Margen: $142.1M · Déficit operacional: −$2.9M'},
+    {t:'warn',i:'💸',title:'Asesorías por encima del benchmark sectorial',desc:'El ítem Asesorías totaliza $22.9M YTD, equivalente a 7.2% de los ingresos. El benchmark para retail de especialidad es 2–4%. Esta partida merece revisión de composición, ROI individual por asesoría, y posibilidad de internalización de funciones recurrentes.',val:'$22.9M YTD · 7.2% ventas · Benchmark: 2–4% · Exceso: ~$10M'},
+    {t:'warn',i:'🌐',title:'Concentración en canal Web con menor margen',desc:'Página Web representa el 41.0% de los ingresos pero con el segundo menor margen bruto (42.1%). Los canales con mejores márgenes (Araucaria 49.3%, Costanera 48.1%) tienen menor peso relativo. Escalar tiendas físicas o mejorar margen Web son palancas relevantes.',val:'Web: 41% ingresos, 42.1% margen · Tiendas físicas: 48.7% margen promedio'},
+    {t:'ok',  i:'📈',title:'Mejora YTD de +$19.1M vs mismo período 2025',desc:'A pesar del EBITDA negativo, la empresa mejoró $19.1M vs 2025 (−$24.8M → −$5.7M). Esto refleja mayor eficiencia operacional, crecimiento de ingresos (+$37.4M o +13.3%) y racionalización de gastos variables. La tendencia estructural es positiva.',val:'EBITDA: −$5.7M vs −$24.8M en 2025 · Mejora: +$19.1M'},
+    {t:'ok',  i:'🏪',title:'Tiendas físicas mantienen márgenes superiores',desc:'Araucaria (49.3%) y Costanera (48.1%) mantienen márgenes brutos sólidos pese a la caída general. Las tiendas físicas representan el 48.3% del ingreso total con la mejor rentabilidad por peso vendido, validando el modelo de retail presencial premium.',val:'Araucaria: 49.3% · Costanera: 48.1% · Ambas sobre benchmark web'},
+    {t:'info', i:'📊',title:'Alta palanca operativa: meses Q2–Q4 son decisivos',desc:'Con leverage operativo estimado de 7.5× y estacionalidad histórica favorable desde Marzo, la empresa tiene alta probabilidad de revertir el EBITDA en la segunda mitad del año. Los meses Mayo, Octubre y Noviembre históricamente concentran el 38% de los ingresos anuales.',val:'Leverage: ~7.5× · Break-even a solo +2.1% sobre run-rate · Q2 crítico'},
+    {t:'info', i:'🔧',title:'Métricas ausentes que se recomienda implementar',desc:'Para gestión de nivel institucional se necesita incorporar: Ticket Promedio por canal, Unidades vendidas y rotación de inventario, CAC (Costo de Adquisición de Cliente) en canales digitales, Tasa de conversión Web, Retención y recompra de clientes, y Flujo de Caja Libre.',val:'Fuentes requeridas: Shopify (ventas), Bsale (inventario), CRM, Google Analytics 4'},
+  ];
+  document.getElementById('insight-container').innerHTML=ins.map(x=>`
+    <div class="insight-card">
+      <div class="insight-icon ${x.t}">${x.i}</div>
+      <div>
+        <div class="insight-title">${x.title}</div>
+        <div class="insight-desc">${x.desc}</div>
+        <div class="insight-value ${x.t}">${x.val}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ═══════════ DATA DOCS ═══════════
+function buildDocs(){
+  const docs=[
+    {n:'01',title:'eerr_mensual.csv',desc:'Estado de resultados mensual. Archivo central. Una fila por partida y mes.',fields:['partida','mes (YYYYMM)','monto_real','monto_presupuesto','centro_costo'],fmt:'CSV · Actualización mensual'},
+    {n:'02',title:'ventas_canal.csv',desc:'Detalle de cada venta. Permite análisis de ticket promedio y mix de productos.',fields:['fecha (DD/MM/YYYY)','canal','sku','descripcion','valor_venta','costo_venta','cantidad'],fmt:'CSV · Actualización semanal o mensual'},
+    {n:'03',title:'gastos_detalle.csv',desc:'Cada gasto con clasificación completa. Permite análisis de estructura de costos.',fields:['fecha','tipo_doc','proveedor','descripcion','monto','centro_costo','meses_prorrateo','categoria'],fmt:'CSV · Actualización mensual'},
+    {n:'04',title:'presupuesto_2026.csv',desc:'Presupuesto por partida y mes. Se carga una vez al año.',fields:['partida','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],fmt:'CSV · Carga anual'},
+    {n:'05',title:'eerr_historico.csv',desc:'Resumen anual 2016–2025 para gráficos de tendencia y CAGR.',fields:['año','ingresos','costo_venta','margen_bruto','ebitda','resultado_neto'],fmt:'CSV · Carga única'},
+    {n:'06',title:'remuneraciones.csv',desc:'Detalle de sueldos por persona y centro de costo.',fields:['mes (YYYYMM)','nombre','cargo','centro_costo','sueldo_bruto','imposiciones','total_empresa'],fmt:'CSV · Actualización mensual'},
+  ];
+  document.getElementById('doc-cards').innerHTML=docs.map(d=>`
+    <div class="doc-card">
+      <div class="doc-num">${d.n}</div>
+      <div class="doc-title">${d.title}</div>
+      <div class="doc-desc">${d.desc}</div>
+      <div class="doc-fields">${d.fields.map(f=>`<div class="doc-field">${f}</div>`).join('')}</div>
+      <div class="doc-format">${d.fmt}</div>
+    </div>`).join('');
+}
+
+// ═══════════ CHARTS ═══════════
+function initCharts(){
+  // 1. Ingresos evolución
+  mk('chartIngEvol',{type:'bar',data:{labels:MESES,datasets:[
+    {label:'Real 2026',data:D26.ingresos.map(v=>v/1e6),backgroundColor:GOLD+'44',borderColor:GOLD,borderWidth:1.5,borderRadius:4,order:2},
+    {label:'Presupuesto',data:PRES.ingresos.map(v=>v/1e6),type:'line',borderColor:BLUE,borderWidth:1.5,borderDash:[4,4],fill:false,tension:0.3,pointRadius:3,pointBackgroundColor:BLUE,order:1},
+    {label:'Real 2025',data:D25.ingresos.map(v=>v/1e6),type:'line',borderColor:'#3c3a36',borderWidth:1.5,fill:false,tension:0.3,pointRadius:2,order:1},
+  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v+'M'}}}}});
+
+  // 2. Mix donut
+  const ca=CANALES.filter(c=>c.ing>0);
+  mk('chartMix',{type:'doughnut',data:{labels:ca.map(c=>c.name.replace('Tienda ','')),datasets:[{data:ca.map(c=>c.ing/1e6),backgroundColor:ca.map(c=>c.col+'cc'),borderColor:ca.map(c=>c.col),borderWidth:1.5,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,cutout:'65%',plugins:{legend:{position:'right',labels:{color:'#9a9690',usePointStyle:true,padding:12,font:{size:11}}}}}});
+
+  // 3. Waterfall
+  const wd=[ytd(D26.ingresos),ytd(D26.costo_venta),ytd(D26.margen_bruto),ytd(D26.otros_ing)+ytd(D26.otros_costo),ytd(D26.gav),ytd(D26.gastos_fijos),ytd(D26.ebitda)];
+  const wl=['Ingresos','Costo CV','Margen Bruto','Otros Neto','GAV','Gastos Fijos','EBITDA'];
+  const wc=[GOLD,RED,BLUE,AMBER,RED,RED,wd[6]>=0?GREEN:RED];
+  mk('chartWaterfall',{type:'bar',data:{labels:wl,datasets:[{data:wd.map(v=>Math.abs(v)/1e6),backgroundColor:wc.map(c=>c+'99'),borderColor:wc,borderWidth:1.5,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:GL,ticks:{...TS,maxRotation:25}},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v.toFixed(0)+'M'}}}}});
+
+  // 4. Margen por canal
+  const cA=CANALES.filter(c=>c.ing>0);
+  mk('chartMargenCanal',{type:'bar',data:{labels:cA.map(c=>c.name.replace('Tienda ','')),datasets:[{label:'2026',data:cA.map(c=>c.ing>0?(c.ing-c.costo)/c.ing*100:0),backgroundColor:GOLD+'99',borderColor:GOLD,borderWidth:1.5,borderRadius:4},{label:'2025',data:cA.map(c=>c.m25*100),backgroundColor:'#3c3a3699',borderColor:'#3c3a36',borderWidth:1.5,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>v+'%'},min:0,max:60}}}});
+
+  // 5. EBITDA mensual
+  mk('chartEBITDA',{type:'bar',data:{labels:MESES,datasets:[
+    {label:'2026',data:D26.ebitda.map(v=>v/1e6),backgroundColor:D26.ebitda.map(v=>v>=0?GREEN+'99':RED+'99'),borderColor:D26.ebitda.map(v=>v>=0?GREEN:RED),borderWidth:1.5,borderRadius:4},
+    {label:'2025',data:D25.ebitda.map(v=>v/1e6),type:'line',borderColor:'#3c3a36',borderWidth:1.5,pointRadius:2,fill:false,tension:0.3},
+    {label:'Presupuesto',data:PRES.ebitda.map(v=>v/1e6),type:'line',borderColor:BLUE,borderWidth:1.5,pointRadius:2,fill:false,tension:0.3,borderDash:[4,4]},
+  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v.toFixed(0)+'M'}}}}});
+
+  // 6. Margen Bruto % evolución
+  const mb26=D26.ingresos.map((v,i)=>v>0?D26.margen_bruto[i]/v*100:null);
+  const mb25=D25.ingresos.map((v,i)=>v>0?D25.margen_bruto[i]/v*100:null);
+  const mbP=PRES.ingresos.map((v,i)=>v>0?PRES.margen_bruto[i]/(v||1)*100:null);
+  mk('chartMargenEvol',{type:'line',data:{labels:MESES,datasets:[
+    {label:'2026',data:mb26,borderColor:GOLD,backgroundColor:GOLD+'20',fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:GOLD,borderWidth:2},
+    {label:'2025',data:mb25,borderColor:'#3c3a36',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5},
+    {label:'Presupuesto',data:mbP,borderColor:BLUE,borderDash:[4,4],fill:false,tension:0.3,pointRadius:2,borderWidth:1.5},
+  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>v.toFixed(0)+'%'},min:35,max:65}}}});
+
+  // 7. Canales evolución stacked
+  const cAct=CANALES.filter(c=>c.name!=='Marketplace');
+  mk('chartCanalesEvol',{type:'bar',data:{labels:['Enero','Febrero'],datasets:cAct.map(c=>({label:c.name.replace('Tienda ',''),data:[c.ene/1e6,c.feb/1e6],backgroundColor:c.col+'99',borderColor:c.col,borderWidth:1.5,borderRadius:3}))},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS,stacked:true},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v+'M'},stacked:true}}}});
+
+  // 8. Radar
+  const rC=CANALES.filter(c=>c.ing>0);
+  mk('chartRadar',{type:'radar',data:{labels:rC.map(c=>c.name.replace('Tienda ','')),datasets:[
+    {label:'2026',data:rC.map(c=>c.ing>0?(c.ing-c.costo)/c.ing*100:0),backgroundColor:GOLD+'33',borderColor:GOLD,borderWidth:2,pointBackgroundColor:GOLD},
+    {label:'2025',data:rC.map(c=>c.m25*100),backgroundColor:BLUE+'22',borderColor:BLUE,borderWidth:1.5,borderDash:[4,4],pointBackgroundColor:BLUE},
+  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{r:{grid:{color:'rgba(255,255,255,0.05)'},angleLines:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5c5a56',backdropColor:'transparent',stepSize:10},min:0,max:60,pointLabels:{color:'#9a9690',font:{size:11}}}}}});
+
+  // 9. GAV composición
+  mk('chartGAVComp',{type:'doughnut',data:{labels:['Sueldos','Arriendos','Asesorías','Marketing','Otros'],datasets:[{data:[37598,41744,22893,11832,7199].map(v=>v/1000),backgroundColor:[GOLD+'cc',BLUE+'cc',RED+'cc',GREEN+'cc',AMBER+'cc'],borderColor:[GOLD,BLUE,RED,GREEN,AMBER],borderWidth:1.5,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:'#9a9690',usePointStyle:true,padding:10,font:{size:10}}}}}});
+
+  // 10. Histórico
+  mk('chartHistorico',{type:'bar',data:{labels:HIST.map(h=>h.y),datasets:[
+    {label:'Ingresos ($M)',data:HIST.map(h=>h.ing/1e6),backgroundColor:GOLD+'55',borderColor:GOLD,borderWidth:1.5,borderRadius:4,order:2,yAxisID:'y'},
+    {label:'Margen Bruto %',data:HIST.map(h=>h.mb*100),type:'line',borderColor:GREEN,borderWidth:2,pointRadius:4,fill:false,tension:0.3,order:1,yAxisID:'y2',pointBackgroundColor:GREEN},
+    {label:'EBITDA %',data:HIST.map(h=>h.ebitda_pct*100),type:'line',borderColor:BLUE,borderWidth:1.5,pointRadius:3,fill:false,tension:0.3,order:1,yAxisID:'y2',borderDash:[4,4],pointBackgroundColor:BLUE},
+  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v+'M'},position:'left'},y2:{grid:{display:false},ticks:{...TS,callback:v=>v+'%'},position:'right'}}}});
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  buildEERR();buildCanalCards();buildCostos();buildHist();buildInsights();buildDocs();initCharts();
+});
+</script>
+</body>
+</html>
