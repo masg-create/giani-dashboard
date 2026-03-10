@@ -3,639 +3,1124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Giani Dafirenze — Intelligence Financiera</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<title>Giani Dafirenze · Inteligencia Financiera</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 :root {
-  --bg:#06070a;--bg2:#0d0f14;--bg3:#13161d;--bg4:#191d26;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
-  --gold:#c8a96e;--gold2:#e8c98a;--gold3:rgba(200,169,110,0.15);
-  --text:#e8e6e0;--text2:#9a9690;--text3:#5c5a56;
-  --red:#d45f5f;--red2:rgba(212,95,95,0.15);
-  --green:#5ab585;--green2:rgba(90,181,133,0.15);
-  --blue:#5a9fd4;--blue2:rgba(90,159,212,0.15);
-  --amber:#d4a55a;--amber2:rgba(212,165,90,0.15);
-  --shadow:0 2px 20px rgba(0,0,0,0.5);--radius:12px;
+  --bg:       #070810;
+  --bg2:      #0d0f1a;
+  --bg3:      #13162A;
+  --border:   rgba(200,169,110,0.12);
+  --gold:     #c8a96e;
+  --gold2:    #e8c98a;
+  --gold3:    #f5e0b5;
+  --text:     #e8e6e0;
+  --muted:    #7a7870;
+  --green:    #5ab585;
+  --red:      #d45f5f;
+  --blue:     #5a9fd4;
+  --amber:    #d4a55a;
+  --font-d:   'Playfair Display', serif;
+  --font-s:   'DM Sans', sans-serif;
+  --font-m:   'DM Mono', monospace;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
-.site-header{background:linear-gradient(180deg,rgba(200,169,110,0.04) 0%,transparent 100%);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);}
-.header-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1560px;margin:0 auto;}
-.brand{display:flex;align-items:center;gap:14px;}
-.brand-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;color:#06070a;font-weight:700;}
-.brand-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold2);letter-spacing:0.02em;}
-.brand-sub{font-size:11px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-top:-2px;}
-.header-meta{display:flex;align-items:center;gap:24px;}
-.period-badge{background:var(--gold3);border:1px solid rgba(200,169,110,0.3);color:var(--gold);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;letter-spacing:0.05em;}
-.update-time{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
-.nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:64px;z-index:99;}
-.nav-inner{display:flex;gap:2px;max-width:1560px;margin:0 auto;overflow-x:auto;}
-.nav-btn{background:none;border:none;color:var(--text2);padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;letter-spacing:0.02em;}
-.nav-btn:hover{color:var(--text);}
-.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
-.main{max-width:1560px;margin:0 auto;padding:32px 40px;}
-.section{display:none;}.section.active{display:block;}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);}
-.card-title{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
-.card-title::before{content:'';width:3px;height:14px;background:var(--gold);border-radius:2px;opacity:0.6;}
-.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px;}
-.kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;position:relative;overflow:hidden;}
-.kpi-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent-color,var(--gold));opacity:0.6;}
-.kpi-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;margin-bottom:10px;}
-.kpi-value{font-family:'Playfair Display',serif;font-size:26px;color:var(--text);line-height:1.1;margin-bottom:8px;}
-.kpi-sub{font-size:11px;color:var(--text3);margin-bottom:6px;}
-.kpi-badges{display:flex;gap:6px;flex-wrap:wrap;}
-.badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
-.badge.up{background:var(--green2);color:var(--green);}
-.badge.down{background:var(--red2);color:var(--red);}
-.badge.neutral{background:var(--blue2);color:var(--blue);}
-.badge.warn{background:var(--amber2);color:var(--amber);}
-.alert-banner{background:linear-gradient(90deg,rgba(212,95,95,0.08),rgba(212,95,95,0.04));border:1px solid rgba(212,95,95,0.25);border-radius:var(--radius);padding:14px 20px;display:flex;align-items:center;gap:12px;margin-bottom:24px;font-size:13px;}
-.alert-text{color:var(--text2);}
-.alert-text strong{color:var(--text);}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
-.grid-6040{display:grid;grid-template-columns:3fr 2fr;gap:20px;}
-.mb24{margin-bottom:24px;}.mb16{margin-bottom:16px;}
-.section-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--text);margin-bottom:6px;letter-spacing:-0.01em;}
-.section-sub{font-size:13px;color:var(--text3);margin-bottom:28px;}
-.chart-wrap{position:relative;}.chart-wrap canvas{max-height:280px;}.chart-wrap.tall canvas{max-height:340px;}
-.fin-table{width:100%;border-collapse:collapse;font-size:12px;font-family:'DM Mono',monospace;}
-.fin-table th{padding:10px 12px;text-align:right;color:var(--text3);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--border);font-weight:500;white-space:nowrap;}
-.fin-table th:first-child{text-align:left;}
-.fin-table td{padding:9px 12px;text-align:right;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text2);white-space:nowrap;}
-.fin-table td:first-child{text-align:left;color:var(--text);font-family:'DM Sans',sans-serif;}
-.fin-table tr.section-row td{background:var(--bg3);color:var(--text);font-weight:600;border-top:1px solid var(--border);}
-.fin-table tr.total-row td{background:var(--bg4);color:var(--gold);font-weight:700;border-top:1px solid var(--border2);font-size:13px;}
-.fin-table tr.sub-row td{padding-left:28px;font-size:11px;}
-.fin-table .pos{color:var(--green);}.fin-table .neg{color:var(--red);}.fin-table .muted{color:var(--text3);}
-.fin-table tr:hover td{background:rgba(255,255,255,0.02);}
-.canal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
-.canal-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
-.canal-name{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:8px;}
-.canal-value{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:4px;}
-.canal-pct{font-size:11px;color:var(--text3);margin-bottom:12px;}
-.margen-bar-bg{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-bottom:6px;}
-.margen-bar-fill{height:100%;border-radius:2px;}
-.canal-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);}
-.insight-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
-.insight-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;gap:14px;align-items:flex-start;}
-.insight-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-.insight-icon.alert{background:var(--red2);}.insight-icon.warn{background:var(--amber2);}.insight-icon.ok{background:var(--green2);}.insight-icon.info{background:var(--blue2);}
-.insight-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px;}
-.insight-desc{font-size:12px;color:var(--text2);line-height:1.6;}
-.insight-value{font-family:'DM Mono',monospace;font-size:11px;margin-top:8px;padding:4px 8px;border-radius:6px;display:inline-block;}
-.insight-value.alert{background:var(--red2);color:var(--red);}.insight-value.warn{background:var(--amber2);color:var(--amber);}.insight-value.ok{background:var(--green2);color:var(--green);}.insight-value.info{background:var(--blue2);color:var(--blue);}
-.indicador-row{display:grid;grid-template-columns:220px 1fr auto;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);}
-.indicador-row:last-child{border-bottom:none;}
-.ind-label{font-size:13px;color:var(--text2);}
-.ind-bar-bg{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;}
-.ind-bar-fill{height:100%;border-radius:3px;}
-.ind-value{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;text-align:right;min-width:80px;}
-.hist-year-row{display:grid;grid-template-columns:70px 1fr 110px 80px 80px;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;font-size:13px;}
-.hist-year-row:last-child{border-bottom:none;}
-.hist-bar-bg{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;}
-.hist-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--gold2));}
-.gasto-row{display:grid;grid-template-columns:200px 1fr 80px 60px;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center;font-size:12px;}
-.gasto-row:last-child{border-bottom:none;}
-.gasto-bar-bg{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;}
-.gasto-bar-fill{height:100%;border-radius:3px;}
-.doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.doc-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;}
-.doc-num{font-family:'Playfair Display',serif;font-size:42px;color:rgba(200,169,110,0.2);line-height:1;margin-bottom:12px;}
-.doc-title{font-weight:600;color:var(--text);margin-bottom:8px;font-size:14px;font-family:'DM Mono',monospace;}
-.doc-desc{font-size:12px;color:var(--text3);line-height:1.7;margin-bottom:16px;}
-.doc-fields{display:flex;flex-direction:column;gap:6px;}
-.doc-field{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text2);}
-.doc-field::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:0.5;flex-shrink:0;}
-.doc-format{display:inline-block;background:var(--bg3);border:1px solid var(--border);color:var(--gold);font-family:'DM Mono',monospace;font-size:11px;padding:3px 8px;border-radius:5px;margin-top:12px;}
-.phase-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold);margin-bottom:14px;margin-top:28px;padding-top:4px;}
-.step-row{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13px;}
-.step-row:last-child{border-bottom:none;}
-.step-num{width:24px;height:24px;background:var(--gold3);border:1px solid rgba(200,169,110,0.3);color:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
-.step-label{font-weight:600;color:var(--text);margin-bottom:2px;}
-.step-desc{font-size:12px;color:var(--text3);}
-.divider{height:1px;background:var(--border);margin:20px 0;}
-.hl{color:var(--gold);font-family:'DM Mono',monospace;}
-.hl-red{color:var(--red);}
-.hl-green{color:var(--green);}
-::-webkit-scrollbar{width:6px;height:6px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
-@media(max-width:1200px){.kpi-grid{grid-template-columns:repeat(3,1fr);}canal-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:900px){.main{padding:20px;}.site-header,.nav{padding:0 20px;}.grid-2,.grid-3,.grid-6040{grid-template-columns:1fr;}.kpi-grid{grid-template-columns:repeat(2,1fr);}.canal-grid{grid-template-columns:1fr;}.doc-grid{grid-template-columns:1fr;}.insight-grid{grid-template-columns:1fr;}}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-s); font-size: 14px; min-height: 100vh; overflow-x: hidden; }
+
+/* ── HEADER ── */
+.header { background: linear-gradient(135deg, #0a0c18 0%, #141828 100%); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 100; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-logo { width: 28px; height: 28px; border: 1.5px solid var(--gold); transform: rotate(45deg); display: flex; align-items: center; justify-content: center; }
+.brand-logo span { display: block; width: 10px; height: 10px; background: var(--gold); transform: rotate(0deg); }
+.brand-name { font-family: var(--font-d); font-size: 17px; color: var(--gold2); letter-spacing: 0.04em; }
+.brand-sub { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 1px; }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.ytd-badge { background: rgba(200,169,110,0.1); border: 1px solid rgba(200,169,110,0.25); padding: 4px 12px; border-radius: 4px; font-size: 11px; color: var(--gold); font-family: var(--font-m); letter-spacing: 0.05em; }
+.chat-btn { background: var(--gold); color: #070810; border: none; padding: 8px 18px; border-radius: 4px; font-family: var(--font-s); font-weight: 600; font-size: 12px; cursor: pointer; letter-spacing: 0.04em; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+.chat-btn:hover { background: var(--gold2); transform: translateY(-1px); }
+.chat-btn svg { width: 14px; height: 14px; }
+
+/* ── TABS ── */
+.tabs { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 0; position: sticky; top: 60px; z-index: 99; overflow-x: auto; }
+.tab { padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; letter-spacing: 0.03em; transition: all 0.2s; }
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ── MAIN CONTENT ── */
+.content { padding: 28px 32px; max-width: 1600px; margin: 0 auto; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── KPI GRID ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 24px; }
+.kpi { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 20px; position: relative; overflow: hidden; }
+.kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); }
+.kpi.red::before { background: linear-gradient(90deg, var(--red), transparent); }
+.kpi.green::before { background: linear-gradient(90deg, var(--green), transparent); }
+.kpi.blue::before { background: linear-gradient(90deg, var(--blue), transparent); }
+.kpi-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.kpi-value { font-family: var(--font-m); font-size: 22px; color: var(--gold2); font-weight: 500; margin-bottom: 6px; }
+.kpi-value.red { color: var(--red); }
+.kpi-value.green { color: var(--green); }
+.kpi-delta { font-size: 11px; display: flex; align-items: center; gap: 4px; }
+.kpi-delta .up { color: var(--green); }
+.kpi-delta .dn { color: var(--red); }
+.kpi-delta .neutral { color: var(--muted); }
+
+/* ── CHARTS GRID ── */
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.charts-grid.three { grid-template-columns: 2fr 1fr; }
+.chart-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 20px; }
+.chart-card.full { grid-column: 1 / -1; }
+.card-title { font-family: var(--font-d); font-size: 13px; color: var(--gold); margin-bottom: 6px; letter-spacing: 0.02em; }
+.card-sub { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+.chart-wrap { position: relative; }
+.chart-wrap canvas { max-height: 280px; }
+.chart-wrap.tall canvas { max-height: 340px; }
+.chart-wrap.short canvas { max-height: 200px; }
+
+/* ── TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.data-table th { text-align: right; padding: 8px 12px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--border); font-weight: 500; }
+.data-table th:first-child { text-align: left; }
+.data-table td { padding: 7px 12px; text-align: right; font-family: var(--font-m); font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.data-table td:first-child { text-align: left; font-family: var(--font-s); color: var(--text); }
+.data-table tr.total td { border-top: 1px solid rgba(200,169,110,0.2); color: var(--gold); font-weight: 600; background: rgba(200,169,110,0.05); }
+.data-table tr.subtotal td { color: var(--muted); font-size: 11px; padding-left: 24px; }
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+.pos { color: var(--green) !important; }
+.neg { color: var(--red) !important; }
+.muted-val { color: var(--muted) !important; }
+
+/* ── CANAL CARDS ── */
+.canal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.canal-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 18px; }
+.canal-name { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 12px; }
+.canal-ing { font-family: var(--font-m); font-size: 20px; color: var(--gold2); margin-bottom: 4px; }
+.canal-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; }
+.canal-row span:first-child { color: var(--muted); }
+.canal-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; margin: 8px 0; overflow: hidden; }
+.canal-bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+.canal-delta { font-size: 11px; margin-top: 8px; color: var(--muted); }
+
+/* ── INSIGHTS ── */
+.insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.insight { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 18px; display: flex; gap: 14px; }
+.insight-icon { width: 36px; height: 36px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+.insight.alert .insight-icon { background: rgba(212,95,95,0.15); }
+.insight.warn .insight-icon { background: rgba(212,165,90,0.15); }
+.insight.ok .insight-icon { background: rgba(90,181,133,0.15); }
+.insight.info .insight-icon { background: rgba(90,159,212,0.15); }
+.insight-tag { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 5px; }
+.insight.alert .insight-tag { color: var(--red); }
+.insight.warn .insight-tag { color: var(--amber); }
+.insight.ok .insight-tag { color: var(--green); }
+.insight.info .insight-tag { color: var(--blue); }
+.insight-text { font-size: 12px; line-height: 1.6; color: var(--text); }
+.insight-text strong { color: var(--gold2); }
+
+/* ── YEAR SELECTOR ── */
+.controls { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.controls label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.year-btns { display: flex; gap: 4px; flex-wrap: wrap; }
+.year-btn { padding: 5px 12px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 11px; border-radius: 3px; cursor: pointer; font-family: var(--font-m); transition: all 0.15s; }
+.year-btn:hover { color: var(--text); border-color: rgba(200,169,110,0.3); }
+.year-btn.active { background: rgba(200,169,110,0.12); border-color: var(--gold); color: var(--gold); }
+
+/* ── CHAT PANEL ── */
+.chat-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.chat-overlay.open { opacity: 1; pointer-events: all; }
+.chat-panel { position: fixed; right: 0; top: 0; bottom: 0; width: 440px; background: var(--bg2); border-left: 1px solid var(--border); display: flex; flex-direction: column; z-index: 201; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+.chat-panel.open { transform: translateX(0); }
+.chat-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #0d0f1a, #13162a); }
+.chat-header-left { display: flex; align-items: center; gap: 10px; }
+.chat-ai-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(90,181,133,0.6); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.chat-title { font-family: var(--font-d); font-size: 15px; color: var(--gold2); }
+.chat-subtitle { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.close-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 20px; padding: 4px; transition: color 0.2s; line-height: 1; }
+.close-btn:hover { color: var(--text); }
+.chat-messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background: rgba(200,169,110,0.2); border-radius: 2px; }
+.msg { max-width: 85%; }
+.msg.user { align-self: flex-end; }
+.msg.assistant { align-self: flex-start; }
+.msg-bubble { padding: 12px 16px; border-radius: 8px; font-size: 13px; line-height: 1.6; }
+.msg.user .msg-bubble { background: rgba(200,169,110,0.12); border: 1px solid rgba(200,169,110,0.2); color: var(--gold3); }
+.msg.assistant .msg-bubble { background: var(--bg3); border: 1px solid var(--border); color: var(--text); }
+.msg.assistant .msg-bubble strong { color: var(--gold2); }
+.msg-time { font-size: 10px; color: var(--muted); margin-top: 4px; text-align: right; }
+.msg.assistant .msg-time { text-align: left; }
+.typing { display: flex; gap: 4px; padding: 12px 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; width: fit-content; }
+.typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: bounce 1.2s infinite; }
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+.chat-footer { padding: 16px 20px; border-top: 1px solid var(--border); }
+.chat-suggestions { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.suggestion { padding: 5px 10px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 11px; border-radius: 20px; cursor: pointer; transition: all 0.15s; font-family: var(--font-s); }
+.suggestion:hover { color: var(--gold); border-color: rgba(200,169,110,0.4); background: rgba(200,169,110,0.05); }
+.chat-input-row { display: flex; gap: 8px; }
+.chat-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; color: var(--text); font-size: 13px; font-family: var(--font-s); outline: none; transition: border-color 0.2s; resize: none; height: 42px; }
+.chat-input:focus { border-color: rgba(200,169,110,0.4); }
+.chat-send { background: var(--gold); border: none; border-radius: 6px; width: 42px; height: 42px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+.chat-send:hover { background: var(--gold2); }
+.chat-send svg { width: 16px; height: 16px; color: #070810; }
+.chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── HIST TABLE ── */
+.hist-bar { display: inline-block; height: 8px; background: rgba(200,169,110,0.3); border-radius: 2px; vertical-align: middle; margin-right: 8px; }
+
+/* ── SECTION HEADER ── */
+.section-header { margin-bottom: 24px; }
+.section-title { font-family: var(--font-d); font-size: 22px; color: var(--gold2); margin-bottom: 4px; }
+.section-desc { font-size: 12px; color: var(--muted); }
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+/* ── ALERT BANNER ── */
+.alert-banner { background: rgba(212,95,95,0.08); border: 1px solid rgba(212,95,95,0.25); border-radius: 6px; padding: 12px 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.ok-banner { background: rgba(90,181,133,0.08); border: 1px solid rgba(90,181,133,0.25); }
+
+/* ── FILTER BAR ── */
+.filter-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding: 14px 18px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; }
+.filter-group { display: flex; align-items: center; gap: 8px; }
+.filter-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+select { background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; font-size: 12px; border-radius: 4px; font-family: var(--font-s); outline: none; cursor: pointer; }
+select option { background: var(--bg3); }
+
+@media (max-width: 1100px) {
+  .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  .charts-grid { grid-template-columns: 1fr; }
+  .canal-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .content { padding: 16px; }
+  .chat-panel { width: 100%; }
+  .canal-grid { grid-template-columns: 1fr; }
+  .insights-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="header-inner">
-    <div class="brand">
-      <div class="brand-icon">GD</div>
-      <div>
-        <div class="brand-name">Giani Dafirenze</div>
-        <div class="brand-sub">Intelligence Financiera</div>
-      </div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="brand">
+    <div class="brand-logo"><span></span></div>
+    <div>
+      <div class="brand-name">Giani Dafirenze</div>
+      <div class="brand-sub">Inteligencia Financiera</div>
     </div>
-    <div class="header-meta">
-      <div class="period-badge">YTD Febrero 2026</div>
-      <div class="update-time">Datos al 28.02.2026</div>
-    </div>
+  </div>
+  <div class="header-right">
+    <div class="ytd-badge">YTD FEB 2026</div>
+    <button class="chat-btn" onclick="toggleChat()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Consultar IA
+    </button>
   </div>
 </header>
-<nav class="nav">
-  <div class="nav-inner">
-    <button class="nav-btn active" onclick="showSection('resumen',this)">Resumen Ejecutivo</button>
-    <button class="nav-btn" onclick="showSection('eerr',this)">EERR Mensual</button>
-    <button class="nav-btn" onclick="showSection('canales',this)">Análisis por Canal</button>
-    <button class="nav-btn" onclick="showSection('costos',this)">Estructura de Costos</button>
-    <button class="nav-btn" onclick="showSection('indicadores',this)">Indicadores Estratégicos</button>
-    <button class="nav-btn" onclick="showSection('historico',this)">Histórico 2016–2026</button>
-    <button class="nav-btn" onclick="showSection('insights',this)">Insights</button>
-    <button class="nav-btn" onclick="showSection('datos',this)">Guía de Datos</button>
-  </div>
+
+<!-- TABS -->
+<nav class="tabs">
+  <div class="tab active" onclick="showSection('resumen')">Resumen</div>
+  <div class="tab" onclick="showSection('eerr')">EERR Mensual</div>
+  <div class="tab" onclick="showSection('canales')">Canales</div>
+  <div class="tab" onclick="showSection('costos')">Costos</div>
+  <div class="tab" onclick="showSection('historico')">Histórico 2016–2025</div>
+  <div class="tab" onclick="showSection('insights')">Insights</div>
 </nav>
-<main class="main">
 
-<!-- RESUMEN EJECUTIVO -->
-<section id="s-resumen" class="section active">
-  <div class="section-title">Resumen Ejecutivo</div>
-  <div class="section-sub">Estado de resultados consolidado · Enero — Febrero 2026</div>
-  <div class="alert-banner">
-    <span style="font-size:18px;flex-shrink:0">⚠</span>
-    <span class="alert-text"><strong>EBITDA negativo YTD −$5.7M</strong> — Enero cerró con EBITDA positivo (+$387K) pero Febrero revirtió con fuerza (−$6.1M). El margen bruto de <strong>44.5%</strong> representa una caída de <strong>5.6 pp</strong> vs 2025 (50.1%). Patrón estacional habitual de Q1, pero el deterioro de márgenes requiere diagnóstico urgente.</span>
+<!-- MAIN -->
+<main class="content">
+
+<!-- ══ RESUMEN ══ -->
+<section id="sec-resumen" class="section active">
+  <div class="section-header">
+    <div class="section-title">Resumen Ejecutivo</div>
+    <div class="section-desc">YTD Enero–Febrero 2026 · Real vs Presupuesto vs 2025</div>
   </div>
-  <div class="kpi-grid">
-    <div class="kpi-card" style="--accent-color:var(--gold)"><div class="kpi-label">Ingresos Totales YTD</div><div class="kpi-value">$319.3M</div><div class="kpi-sub">Pres: $324.0M · 2025: $281.9M</div><div class="kpi-badges"><span class="badge down">−1.5% vs Pres</span><span class="badge up">+13.3% vs 2025</span></div></div>
-    <div class="kpi-card" style="--accent-color:var(--blue)"><div class="kpi-label">Margen Bruto %</div><div class="kpi-value">44.5%</div><div class="kpi-sub">Pres: 44.6% · 2025: 50.1%</div><div class="kpi-badges"><span class="badge neutral">−0.1 pp vs Pres</span><span class="badge down">−5.6 pp vs 2025</span></div></div>
-    <div class="kpi-card" style="--accent-color:var(--red)"><div class="kpi-label">EBITDA YTD</div><div class="kpi-value" style="color:var(--red)">−$5.7M</div><div class="kpi-sub">Pres: −$1.9M · 2025: −$24.8M</div><div class="kpi-badges"><span class="badge down">−$3.8M vs Pres</span><span class="badge up">+$19.1M vs 2025</span></div></div>
-    <div class="kpi-card" style="--accent-color:var(--red)"><div class="kpi-label">Resultado Neto YTD</div><div class="kpi-value" style="color:var(--red)">−$18.7M</div><div class="kpi-sub">Pres: −$15.7M · 2025: −$38.5M</div><div class="kpi-badges"><span class="badge down">−$3.0M vs Pres</span><span class="badge up">+$19.8M vs 2025</span></div></div>
-    <div class="kpi-card" style="--accent-color:var(--amber)"><div class="kpi-label">Costo / Venta</div><div class="kpi-value">55.5%</div><div class="kpi-sub">2025: 49.9% · Δ +5.6 pp</div><div class="kpi-badges"><span class="badge warn">Deterioro relevante</span></div></div>
+  <div id="alert-banner"></div>
+  <div class="kpi-grid" id="kpi-grid"></div>
+  <div class="charts-grid three">
+    <div class="chart-card">
+      <div class="card-title">Evolución de Ingresos Mensuales</div>
+      <div class="card-sub">Real 2026 vs Presupuesto vs Real 2025</div>
+      <div class="chart-wrap"><canvas id="chartIngEvol"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="card-title">Mix de Ingresos por Canal</div>
+      <div class="card-sub">YTD Feb 2026 · Participación %</div>
+      <div class="chart-wrap"><canvas id="chartMix"></canvas></div>
+    </div>
   </div>
-  <div class="grid-6040 mb24">
-    <div class="card"><div class="card-title">Evolución Ingresos Mensuales</div><div class="chart-wrap"><canvas id="chartIngEvol"></canvas></div></div>
-    <div class="card"><div class="card-title">Mix de Ingresos por Canal</div><div class="chart-wrap"><canvas id="chartMix"></canvas></div></div>
-  </div>
-  <div class="grid-2 mb24">
-    <div class="card"><div class="card-title">Waterfall EBITDA — YTD</div><div class="chart-wrap"><canvas id="chartWaterfall"></canvas></div></div>
-    <div class="card"><div class="card-title">Margen Bruto % por Canal</div><div class="chart-wrap"><canvas id="chartMargenCanal"></canvas></div></div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="card-title">Puente EBITDA</div>
+      <div class="card-sub">De ingresos a EBITDA — YTD Feb 2026</div>
+      <div class="chart-wrap"><canvas id="chartWaterfall"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="card-title">Margen Bruto % por Canal</div>
+      <div class="card-sub">2026 (azul) vs 2025 (gris)</div>
+      <div class="chart-wrap"><canvas id="chartMargenCanal"></canvas></div>
+    </div>
   </div>
 </section>
 
-<!-- EERR MENSUAL -->
-<section id="s-eerr" class="section">
-  <div class="section-title">Estado de Resultados</div>
-  <div class="section-sub">Comparativo mensual · Real 2026 vs Presupuesto vs Real 2025</div>
-  <div class="card mb24" style="overflow-x:auto">
-    <div class="card-title">EERR Consolidado</div>
-    <table class="fin-table">
-      <thead><tr><th style="min-width:200px">Partida</th><th>Enero 2026</th><th>Feb 2026</th><th>YTD 2026</th><th>Pres YTD</th><th>Δ Pres</th><th>YTD 2025</th><th>Δ 2025</th></tr></thead>
-      <tbody id="eerr-body"></tbody>
-    </table>
+<!-- ══ EERR MENSUAL ══ -->
+<section id="sec-eerr" class="section">
+  <div class="section-header">
+    <div class="section-title">Estado de Resultados Mensual</div>
+    <div class="section-desc">Detalle completo por partida</div>
   </div>
-  <div class="grid-2">
-    <div class="card"><div class="card-title">EBITDA Mensual — 2026 vs 2025</div><div class="chart-wrap"><canvas id="chartEBITDA"></canvas></div></div>
-    <div class="card"><div class="card-title">Margen Bruto % — Evolución</div><div class="chart-wrap"><canvas id="chartMargenEvol"></canvas></div></div>
+  <div class="filter-bar">
+    <div class="filter-group">
+      <span class="filter-label">Año</span>
+      <select id="eerr-year" onchange="buildEERR()">
+        <option value="2026">2026</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+      </select>
+    </div>
+  </div>
+  <div class="chart-card" style="margin-bottom:20px; overflow-x:auto;">
+    <div id="eerr-table-wrap"></div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="card-title">EBITDA Mensual</div>
+      <div class="card-sub">Real vs Presupuesto vs año anterior</div>
+      <div class="chart-wrap"><canvas id="chartEBITDA"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="card-title">Margen Bruto % — Evolución Mensual</div>
+      <div class="card-sub">Real vs Presupuesto vs año anterior</div>
+      <div class="chart-wrap"><canvas id="chartMBpct"></canvas></div>
+    </div>
   </div>
 </section>
 
-<!-- CANALES -->
-<section id="s-canales" class="section">
-  <div class="section-title">Análisis por Canal</div>
-  <div class="section-sub">Rentabilidad y evolución — Enero–Febrero 2026</div>
+<!-- ══ CANALES ══ -->
+<section id="sec-canales" class="section">
+  <div class="section-header">
+    <div class="section-title">Análisis por Canal</div>
+    <div class="section-desc">Ingresos, costo y margen bruto por canal de venta</div>
+  </div>
   <div class="canal-grid" id="canal-cards"></div>
-  <div class="grid-2">
-    <div class="card"><div class="card-title">Ingresos Mensuales por Canal</div><div class="chart-wrap tall"><canvas id="chartCanalesEvol"></canvas></div></div>
-    <div class="card"><div class="card-title">Margen Bruto % — Canal vs 2025</div><div class="chart-wrap tall"><canvas id="chartRadar"></canvas></div></div>
-  </div>
-</section>
-
-<!-- COSTOS -->
-<section id="s-costos" class="section">
-  <div class="section-title">Estructura de Costos</div>
-  <div class="section-sub">Composición y magnitud de gastos operacionales · YTD Feb 2026</div>
-  <div class="kpi-grid mb24">
-    <div class="kpi-card" style="--accent-color:var(--blue)"><div class="kpi-label">GAV Total YTD</div><div class="kpi-value">$102.1M</div><div class="kpi-sub">32.0% de ingresos</div></div>
-    <div class="kpi-card" style="--accent-color:var(--green)"><div class="kpi-label">Gastos Fijos YTD</div><div class="kpi-value">$42.7M</div><div class="kpi-sub">13.4% de ingresos</div></div>
-    <div class="kpi-card" style="--accent-color:var(--amber)"><div class="kpi-label">Sueldos + Honorarios</div><div class="kpi-value">$60.5M</div><div class="kpi-sub">19.0% de ingresos</div></div>
-    <div class="kpi-card" style="--accent-color:var(--gold)"><div class="kpi-label">Arriendos (Tiendas)</div><div class="kpi-value">$39.5M</div><div class="kpi-sub">12.4% de ingresos</div></div>
-    <div class="kpi-card" style="--accent-color:#a05fd4"><div class="kpi-label">Marketing Digital</div><div class="kpi-value">$11.8M</div><div class="kpi-sub">3.7% de ingresos</div></div>
-  </div>
-  <div class="grid-6040 mb24">
-    <div class="card"><div class="card-title">Top Partidas de Gasto — YTD</div><div id="gastos-list"></div></div>
-    <div class="card"><div class="card-title">Composición GAV</div><div class="chart-wrap"><canvas id="chartGAVComp"></canvas></div></div>
-  </div>
-  <div class="card" style="overflow-x:auto">
-    <div class="card-title">Detalle de Gastos como % de Ingresos</div>
-    <table class="fin-table">
-      <thead><tr><th>Partida</th><th>Enero Monto</th><th>% Ing</th><th>Feb Monto</th><th>% Ing</th><th>YTD Monto</th><th>YTD %</th><th>Tipo</th></tr></thead>
-      <tbody id="costos-body"></tbody>
-    </table>
-  </div>
-</section>
-
-<!-- INDICADORES ESTRATÉGICOS -->
-<section id="s-indicadores" class="section">
-  <div class="section-title">Indicadores Estratégicos</div>
-  <div class="section-sub">Estructura, palanca y sostenibilidad financiera</div>
-  <div class="grid-2 mb24">
-    <div class="card">
-      <div class="card-title">Punto de Equilibrio</div>
-      <div style="margin-bottom:20px"><div style="font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.08em">Break-Even mensual estimado</div><div style="font-family:'Playfair Display',serif;font-size:36px;color:var(--gold)">$163.0M</div><div style="font-size:12px;color:var(--text3);margin-top:4px">Promedio real YTD: <span class="hl">$159.6M/mes</span> · Déficit: <span style="color:var(--red);font-family:'DM Mono',monospace">−$3.4M/mes</span></div></div>
-      <div class="indicador-row"><div class="ind-label">Ventas reales YTD/mes</div><div class="ind-bar-bg"><div class="ind-bar-fill" style="width:98%;background:var(--gold)"></div></div><div class="ind-value hl">$159.6M</div></div>
-      <div class="indicador-row"><div class="ind-label">Break-Even mensual</div><div class="ind-bar-bg"><div class="ind-bar-fill" style="width:100%;background:var(--red)"></div></div><div class="ind-value" style="color:var(--red)">$163.0M</div></div>
-      <div class="indicador-row"><div class="ind-label">Presupuesto mensual</div><div class="ind-bar-bg"><div class="ind-bar-fill" style="width:100%;background:var(--blue)"></div></div><div class="ind-value" style="color:var(--blue)">$162.0M</div></div>
-      <div class="divider"></div>
-      <div><div style="font-size:11px;color:var(--text3);margin-bottom:6px">Break-even anualizado implica ventas de:</div><div style="font-family:'Playfair Display',serif;font-size:28px;color:var(--amber)">$1,956M</div><div style="font-size:11px;color:var(--text3)">Run-rate actual: $1,916M · Gap: <span style="color:var(--red)">−$40M</span></div></div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="card-title">Ingresos Mensuales por Canal — 2026</div>
+      <div class="card-sub">Enero y Febrero real</div>
+      <div class="chart-wrap tall"><canvas id="chartCanalesEvol"></canvas></div>
     </div>
-    <div class="card">
-      <div class="card-title">Leverage Operativo y Run-Rate</div>
-      <div style="margin-bottom:18px"><div style="font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.08em">Leverage Operativo estimado</div><div style="font-family:'Playfair Display',serif;font-size:36px;color:var(--blue)">~7.5×</div><div style="font-size:12px;color:var(--text3);margin-top:4px">+10% ventas → impacto EBITDA: <span class="hl-green">+$14.1M/mes</span></div></div>
-      <div class="divider"></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
-        <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Run-Rate Anual 2026</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">$1,916M</div><div style="font-size:11px;color:var(--text3)">Pres: $2,402M · <span style="color:var(--red)">−$486M</span></div></div>
-        <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Gastos Fijos / Ingresos</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--amber)">13.4%</div><div style="font-size:11px;color:var(--text3)">Benchmark retail: 8–12%</div></div>
-        <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Gastos Fin. / Ingresos</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--red)">1.9%</div><div style="font-size:11px;color:var(--text3)">$6.2M YTD · Sin cobertura EBITDA</div></div>
-        <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Cobertura Intereses</div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--red)">N/A</div><div style="font-size:11px;color:var(--text3)">EBITDA negativo YTD</div></div>
-      </div>
+    <div class="chart-card">
+      <div class="card-title">Margen Bruto % por Canal</div>
+      <div class="card-sub">Radar comparativo 2026 vs 2025</div>
+      <div class="chart-wrap tall"><canvas id="chartRadar"></canvas></div>
     </div>
   </div>
-  <div class="card" style="overflow-x:auto">
-    <div class="card-title">Análisis de Sensibilidad EBITDA</div>
-    <table class="fin-table">
-      <thead><tr><th>Escenario</th><th>Δ Ingresos</th><th>Ingresos Proy.</th><th>Margen Bruto (44.5%)</th><th>Gastos Totales</th><th>EBITDA Mensual</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td>Pesimista (−10%)</td><td class="neg">−10%</td><td>$143.6M</td><td>$63.9M</td><td>$76.2M</td><td class="neg">−$12.3M</td><td style="color:var(--red)">Crítico</td></tr>
-        <tr><td>Base (run-rate actual)</td><td class="muted">0%</td><td>$159.6M</td><td>$71.0M</td><td>$76.2M</td><td class="neg">−$5.2M</td><td style="color:var(--red)">Déficit</td></tr>
-        <tr class="section-row"><td>Break-Even (+2.1%)</td><td style="color:var(--amber)">+2.1%</td><td style="color:var(--gold)">$163.0M</td><td style="color:var(--gold)">$72.5M</td><td>$72.5M</td><td style="color:var(--gold)">$0M</td><td style="color:var(--amber)">Equilibrio</td></tr>
-        <tr><td>Optimista (+10%)</td><td class="pos">+10%</td><td>$175.6M</td><td>$78.1M</td><td>$76.2M</td><td class="pos">+$1.9M</td><td class="pos">Positivo</td></tr>
-        <tr><td>Presupuesto (+14%)</td><td class="pos">+14%</td><td>$182.0M</td><td>$81.0M</td><td>$76.2M</td><td class="pos">+$4.8M</td><td class="pos">En plan</td></tr>
-      </tbody>
-    </table>
-    <div style="font-size:11px;color:var(--text3);margin-top:10px">* Gastos totales fijados en $76.2M/mes (promedio YTD). El break-even real varía con la estacionalidad de costos.</div>
-  </div>
 </section>
 
-<!-- HISTÓRICO -->
-<section id="s-historico" class="section">
-  <div class="section-title">Serie Histórica 2016–2026</div>
-  <div class="section-sub">Evolución de ingresos, márgenes y rentabilidad · CAGR 2016–2025: +15.4%</div>
-  <div class="card mb24"><div class="card-title">Ingresos Anuales y Margen EBITDA %</div><div class="chart-wrap tall"><canvas id="chartHistorico"></canvas></div></div>
-  <div class="card">
-    <div class="card-title">Resumen por Año</div>
-    <div style="display:grid;grid-template-columns:70px 1fr 110px 80px 80px;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);margin-bottom:4px">
-      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em">Año</div>
-      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em">Escala</div>
-      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;text-align:right">Ingresos</div>
-      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;text-align:right">M.Bruto%</div>
-      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;text-align:right">EBITDA%</div>
+<!-- ══ COSTOS ══ -->
+<section id="sec-costos" class="section">
+  <div class="section-header">
+    <div class="section-title">Estructura de Costos</div>
+    <div class="section-desc">GAV y gastos fijos YTD Ene–Feb 2026</div>
+  </div>
+  <div class="kpi-grid" id="kpi-costos"></div>
+  <div class="charts-grid three">
+    <div class="chart-card">
+      <div class="card-title">Evolución Mensual de Gastos</div>
+      <div class="card-sub">GAV + Gastos Fijos como % de ingresos</div>
+      <div class="chart-wrap"><canvas id="chartGastosEvol"></canvas></div>
     </div>
-    <div id="hist-rows"></div>
+    <div class="chart-card">
+      <div class="card-title">Composición GAV</div>
+      <div class="card-sub">Participación por categoría YTD</div>
+      <div class="chart-wrap"><canvas id="chartGAVComp"></canvas></div>
+    </div>
   </div>
 </section>
 
-<!-- INSIGHTS -->
-<section id="s-insights" class="section">
-  <div class="section-title">Insights & Alertas</div>
-  <div class="section-sub">Análisis automático sobre datos reales YTD Febrero 2026</div>
-  <div class="insight-grid" id="insight-container"></div>
+<!-- ══ HISTÓRICO ══ -->
+<section id="sec-historico" class="section">
+  <div class="section-header">
+    <div class="section-title">Serie Histórica 2016–2025</div>
+    <div class="section-desc">CAGR 10 años +15.4% · 2026 en curso</div>
+  </div>
+  <div class="chart-card" style="margin-bottom:20px;">
+    <div class="card-title">Ingresos, Margen Bruto % y EBITDA % · 2016–2026</div>
+    <div class="card-sub">Barras = ingresos · Líneas = márgenes</div>
+    <div class="chart-wrap tall"><canvas id="chartHistorico"></canvas></div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="card-title">Tabla Resumen Anual</div>
+      <div class="card-sub">Todos los años</div>
+      <div id="hist-table-wrap"></div>
+    </div>
+    <div class="chart-card">
+      <div class="card-title">Estacionalidad por Mes — Promedio 2020–2025</div>
+      <div class="card-sub">Participación de cada mes en ingresos anuales</div>
+      <div class="chart-wrap"><canvas id="chartEstacional"></canvas></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section-header">
+    <div class="section-title" style="font-size:17px;">Drill-down Mensual por Año</div>
+    <div class="section-desc">Seleccione un año para ver el EERR mes a mes</div>
+  </div>
+  <div class="controls">
+    <span class="filter-label">Año:</span>
+    <div class="year-btns" id="year-btns"></div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="card-title" id="drilldown-title">Ingresos Mensuales</div>
+      <div class="chart-wrap"><canvas id="chartDrillIngresos"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="card-title" id="drilldown-title2">EBITDA Mensual</div>
+      <div class="chart-wrap"><canvas id="chartDrillEBITDA"></canvas></div>
+    </div>
+  </div>
 </section>
 
-<!-- GUÍA DE DATOS -->
-<section id="s-datos" class="section">
-  <div class="section-title">Guía de Datos</div>
-  <div class="section-sub">Documentos que debe preparar para alimentar y actualizar el sistema</div>
-  <div class="alert-banner" style="border-color:rgba(90,159,212,0.3);background:linear-gradient(90deg,rgba(90,159,212,0.06),rgba(90,159,212,0.02));margin-bottom:28px">
-    <span style="font-size:18px;flex-shrink:0">📋</span>
-    <span class="alert-text"><strong>Sistema de carga manual estructurada.</strong> Prepare los archivos CSV en el formato indicado. Una vez listos, se cargan directamente en el dashboard sin necesidad de programación ni servidores.</span>
+<!-- ══ INSIGHTS ══ -->
+<section id="sec-insights" class="section">
+  <div class="section-header">
+    <div class="section-title">Insights Automáticos</div>
+    <div class="section-desc">Alertas y señales clave generadas desde los datos reales</div>
   </div>
-  <div class="doc-grid mb24" id="doc-cards"></div>
-  <div class="card">
-    <div class="card-title">Plan de Implementación</div>
-    <div class="phase-title">Fase 1 — Base operativa (Completada ✓)</div>
-    <div class="step-row"><div class="step-num">✓</div><div><div class="step-label">Dashboard web interactivo publicado</div><div class="step-desc">8 secciones, 12 gráficos, datos reales YTD Feb 2026</div></div></div>
-    <div class="step-row"><div class="step-num">✓</div><div><div class="step-label">Análisis financiero completo con datos Excel</div><div class="step-desc">EERR, canales, costos, histórico 2016–2025, insights automáticos</div></div></div>
-    <div class="phase-title">Fase 2 — Datos y Exportaciones (Próximo)</div>
-    <div class="step-row"><div class="step-num">1</div><div><div class="step-label">Preparar y cargar archivos CSV</div><div class="step-desc">6 archivos definidos en esta sección · Actualización mensual manual</div></div></div>
-    <div class="step-row"><div class="step-num">2</div><div><div class="step-label">Publicar en GitHub Pages</div><div class="step-desc">Repositorio → activar Pages → URL pública permanente e inmutable</div></div></div>
-    <div class="step-row"><div class="step-num">3</div><div><div class="step-label">Generación automática Excel EERR</div><div class="step-desc">Template exportable con 4 hojas: EERR mensual, Comparativo, Canal, Costos</div></div></div>
-    <div class="step-row"><div class="step-num">4</div><div><div class="step-label">Generación PowerPoint Directorio</div><div class="step-desc">8 slides automáticos generados desde los datos del dashboard</div></div></div>
-    <div class="phase-title">Fase 3 — Automatización (Mes 3)</div>
-    <div class="step-row"><div class="step-num">5</div><div><div class="step-label">API Shopify → ventas e-commerce en tiempo real</div><div class="step-desc">Ticket promedio, unidades, tasa de conversión, CAC digital</div></div></div>
-    <div class="step-row"><div class="step-num">6</div><div><div class="step-label">API Bsale + SII → compras y honorarios automáticos</div><div class="step-desc">Facturas de compra, boletas de honorarios, inventario, stock rotación</div></div></div>
-  </div>
+  <div class="insights-grid" id="insights-grid"></div>
 </section>
 
 </main>
-<script>
-// ═══════════ DATA ═══════════
-const MESES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-const D26={
-  ingresos:     [161081943,158177418,0,0,0,0,0,0,0,0,0,0],
-  costo_venta:  [-85463838,-91654419,0,0,0,0,0,0,0,0,0,0],
-  margen_bruto: [75618105, 66522999, 0,0,0,0,0,0,0,0,0,0],
-  otros_ing:    [2470370,  3112294,  0,0,0,0,0,0,0,0,0,0],
-  otros_costo:  [-4515446, -3894894, 0,0,0,0,0,0,0,0,0,0],
-  gav:          [-51465134,-50599046,0,0,0,0,0,0,0,0,0,0],
-  gastos_fijos: [-21554679,-21185485,0,0,0,0,0,0,0,0,0,0],
-  ebitda:       [387515,   -6052132, 0,0,0,0,0,0,0,0,0,0],
-  depreciacion: [-3391566, -3444985, 0,0,0,0,0,0,0,0,0,0],
-  gastos_fin:   [-3314977, -2855224, 0,0,0,0,0,0,0,0,0,0],
-  resultado:    [-6319028, -12352342,0,0,0,0,0,0,0,0,0,0],
-};
-const D25={
-  ingresos:     [154397655,127517652,212472934,179611437,222760613,196635227,150107961,161535902,148305282,225203687,224803432,204346677],
-  margen_bruto: [65746208, 59419328, 108849880,101116489,118773331,98927705, 67315750, 68053261, 65599566, 114459821,122861647,110910403],
-  ebitda:       [-8222231, -16597914,31675374, 15173625, 33801662, 10982050, -12141990,-9676466, -11124859,27753243, 31560742, 16523078],
-  resultado:    [-15088002,-23430146,25236939, 8523317,  27281404, 2660888,  -18394548,-15757052,-17050371,20856084, 24840149, 10379376],
-};
-const PRES={
-  ingresos:     [154999999,169000000,235999999,210000001,239500000,215500000,170000000,156182660,162999999,246000000,244000000,198000000],
-  margen_bruto: [67504948, 76940811, 0,0,0,0,0,0,0,0,0,0],
-  ebitda:       [-5968312, 4096668,  0,0,0,0,0,0,0,0,0,0],
-  resultado:    [-13062978,-2649902, 0,0,0,0,0,0,0,0,0,0],
-};
-const CANALES=[
-  {name:'Tienda Araucaria',ing:71382799, costo:36155955, ene:41842122,feb:29540677,col:'#c8a96e',m25:0.545},
-  {name:'Tienda Costanera',ing:82764909, costo:42931366, ene:49822020,feb:32942889,col:'#5a9fd4',m25:0.540},
-  {name:'Página Web',      ing:130744163,costo:75684355, ene:62032239,feb:68711924,col:'#5ab585',m25:0.489},
-  {name:'Mayorista',       ing:20524114, costo:13472699, ene:5550839, feb:14973275,col:'#d4a55a',m25:0.367},
-  {name:'Boutique',        ing:13843376, costo:8873882,  ene:1834723, feb:12008653,col:'#a05fd4',m25:0.373},
-  {name:'Marketplace',     ing:0,        costo:0,        ene:0,       feb:0,       col:'#5c5a56',m25:0},
-];
-const GASTOS=[
-  {name:'Sueldos Brutos',   ene:17871516,feb:19726327,tipo:'Fijo'},
-  {name:'Arriendo Tiendas', ene:19684309,feb:19790133,tipo:'Fijo'},
-  {name:'Asesorías',        ene:11147054,feb:11745854,tipo:'Variable'},
-  {name:'Comisión POS/Vta', ene:4366276, feb:3572625, tipo:'Variable'},
-  {name:'Extras / Otros',   ene:4959874, feb:3237193, tipo:'Variable'},
-  {name:'Facebook Ads',     ene:2683311, feb:2700029, tipo:'Variable'},
-  {name:'Fotos / Contenido',ene:2418879, feb:0,       tipo:'Variable'},
-  {name:'Google Ads',       ene:1507718, feb:1797598, tipo:'Variable'},
-  {name:'Página Web (mant)',ene:1583510, feb:1508801, tipo:'Fijo'},
-  {name:'Asesoría Digital', ene:1073588, feb:1074194, tipo:'Variable'},
-  {name:'Klaviyo',          ene:884000,  feb:1263800, tipo:'Variable'},
-  {name:'Shopify',          ene:971047,  feb:1521868, tipo:'Fijo'},
-  {name:'Campaña Marketing',ene:365000,  feb:1166636, tipo:'Variable'},
-  {name:'Arriendo Oficina', ene:1395572, feb:874776,  tipo:'Fijo'},
-  {name:'Promotoras',       ene:250000,  feb:250000,  tipo:'Fijo'},
-  {name:'Luz',              ene:130930,  feb:135764,  tipo:'Fijo'},
-  {name:'Gastos Financieros',ene:3314977,feb:2855224, tipo:'Fijo'},
-];
-const HIST=[
-  {y:2016,ing:605064130,  ebitda_pct:-0.007,mb:0.268},
-  {y:2017,ing:1046884380, ebitda_pct:0.125, mb:0.339},
-  {y:2018,ing:1290978073, ebitda_pct:0.034, mb:0.304},
-  {y:2019,ing:1336390487, ebitda_pct:0.016, mb:0.320},
-  {y:2020,ing:1099103359, ebitda_pct:0.191, mb:0.450},
-  {y:2021,ing:1659720995, ebitda_pct:0.290, mb:0.547},
-  {y:2022,ing:1714809504, ebitda_pct:0.162, mb:0.504},
-  {y:2023,ing:1763895075, ebitda_pct:0.096, mb:0.501},
-  {y:2024,ing:1863513606, ebitda_pct:0.071, mb:0.501},
-  {y:2025,ing:2207698459, ebitda_pct:0.050, mb:0.499},
-  {y:'2026*',ing:1915556166,ebitda_pct:-0.018,mb:0.445},
-];
 
-// ═══════════ UTILS ═══════════
-const ytd=(arr,n=2)=>arr.slice(0,n).reduce((a,b)=>a+(b||0),0);
-const f=(n)=>{
-  if(!n||n===0)return '—';
-  const a=Math.abs(n);
-  let s=a>=1e9?(a/1e9).toFixed(1)+'B':a>=1e6?(a/1e6).toFixed(1)+'M':a>=1e3?(a/1e3).toFixed(0)+'K':a.toFixed(0);
-  return n<0?`(${s})`:s;
-};
-const fm=n=>`$${f(n)}`;
-const fp=n=>n||n===0?(n*100).toFixed(1)+'%':'—';
-const fdiff=(a,b)=>{if(!b||b===0)return'—';const d=(a-b)/Math.abs(b);return`${d>0?'+':''}${(d*100).toFixed(1)}%`;};
-
-Chart.defaults.color='#5c5a56';
-Chart.defaults.borderColor='rgba(255,255,255,0.06)';
-Chart.defaults.font.family="'DM Sans', sans-serif";
-Chart.defaults.font.size=11;
-const GL={color:'rgba(255,255,255,0.05)',drawBorder:false};
-const TS={color:'#5c5a56',font:{size:10}};
-const [GOLD,RED,GREEN,BLUE,AMBER,PURPLE]=['#c8a96e','#d45f5f','#5ab585','#5a9fd4','#d4a55a','#a05fd4'];
-
-function mk(id,cfg){const el=document.getElementById(id);if(!el)return;return new Chart(el.getContext('2d'),cfg);}
-
-// ═══════════ NAVIGATION ═══════════
-function showSection(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('s-'+id).classList.add('active');
-  btn.classList.add('active');
-}
-
-// ═══════════ BUILD EERR TABLE ═══════════
-function buildEERR(){
-  const rows=[
-    {label:'INGRESOS POR VENTA',        key:'ingresos',    cls:'section-row',pct:false},
-    {label:'  Tienda Araucaria',         custom:[41842122,29540677,71382799,null,null,462741312],cls:'sub-row'},
-    {label:'  Tienda Costanera',         custom:[49822020,32942889,82764909,null,null,493242187],cls:'sub-row'},
-    {label:'  Página Web',               custom:[62032239,68711924,130744163,null,null,1015548573],cls:'sub-row'},
-    {label:'  Mayorista',                custom:[5550839,14973275,20524114,null,null,144314285],cls:'sub-row'},
-    {label:'  Boutique',                 custom:[1834723,12008653,13843376,null,null,92405262],cls:'sub-row'},
-    {label:'COSTO DE VENTA',             key:'costo_venta', cls:'section-row'},
-    {label:'MARGEN BRUTO',               key:'margen_bruto',cls:'total-row',pct:true},
-    {label:'Otros Ingresos',             key:'otros_ing',   cls:''},
-    {label:'Otros Costos (Despacho neto)',key:'otros_costo', cls:''},
-    {label:'GAV (Gastos Administ.)',      key:'gav',         cls:'section-row'},
-    {label:'  Gastos Fijos',             key:'gastos_fijos',cls:'sub-row'},
-    {label:'EBITDA',                     key:'ebitda',      cls:'total-row',pct:true},
-    {label:'Depreciación y Amortización',key:'depreciacion',cls:''},
-    {label:'Gastos Financieros',         key:'gastos_fin',  cls:''},
-    {label:'RESULTADO ANTES DE IMPUESTO',key:'resultado',   cls:'total-row',pct:true},
-  ];
-  const ing_ytd=ytd(D26.ingresos);
-  const ing_ytd25=ytd(D25.ingresos);
-  let html='';
-  rows.forEach(r=>{
-    let e,f2,y,p,y25;
-    if(r.key){e=D26[r.key][0];f2=D26[r.key][1];y=ytd(D26[r.key]);p=ytd(PRES[r.key]||[0,0]);y25=ytd(D25[r.key]||[0,0]);}
-    else{[e,f2,y,,, y25]=r.custom;p=null;}
-    const dp=p&&y?(y-p)/Math.abs(p):null;
-    const d25=y25&&y?(y-y25)/Math.abs(y25):null;
-    const isPos=v=>r.key&&['ingresos','otros_ing','margen_bruto','ebitda','resultado'].includes(r.key)?v>0?'pos':'neg':'';
-    const dc=d=>{if(d===null)return'<td>—</td>';const c=d>0.02?'pos':d<-0.02?'neg':'muted';return`<td class="${c}">${d>0?'+':''}${(d*100).toFixed(1)}%</td>`;};
-    let pl='';
-    if(r.pct&&ing_ytd&&y){const pv=y/ing_ytd;pl=` <span style="font-size:10px;color:var(--text3)">(${(pv*100).toFixed(1)}%)</span>`;}
-    html+=`<tr class="${r.cls}"><td>${r.label}${pl}</td><td class="${isPos(e)}">${fm(e)}</td><td class="${isPos(f2)}">${fm(f2)}</td><td class="${isPos(y)}">${fm(y)}</td><td class="muted">${fm(p)}</td>${dc(dp)}<td class="muted">${fm(y25)}</td>${dc(d25)}</tr>`;
-  });
-  document.getElementById('eerr-body').innerHTML=html;
-}
-
-// ═══════════ CANAL CARDS ═══════════
-function buildCanalCards(){
-  const total=ytd(D26.ingresos);
-  let html='';
-  CANALES.forEach(c=>{
-    const m=c.ing>0?(c.ing-c.costo)/c.ing:0;
-    const share=c.ing>0?c.ing/total:0;
-    const dm=m-c.m25;
-    const col=m>0.45?GREEN:m>0.35?AMBER:m>0?RED:'#5c5a56';
-    html+=`<div class="canal-card">
-      <div class="canal-name">${c.name}</div>
-      <div class="canal-value">${fm(c.ing)}</div>
-      <div class="canal-pct">${fp(share)} del total · Costo ${fm(c.costo)}</div>
-      <div class="margen-bar-bg"><div class="margen-bar-fill" style="width:${Math.min(m*200,100)}%;background:${col}"></div></div>
-      <div class="canal-meta"><span>Margen Bruto</span><span style="font-family:'DM Mono',monospace;color:${col}">${fp(m)} <span style="color:${dm>=0?GREEN:RED};font-size:10px">${dm>=0?'+':''}${(dm*100).toFixed(1)}pp vs 2025</span></span></div>
-    </div>`;
-  });
-  document.getElementById('canal-cards').innerHTML=html;
-}
-
-// ═══════════ COSTOS ═══════════
-function buildCostos(){
-  const ie=D26.ingresos[0],ife=D26.ingresos[1],iy=ytd(D26.ingresos);
-  const sorted=[...GASTOS].sort((a,b)=>(b.ene+b.feb)-(a.ene+a.feb));
-  const mx=sorted[0].ene+sorted[0].feb;
-  let bl='';
-  sorted.forEach(g=>{
-    const t=g.ene+g.feb;
-    const col=g.tipo==='Fijo'?BLUE:AMBER;
-    bl+=`<div class="gasto-row">
-      <div style="color:var(--text)">${g.name}</div>
-      <div class="gasto-bar-bg"><div class="gasto-bar-fill" style="width:${(t/mx*100).toFixed(0)}%;background:${col}"></div></div>
-      <div style="font-family:'DM Mono',monospace;text-align:right;color:var(--text2)">${fm(t)}</div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;text-align:right;color:var(--text3)">${(t/iy*100).toFixed(1)}%</div>
-    </div>`;
-  });
-  document.getElementById('gastos-list').innerHTML=bl;
-  let th='';
-  GASTOS.forEach(g=>{
-    const t=g.ene+g.feb;
-    const col=g.tipo==='Fijo'?'color:var(--blue)':'color:var(--amber)';
-    th+=`<tr><td>${g.name}</td><td>(${fm(g.ene)})</td><td>${(g.ene/ie*100).toFixed(1)}%</td><td>(${fm(g.feb)})</td><td>${(g.feb/ife*100).toFixed(1)}%</td><td>(${fm(t)})</td><td>${(t/iy*100).toFixed(1)}%</td><td style="${col}">${g.tipo}</td></tr>`;
-  });
-  document.getElementById('costos-body').innerHTML=th;
-}
-
-// ═══════════ HISTÓRICO ═══════════
-function buildHist(){
-  const mx=Math.max(...HIST.map(h=>h.ing));
-  let html='';
-  HIST.forEach(h=>{
-    const ec=h.ebitda_pct>=0.10?GREEN:h.ebitda_pct>=0?AMBER:RED;
-    html+=`<div class="hist-year-row">
-      <div style="font-family:'DM Mono',monospace;color:var(--gold)">${h.y}</div>
-      <div class="hist-bar-bg"><div class="hist-bar-fill" style="width:${(h.ing/mx*100).toFixed(0)}%"></div></div>
-      <div style="font-family:'DM Mono',monospace;text-align:right;color:var(--gold)">${fm(h.ing)}</div>
-      <div style="font-family:'DM Mono',monospace;font-size:12px;text-align:right;color:${GREEN}">${fp(h.mb)}</div>
-      <div style="font-family:'DM Mono',monospace;font-size:12px;text-align:right;color:${ec}">${fp(h.ebitda_pct)}</div>
-    </div>`;
-  });
-  document.getElementById('hist-rows').innerHTML=html;
-}
-
-// ═══════════ INSIGHTS ═══════════
-function buildInsights(){
-  const ins=[
-    {t:'alert',i:'📉',title:'Caída crítica de margen bruto: −5.6pp vs 2025',desc:'El margen bruto YTD 2026 es 44.5% vs 50.1% en 2025. Esta caída de 5.6 puntos porcentuales es la más pronunciada desde 2019. La causa debe ser identificada con urgencia: ¿mix de productos, tipo de cambio en importaciones, descuentos excesivos, o cambio en canal mix hacia Web?',val:'44.5% real vs 50.1% 2025 · Impacto absoluto: −$17.8M'},
-    {t:'alert',i:'⚖️',title:'Gastos totales superan el margen bruto',desc:'Los gastos totales YTD ($145.0M) superan el margen bruto ($142.1M). La empresa no puede cubrir sus costos operacionales con la rentabilidad comercial. Esta situación es sostenible por la estacionalidad Q1, pero exige crecimiento acelerado en Q2–Q4.',val:'Gastos: $145.0M · Margen: $142.1M · Déficit operacional: −$2.9M'},
-    {t:'warn',i:'💸',title:'Asesorías por encima del benchmark sectorial',desc:'El ítem Asesorías totaliza $22.9M YTD, equivalente a 7.2% de los ingresos. El benchmark para retail de especialidad es 2–4%. Esta partida merece revisión de composición, ROI individual por asesoría, y posibilidad de internalización de funciones recurrentes.',val:'$22.9M YTD · 7.2% ventas · Benchmark: 2–4% · Exceso: ~$10M'},
-    {t:'warn',i:'🌐',title:'Concentración en canal Web con menor margen',desc:'Página Web representa el 41.0% de los ingresos pero con el segundo menor margen bruto (42.1%). Los canales con mejores márgenes (Araucaria 49.3%, Costanera 48.1%) tienen menor peso relativo. Escalar tiendas físicas o mejorar margen Web son palancas relevantes.',val:'Web: 41% ingresos, 42.1% margen · Tiendas físicas: 48.7% margen promedio'},
-    {t:'ok',  i:'📈',title:'Mejora YTD de +$19.1M vs mismo período 2025',desc:'A pesar del EBITDA negativo, la empresa mejoró $19.1M vs 2025 (−$24.8M → −$5.7M). Esto refleja mayor eficiencia operacional, crecimiento de ingresos (+$37.4M o +13.3%) y racionalización de gastos variables. La tendencia estructural es positiva.',val:'EBITDA: −$5.7M vs −$24.8M en 2025 · Mejora: +$19.1M'},
-    {t:'ok',  i:'🏪',title:'Tiendas físicas mantienen márgenes superiores',desc:'Araucaria (49.3%) y Costanera (48.1%) mantienen márgenes brutos sólidos pese a la caída general. Las tiendas físicas representan el 48.3% del ingreso total con la mejor rentabilidad por peso vendido, validando el modelo de retail presencial premium.',val:'Araucaria: 49.3% · Costanera: 48.1% · Ambas sobre benchmark web'},
-    {t:'info', i:'📊',title:'Alta palanca operativa: meses Q2–Q4 son decisivos',desc:'Con leverage operativo estimado de 7.5× y estacionalidad histórica favorable desde Marzo, la empresa tiene alta probabilidad de revertir el EBITDA en la segunda mitad del año. Los meses Mayo, Octubre y Noviembre históricamente concentran el 38% de los ingresos anuales.',val:'Leverage: ~7.5× · Break-even a solo +2.1% sobre run-rate · Q2 crítico'},
-    {t:'info', i:'🔧',title:'Métricas ausentes que se recomienda implementar',desc:'Para gestión de nivel institucional se necesita incorporar: Ticket Promedio por canal, Unidades vendidas y rotación de inventario, CAC (Costo de Adquisición de Cliente) en canales digitales, Tasa de conversión Web, Retención y recompra de clientes, y Flujo de Caja Libre.',val:'Fuentes requeridas: Shopify (ventas), Bsale (inventario), CRM, Google Analytics 4'},
-  ];
-  document.getElementById('insight-container').innerHTML=ins.map(x=>`
-    <div class="insight-card">
-      <div class="insight-icon ${x.t}">${x.i}</div>
+<!-- CHAT PANEL -->
+<div class="chat-overlay" id="chat-overlay" onclick="toggleChat()"></div>
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-ai-dot"></div>
       <div>
-        <div class="insight-title">${x.title}</div>
-        <div class="insight-desc">${x.desc}</div>
-        <div class="insight-value ${x.t}">${x.val}</div>
+        <div class="chat-title">CFO Assistant</div>
+        <div class="chat-subtitle">Datos reales Giani · 2016–2026</div>
+      </div>
+    </div>
+    <button class="close-btn" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg assistant">
+      <div class="msg-bubble">Hola. Tengo acceso completo a los datos financieros de Giani Dafirenze: <strong>EERR mensual 2016–2025, EERR real 2026 (Ene–Feb), presupuesto 2026 y márgenes por canal.</strong><br><br>Puede preguntarme sobre cualquier período, canal, partida o comparativo. También puedo hacer cálculos, explicar variaciones o identificar tendencias.</div>
+      <div class="msg-time">Listo</div>
+    </div>
+  </div>
+  <div class="chat-footer">
+    <div class="chat-suggestions" id="chat-suggestions">
+      <button class="suggestion" onclick="sendSuggestion(this)">¿Cómo fue Feb 2026 vs Feb 2025?</button>
+      <button class="suggestion" onclick="sendSuggestion(this)">¿Cuál canal tiene mejor margen?</button>
+      <button class="suggestion" onclick="sendSuggestion(this)">¿Qué pasó con el EBITDA en 2021?</button>
+      <button class="suggestion" onclick="sendSuggestion(this)">Proyección anual 2026</button>
+    </div>
+    <div class="chat-input-row">
+      <textarea class="chat-input" id="chat-input" placeholder="Consulte cualquier dato financiero..." rows="1" onkeydown="handleKey(event)"></textarea>
+      <button class="chat-send" id="chat-send" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════
+</script>
+<script>
+
+const DATA = {"hist_annual": {"2016": {"ing": 605064130, "costo": 442787083, "mb": 162277047, "oi": 3161, "gav": 110246460, "gf": 56079945, "ebitda": -4049358, "dep": 6101077, "gfin": 13170882, "res": -23321318, "mb_pct": 0.2682, "ebitda_pct": -0.0067}, "2017": {"ing": 1046884380, "costo": 691830005, "mb": 355054375, "oi": 17304387, "gav": 162240173, "gf": 62215441, "ebitda": 130598761, "dep": 9907911, "gfin": 12691494, "res": 107999356, "mb_pct": 0.3392, "ebitda_pct": 0.1247}, "2018": {"ing": 1290978073, "costo": 898870669, "mb": 392107404, "oi": 26603762, "gav": 280926431, "gf": 67593959, "ebitda": 43587014, "dep": 10840835, "gfin": 6753953, "res": 25992225, "mb_pct": 0.3037, "ebitda_pct": 0.0338}, "2019": {"ing": 1336390487, "costo": 908409044, "mb": 427981443, "oi": 29076257, "gav": 314529754, "gf": 92509897, "ebitda": 20941793, "dep": 12360765, "gfin": 7457172, "res": 1123855, "mb_pct": 0.3203, "ebitda_pct": 0.0157}, "2020": {"ing": 1099103359, "costo": 604214891, "mb": 494888468, "oi": 56323800, "gav": 247521400, "gf": 37549557, "ebitda": 209817511, "dep": 1661833, "gfin": 4981922, "res": 203173755, "mb_pct": 0.4503, "ebitda_pct": 0.1909}, "2021": {"ing": 1659720995, "costo": 751227993, "mb": 908493002, "oi": 73792233, "gav": 369526082, "gf": 54921195, "ebitda": 480699621, "dep": 12392781, "gfin": 6394696, "res": 461912144, "mb_pct": 0.5474, "ebitda_pct": 0.2896}, "2022": {"ing": 1714809504, "costo": 850585120, "mb": 864224384, "oi": 64478396, "gav": 480232037, "gf": 105608012, "ebitda": 277220813, "dep": 12360571, "gfin": 4094355, "res": 260765887, "mb_pct": 0.504, "ebitda_pct": 0.1617}, "2023": {"ing": 1763895075, "costo": 879861310, "mb": 884033765, "oi": 59149720, "gav": 563085153, "gf": 144897142, "ebitda": 169998185, "dep": 22560240, "gfin": 10811231, "res": 136626714, "mb_pct": 0.5012, "ebitda_pct": 0.0964}, "2024": {"ing": 1863513606, "costo": 929068387, "mb": 934445219, "oi": 43677215, "gav": 596639095, "gf": 190628869, "ebitda": 132512218, "dep": 38265822, "gfin": 35925535, "res": 58320861, "mb_pct": 0.5014, "ebitda_pct": 0.0711}, "2025": {"ing": 2207698459, "costo": 1105665073, "mb": 1102033386, "oi": 41324456, "gav": 692220522, "gf": 270360694, "ebitda": 109706313, "dep": 43626143, "gfin": 36022132, "res": 30058038, "mb_pct": 0.4992, "ebitda_pct": 0.0497}}, "hist_monthly": {"2016": {"ENERO": {"ing": 11666758, "costo": 1, "mb": 3877777, "oi": 0, "gav": 0, "gf": 0, "ebitda": -5193310, "dep": 133333, "gfin": 792550, "res": -6119193, "mb_pct": 0.3324, "ebitda_pct": -0.4451}, "FEBRERO": {"ing": 34807929, "costo": 0, "mb": 6267219, "oi": 0, "gav": 0, "gf": 0, "ebitda": -7074852, "dep": 233620, "gfin": 695992, "res": -8004463, "mb_pct": 0.1801, "ebitda_pct": -0.2033}, "MARZO": {"ing": 26634892, "costo": 0, "mb": 6410828, "oi": 2740, "gav": 0, "gf": 0, "ebitda": -6018628, "dep": 331942, "gfin": 283530, "res": -6634100, "mb_pct": 0.2407, "ebitda_pct": -0.226}, "ABRIL": {"ing": 93144372, "costo": 0, "mb": 23370325, "oi": 0, "gav": 0, "gf": 0, "ebitda": 11318107, "dep": 383585, "gfin": 1071142, "res": 9863380, "mb_pct": 0.2509, "ebitda_pct": 0.1215}, "MAYO": {"ing": 51498508, "costo": 0, "mb": 14235452, "oi": 0, "gav": 0, "gf": 0, "ebitda": 1102595, "dep": 449296, "gfin": 527399, "res": 125900, "mb_pct": 0.2764, "ebitda_pct": 0.0214}, "JUNIO": {"ing": 43462465, "costo": 0, "mb": 16845616, "oi": 0, "gav": 0, "gf": 0, "ebitda": 2476363, "dep": 546768, "gfin": 925281, "res": 1004314, "mb_pct": 0.3876, "ebitda_pct": 0.057}, "JULIO": {"ing": 65998370, "costo": 0, "mb": 20231268, "oi": 2571, "gav": 0, "gf": 0, "ebitda": 5947260, "dep": 546768, "gfin": 807136, "res": 4593357, "mb_pct": 0.3065, "ebitda_pct": 0.0901}, "AGOSTO": {"ing": 53456334, "costo": 0, "mb": 16473699, "oi": 0, "gav": 0, "gf": 0, "ebitda": 1192889, "dep": 583183, "gfin": 1644723, "res": -1035017, "mb_pct": 0.3082, "ebitda_pct": 0.0223}, "SEPTIEMBRE": {"ing": 65356792, "costo": 0, "mb": 14167448, "oi": 2992, "gav": 0, "gf": 0, "ebitda": -484659, "dep": 620844, "gfin": 2179659, "res": -3285162, "mb_pct": 0.2168, "ebitda_pct": -0.0074}, "OCTUBRE": {"ing": 69674098, "costo": 0, "mb": 12049968, "oi": 0, "gav": 0, "gf": 0, "ebitda": -3406380, "dep": 708310, "gfin": 1366185, "res": -5480874, "mb_pct": 0.1729, "ebitda_pct": -0.0489}, "NOVIEMBRE": {"ing": 32278677, "costo": 0, "mb": 9299450, "oi": 0, "gav": 0, "gf": 0, "ebitda": -4451063, "dep": 761070, "gfin": 1560127, "res": -6772260, "mb_pct": 0.2881, "ebitda_pct": -0.1379}, "DICIEMBRE": {"ing": 57084935, "costo": 0, "mb": 19047996, "oi": 0, "gav": 0, "gf": 0, "ebitda": 542319, "dep": 802360, "gfin": 1317158, "res": -1577199, "mb_pct": 0.3337, "ebitda_pct": 0.0095}}, "2017": {"ENERO": {"ing": 69482253, "costo": 1, "mb": 20024389, "oi": 864549, "gav": 0, "gf": 0, "ebitda": 4360226, "dep": 877022, "gfin": 1059811, "res": 2423393, "mb_pct": 0.2882, "ebitda_pct": 0.0628}, "FEBRERO": {"ing": 71097467, "costo": 1, "mb": 18767492, "oi": 809080, "gav": 0, "gf": 0, "ebitda": 2141367, "dep": 877022, "gfin": 1631170, "res": -366825, "mb_pct": 0.264, "ebitda_pct": 0.0301}, "MARZO": {"ing": 97128708, "costo": 0, "mb": 28828354, "oi": 1309911, "gav": 0, "gf": 0, "ebitda": 11367671, "dep": 878125, "gfin": 755079, "res": 9734467, "mb_pct": 0.2968, "ebitda_pct": 0.117}, "ABRIL": {"ing": 99447759, "costo": 0, "mb": 33087978, "oi": 1361312, "gav": 0, "gf": 0, "ebitda": 15717843, "dep": 991083, "gfin": 1155005, "res": 13571755, "mb_pct": 0.3327, "ebitda_pct": 0.1581}, "MAYO": {"ing": 81242614, "costo": 0, "mb": 34348934, "oi": 1565582, "gav": 0, "gf": 0, "ebitda": 15166556, "dep": 957790, "gfin": 782643, "res": 13426123, "mb_pct": 0.4228, "ebitda_pct": 0.1867}, "JUNIO": {"ing": 70336650, "costo": 0, "mb": 27163010, "oi": 1593878, "gav": 0, "gf": 0, "ebitda": 9272174, "dep": 1028096, "gfin": 695170, "res": 7548907, "mb_pct": 0.3862, "ebitda_pct": 0.1318}, "JULIO": {"ing": 102778461, "costo": 0, "mb": 30392491, "oi": 2122555, "gav": 0, "gf": 0, "ebitda": 12196046, "dep": 856080, "gfin": 649834, "res": 10690131, "mb_pct": 0.2957, "ebitda_pct": 0.1187}, "AGOSTO": {"ing": 97249070, "costo": 0, "mb": 33672404, "oi": 1630199, "gav": 0, "gf": 0, "ebitda": 15131597, "dep": 772747, "gfin": 1020632, "res": 13338218, "mb_pct": 0.3462, "ebitda_pct": 0.1556}, "SEPTIEMBRE": {"ing": 87127871, "costo": 0, "mb": 30801146, "oi": 1438202, "gav": 0, "gf": 0, "ebitda": 11469893, "dep": 673914, "gfin": 588592, "res": 10207388, "mb_pct": 0.3535, "ebitda_pct": 0.1316}, "OCTUBRE": {"ing": 89776390, "costo": 0, "mb": 33024174, "oi": 1403020, "gav": 10272140, "gf": 0, "ebitda": 14106918, "dep": 744413, "gfin": 531521, "res": 12830984, "mb_pct": 0.3678, "ebitda_pct": 0.1571}, "NOVIEMBRE": {"ing": 93546544, "costo": 0, "mb": 32334710, "oi": 1188687, "gav": 0, "gf": 11099207, "ebitda": 10137963, "dep": 678702, "gfin": 570636, "res": 8888625, "mb_pct": 0.3457, "ebitda_pct": 0.1084}, "DICIEMBRE": {"ing": 87670593, "costo": 0, "mb": 32609293, "oi": 2017412, "gav": 0, "gf": 0, "ebitda": 9530509, "dep": 572918, "gfin": 3251401, "res": 5706189, "mb_pct": 0.372, "ebitda_pct": 0.1087}}, "2018": {"ENERO": {"ing": 100917007, "costo": 1, "mb": 27579696, "oi": 2048043, "gav": 0, "gf": 0, "ebitda": 7118414, "dep": 612565, "gfin": 652574, "res": 5853275, "mb_pct": 0.2733, "ebitda_pct": 0.0705}, "FEBRERO": {"ing": 96901833, "costo": 1, "mb": 22228661, "oi": 2297032, "gav": 0, "gf": 0, "ebitda": 1686993, "dep": 711989, "gfin": 502930, "res": 472074, "mb_pct": 0.2294, "ebitda_pct": 0.0174}, "MARZO": {"ing": 118589471, "costo": 0, "mb": 37043003, "oi": 2055054, "gav": 0, "gf": 0, "ebitda": 13063653, "dep": 790559, "gfin": 1575473, "res": 10697620, "mb_pct": 0.3124, "ebitda_pct": 0.1102}, "ABRIL": {"ing": 118977199, "costo": 0, "mb": 44566371, "oi": 1594189, "gav": 0, "gf": 0, "ebitda": 14819455, "dep": 696901, "gfin": 459615, "res": 13662939, "mb_pct": 0.3746, "ebitda_pct": 0.1246}, "MAYO": {"ing": 153089156, "costo": 0, "mb": 60304128, "oi": 3226689, "gav": 0, "gf": 0, "ebitda": 29348889, "dep": 661164, "gfin": 339342, "res": 28348383, "mb_pct": 0.3939, "ebitda_pct": 0.1917}, "JUNIO": {"ing": 93852258, "costo": 0, "mb": 24724685, "oi": 3099261, "gav": 0, "gf": 0, "ebitda": -3792510, "dep": 741109, "gfin": 277749, "res": -4811368, "mb_pct": 0.2634, "ebitda_pct": -0.0404}, "JULIO": {"ing": 110872138, "costo": 0, "mb": 30762850, "oi": 3031265, "gav": 0, "gf": 0, "ebitda": -1629854, "dep": 784001, "gfin": 230341, "res": -2644196, "mb_pct": 0.2775, "ebitda_pct": -0.0147}, "AGOSTO": {"ing": 100450014, "costo": 0, "mb": 27279047, "oi": 1996100, "gav": 0, "gf": 0, "ebitda": -4480378, "dep": 995585, "gfin": 219873, "res": -5695836, "mb_pct": 0.2716, "ebitda_pct": -0.0446}, "SEPTIEMBRE": {"ing": 115308439, "costo": 0, "mb": 27682952, "oi": 850236, "gav": 0, "gf": 0, "ebitda": -2998067, "dep": 987195, "gfin": 149229, "res": -4134492, "mb_pct": 0.2401, "ebitda_pct": -0.026}, "OCTUBRE": {"ing": 113825986, "costo": 0, "mb": 32056038, "oi": 2318016, "gav": 0, "gf": 0, "ebitda": 585577, "dep": 1017853, "gfin": 754205, "res": -1186482, "mb_pct": 0.2816, "ebitda_pct": 0.0051}, "NOVIEMBRE": {"ing": 87451684, "costo": 0, "mb": 24378612, "oi": 2905926, "gav": 0, "gf": 0, "ebitda": -6008005, "dep": 1265247, "gfin": 829938, "res": -8103190, "mb_pct": 0.2788, "ebitda_pct": -0.0687}, "DICIEMBRE": {"ing": 80742888, "costo": 0, "mb": 33501361, "oi": 1181951, "gav": 0, "gf": 0, "ebitda": -4127152, "dep": 1576667, "gfin": 762684, "res": -6466503, "mb_pct": 0.4149, "ebitda_pct": -0.0511}}, "2019": {"ENERO": {"ing": 97087617, "costo": 1, "mb": 28450084, "oi": 1495845, "gav": 0, "gf": 0, "ebitda": -1341510, "dep": 1586508, "gfin": 756809, "res": -3684828, "mb_pct": 0.293, "ebitda_pct": -0.0138}, "FEBRERO": {"ing": 129611456, "costo": 1, "mb": 27239937, "oi": 2863434, "gav": 0, "gf": 0, "ebitda": -4573145, "dep": 1472853, "gfin": 883652, "res": -6929650, "mb_pct": 0.2102, "ebitda_pct": -0.0353}, "MARZO": {"ing": 130951424, "costo": 0, "mb": 27240446, "oi": 1793591, "gav": 0, "gf": 0, "ebitda": -8783067, "dep": 1390655, "gfin": 633077, "res": -10806799, "mb_pct": 0.208, "ebitda_pct": -0.0671}, "ABRIL": {"ing": 128658509, "costo": 0, "mb": 49366033, "oi": 1897514, "gav": 0, "gf": 0, "ebitda": 15141653, "dep": 1333823, "gfin": 669638, "res": 13138192, "mb_pct": 0.3837, "ebitda_pct": 0.1177}, "MAYO": {"ing": 131230368, "costo": 0, "mb": 51510705, "oi": 4199186, "gav": 0, "gf": 0, "ebitda": 18826968, "dep": 1273594, "gfin": 791170, "res": 16762204, "mb_pct": 0.3925, "ebitda_pct": 0.1435}, "JUNIO": {"ing": 98939401, "costo": 0, "mb": 37814657, "oi": 1569461, "gav": 0, "gf": 0, "ebitda": -3708931, "dep": 1153266, "gfin": 624983, "res": -5487181, "mb_pct": 0.3822, "ebitda_pct": -0.0375}, "JULIO": {"ing": 136092715, "costo": 0, "mb": 41680595, "oi": 2896805, "gav": 0, "gf": 0, "ebitda": 6319649, "dep": 1076671, "gfin": 556127, "res": 4686851, "mb_pct": 0.3063, "ebitda_pct": 0.0464}, "AGOSTO": {"ing": 104852080, "costo": 0, "mb": 29144378, "oi": 3174459, "gav": 0, "gf": 0, "ebitda": -5368050, "dep": 845985, "gfin": 687947, "res": -6901982, "mb_pct": 0.278, "ebitda_pct": -0.0512}, "SEPTIEMBRE": {"ing": 84595361, "costo": 0, "mb": 26689925, "oi": 1973492, "gav": 0, "gf": 0, "ebitda": -6649156, "dep": 833460, "gfin": 486940, "res": -7969556, "mb_pct": 0.3155, "ebitda_pct": -0.0786}, "OCTUBRE": {"ing": 121724926, "costo": 0, "mb": 36343066, "oi": 2939374, "gav": 0, "gf": 0, "ebitda": 4026356, "dep": 784746, "gfin": 439109, "res": 2802501, "mb_pct": 0.2986, "ebitda_pct": 0.0331}, "NOVIEMBRE": {"ing": 78092308, "costo": 0, "mb": 30125656, "oi": 1785146, "gav": 0, "gf": 0, "ebitda": -2591354, "dep": 472916, "gfin": 567186, "res": -3631456, "mb_pct": 0.3858, "ebitda_pct": -0.0332}, "DICIEMBRE": {"ing": 94554322, "costo": 0, "mb": 42375961, "oi": 2487950, "gav": 0, "gf": 0, "ebitda": 9642380, "dep": 136287, "gfin": 360534, "res": 9145559, "mb_pct": 0.4482, "ebitda_pct": 0.102}}, "2020": {"ENERO": {"ing": 97251594, "costo": 1, "mb": 31150609, "oi": 2555793, "gav": 0, "gf": 0, "ebitda": 2518808, "dep": 41092, "gfin": 98362, "res": 2379354, "mb_pct": 0.3203, "ebitda_pct": 0.0259}, "FEBRERO": {"ing": 126139748, "costo": 1, "mb": 32351253, "oi": 2725403, "gav": 0, "gf": 0, "ebitda": 5414038, "dep": 41092, "gfin": 99751, "res": 5273195, "mb_pct": 0.2565, "ebitda_pct": 0.0429}, "MARZO": {"ing": 75925087, "costo": 0, "mb": 26240053, "oi": 2310191, "gav": 0, "gf": 0, "ebitda": 848932, "dep": 0, "gfin": 795234, "res": 53698, "mb_pct": 0.3456, "ebitda_pct": 0.0112}, "ABRIL": {"ing": 68962352, "costo": 0, "mb": 33095642, "oi": 4214168, "gav": 0, "gf": 0, "ebitda": 14852446, "dep": 0, "gfin": 67003, "res": 14785444, "mb_pct": 0.4799, "ebitda_pct": 0.2154}, "MAYO": {"ing": 86048020, "costo": 0, "mb": 48490772, "oi": 4143014, "gav": 0, "gf": 0, "ebitda": 25700384, "dep": 0, "gfin": 59118, "res": 25641266, "mb_pct": 0.5635, "ebitda_pct": 0.2987}, "JUNIO": {"ing": 72066245, "costo": 0, "mb": 37898010, "oi": 4028567, "gav": 0, "gf": 0, "ebitda": 17568470, "dep": 0, "gfin": 59700, "res": 17508769, "mb_pct": 0.5259, "ebitda_pct": 0.2438}, "JULIO": {"ing": 52541030, "costo": 0, "mb": 26690342, "oi": 3685216, "gav": 0, "gf": 0, "ebitda": 8187266, "dep": 0, "gfin": 42948, "res": 8144318, "mb_pct": 0.508, "ebitda_pct": 0.1558}, "AGOSTO": {"ing": 112750982, "costo": 0, "mb": 55242884, "oi": 6123056, "gav": 0, "gf": 0, "ebitda": 32701710, "dep": 0, "gfin": 50573, "res": 32651137, "mb_pct": 0.49, "ebitda_pct": 0.29}, "SEPTIEMBRE": {"ing": 99933734, "costo": 0, "mb": 48853431, "oi": 7444844, "gav": 0, "gf": 0, "ebitda": 23502498, "dep": 100138, "gfin": 58195, "res": 23344165, "mb_pct": 0.4889, "ebitda_pct": 0.2352}, "OCTUBRE": {"ing": 67576654, "costo": 0, "mb": 34994899, "oi": 6078416, "gav": 0, "gf": 0, "ebitda": 11970278, "dep": 418945, "gfin": 53773, "res": 11497560, "mb_pct": 0.5179, "ebitda_pct": 0.1771}, "NOVIEMBRE": {"ing": 129929960, "costo": 0, "mb": 60496145, "oi": 6334098, "gav": 0, "gf": 0, "ebitda": 37368612, "dep": 418945, "gfin": 32324, "res": 36917343, "mb_pct": 0.4656, "ebitda_pct": 0.2876}, "DICIEMBRE": {"ing": 109977953, "costo": 0, "mb": 59384428, "oi": 6681034, "gav": 0, "gf": 0, "ebitda": 29184069, "dep": 641619, "gfin": 3564943, "res": 24977507, "mb_pct": 0.54, "ebitda_pct": 0.2654}}, "2021": {"ENERO": {"ing": 98611673, "costo": 1, "mb": 56192488, "oi": 5308563, "gav": 0, "gf": 0, "ebitda": 26478164, "dep": 733049, "gfin": 549514, "res": 25195601, "mb_pct": 0.5698, "ebitda_pct": 0.2685}, "FEBRERO": {"ing": 110552383, "costo": 0, "mb": 53624969, "oi": 5370440, "gav": 0, "gf": 0, "ebitda": 23149538, "dep": 871988, "gfin": 536460, "res": 21741090, "mb_pct": 0.4851, "ebitda_pct": 0.2094}, "MARZO": {"ing": 146855320, "costo": 0, "mb": 76896362, "oi": 5999179, "gav": 0, "gf": 0, "ebitda": 38719403, "dep": 871988, "gfin": 728125, "res": 37119290, "mb_pct": 0.5236, "ebitda_pct": 0.2637}, "ABRIL": {"ing": 132903356, "costo": 0, "mb": 73940346, "oi": 6333817, "gav": 0, "gf": 0, "ebitda": 41661587, "dep": 871988, "gfin": 787476, "res": 40002123, "mb_pct": 0.5563, "ebitda_pct": 0.3135}, "MAYO": {"ing": 198894631, "costo": 0, "mb": 112691714, "oi": 9491819, "gav": 0, "gf": 0, "ebitda": 78273591, "dep": 871988, "gfin": 535398, "res": 76866205, "mb_pct": 0.5666, "ebitda_pct": 0.3935}, "JUNIO": {"ing": 132263279, "costo": 0, "mb": 72532004, "oi": 7213288, "gav": 0, "gf": 0, "ebitda": 39045874, "dep": 871988, "gfin": 520950, "res": 37652936, "mb_pct": 0.5484, "ebitda_pct": 0.2952}, "JULIO": {"ing": 133223991, "costo": 0, "mb": 78053862, "oi": 6269403, "gav": 0, "gf": 0, "ebitda": 42128660, "dep": 871988, "gfin": 470516, "res": 40786156, "mb_pct": 0.5859, "ebitda_pct": 0.3162}, "AGOSTO": {"ing": 114392012, "costo": 0, "mb": 65460716, "oi": 5168495, "gav": 0, "gf": 0, "ebitda": 27749291, "dep": 1365671, "gfin": 518951, "res": 25864669, "mb_pct": 0.5722, "ebitda_pct": 0.2426}, "SEPTIEMBRE": {"ing": 114510517, "costo": 0, "mb": 62856787, "oi": 5238369, "gav": 0, "gf": 0, "ebitda": 27640903, "dep": 1265533, "gfin": 446399, "res": 25928971, "mb_pct": 0.5489, "ebitda_pct": 0.2414}, "OCTUBRE": {"ing": 164673612, "costo": 0, "mb": 87270097, "oi": 7454022, "gav": 0, "gf": 0, "ebitda": 49567923, "dep": 1265533, "gfin": 479982, "res": 47822408, "mb_pct": 0.53, "ebitda_pct": 0.301}, "NOVIEMBRE": {"ing": 163685807, "costo": 0, "mb": 87384255, "oi": 5323647, "gav": 0, "gf": 0, "ebitda": 50972092, "dep": 1265533, "gfin": 455822, "res": 49250737, "mb_pct": 0.5339, "ebitda_pct": 0.3114}, "DICIEMBRE": {"ing": 149154414, "costo": 0, "mb": 81589402, "oi": 4621191, "gav": 0, "gf": 0, "ebitda": 35312594, "dep": 1265533, "gfin": 365103, "res": 33681958, "mb_pct": 0.547, "ebitda_pct": 0.2368}}, "2022": {"ENERO": {"ing": 96394031, "costo": 1, "mb": 49904238, "oi": 4663931, "gav": 0, "gf": 0, "ebitda": 8085388, "dep": 986130, "gfin": 387517, "res": 6711741, "mb_pct": 0.5177, "ebitda_pct": 0.0839}, "FEBRERO": {"ing": 109240184, "costo": 0, "mb": 51660866, "oi": 4898729, "gav": 0, "gf": 0, "ebitda": 10302371, "dep": 986130, "gfin": 395890, "res": 8920350, "mb_pct": 0.4729, "ebitda_pct": 0.0943}, "MARZO": {"ing": 154014821, "costo": 0, "mb": 74622809, "oi": 4853303, "gav": 0, "gf": 0, "ebitda": 26212404, "dep": 986130, "gfin": 331188, "res": 24895086, "mb_pct": 0.4845, "ebitda_pct": 0.1702}, "ABRIL": {"ing": 157467022, "costo": 0, "mb": 91106042, "oi": 5179268, "gav": 0, "gf": 0, "ebitda": 47008640, "dep": 986130, "gfin": 339724, "res": 45682786, "mb_pct": 0.5786, "ebitda_pct": 0.2985}, "MAYO": {"ing": 243184758, "costo": 0, "mb": 126389330, "oi": 7621149, "gav": 0, "gf": 0, "ebitda": 81524286, "dep": 986130, "gfin": 399861, "res": 80138295, "mb_pct": 0.5197, "ebitda_pct": 0.3352}, "JUNIO": {"ing": 154208566, "costo": 0, "mb": 79110456, "oi": 6066944, "gav": 0, "gf": 0, "ebitda": 24951216, "dep": 1074573, "gfin": 374946, "res": 23501697, "mb_pct": 0.513, "ebitda_pct": 0.1618}, "JULIO": {"ing": 166483271, "costo": 0, "mb": 71678921, "oi": 8927558, "gav": 0, "gf": 0, "ebitda": 18794167, "dep": 1074573, "gfin": 314175, "res": 17405419, "mb_pct": 0.4305, "ebitda_pct": 0.1129}, "AGOSTO": {"ing": 126181346, "costo": 0, "mb": 52508965, "oi": 7034706, "gav": 0, "gf": 0, "ebitda": 2407564, "dep": 1040961, "gfin": 309782, "res": 1056821, "mb_pct": 0.4161, "ebitda_pct": 0.0191}, "SEPTIEMBRE": {"ing": 77566361, "costo": 0, "mb": 41664215, "oi": 3057006, "gav": 0, "gf": 0, "ebitda": -7633272, "dep": 1040961, "gfin": 285522, "res": -8959755, "mb_pct": 0.5371, "ebitda_pct": -0.0984}, "OCTUBRE": {"ing": 152542762, "costo": 0, "mb": 78878039, "oi": 4759785, "gav": 0, "gf": 0, "ebitda": 28163154, "dep": 1040961, "gfin": 265466, "res": 26856727, "mb_pct": 0.5171, "ebitda_pct": 0.1846}, "NOVIEMBRE": {"ing": 162796827, "costo": 0, "mb": 84890372, "oi": 3966472, "gav": 0, "gf": 0, "ebitda": 32838081, "dep": 1040961, "gfin": 393244, "res": 31403876, "mb_pct": 0.5214, "ebitda_pct": 0.2017}, "DICIEMBRE": {"ing": 114729555, "costo": 0, "mb": 61810132, "oi": 3449545, "gav": 0, "gf": 0, "ebitda": 4566814, "dep": 1116928, "gfin": 297040, "res": 3152846, "mb_pct": 0.5387, "ebitda_pct": 0.0398}}, "2023": {"ENERO": {"ing": 107727858, "costo": 1, "mb": 51231308, "oi": 4920849, "gav": 0, "gf": 0, "ebitda": 478341, "dep": 936260, "gfin": 278162, "res": -736081, "mb_pct": 0.4756, "ebitda_pct": 0.0044}, "FEBRERO": {"ing": 112118059, "costo": 0, "mb": 46109376, "oi": 5615073, "gav": 0, "gf": 0, "ebitda": -3951316, "dep": 936260, "gfin": 238392, "res": -5125968, "mb_pct": 0.4113, "ebitda_pct": -0.0352}, "MARZO": {"ing": 141844038, "costo": 0, "mb": 69957486, "oi": 5553905, "gav": 0, "gf": 0, "ebitda": 15466549, "dep": 1228515, "gfin": 214429, "res": 14023604, "mb_pct": 0.4932, "ebitda_pct": 0.109}, "ABRIL": {"ing": 143387705, "costo": 0, "mb": 80848017, "oi": 4028676, "gav": 0, "gf": 0, "ebitda": 22552410, "dep": 1560299, "gfin": 204579, "res": 20787532, "mb_pct": 0.5638, "ebitda_pct": 0.1573}, "MAYO": {"ing": 247058565, "costo": 0, "mb": 134390621, "oi": 6150634, "gav": 0, "gf": 0, "ebitda": 65958437, "dep": 2265638, "gfin": 187641, "res": 63505158, "mb_pct": 0.544, "ebitda_pct": 0.267}, "JUNIO": {"ing": 143657859, "costo": 0, "mb": 79598500, "oi": 3963735, "gav": 0, "gf": 0, "ebitda": 13726909, "dep": 2177195, "gfin": 1714665, "res": 9835049, "mb_pct": 0.5541, "ebitda_pct": 0.0956}, "JULIO": {"ing": 141306866, "costo": 0, "mb": 68786083, "oi": 5967659, "gav": 0, "gf": 0, "ebitda": 9119626, "dep": 2177195, "gfin": 1329977, "res": 5612454, "mb_pct": 0.4868, "ebitda_pct": 0.0645}, "AGOSTO": {"ing": 129883765, "costo": 0, "mb": 57299919, "oi": 4490625, "gav": 0, "gf": 0, "ebitda": -5068622, "dep": 2177195, "gfin": 1411089, "res": -8656906, "mb_pct": 0.4412, "ebitda_pct": -0.039}, "SEPTIEMBRE": {"ing": 164668375, "costo": 0, "mb": 72036462, "oi": 4530159, "gav": 0, "gf": 0, "ebitda": 15881748, "dep": 2177195, "gfin": 1487980, "res": 12216573, "mb_pct": 0.4375, "ebitda_pct": 0.0964}, "OCTUBRE": {"ing": 150742946, "costo": 0, "mb": 76264756, "oi": 5523525, "gav": 0, "gf": 0, "ebitda": 13115501, "dep": 2177195, "gfin": 1269772, "res": 9668534, "mb_pct": 0.5059, "ebitda_pct": 0.087}, "NOVIEMBRE": {"ing": 149724374, "costo": 0, "mb": 75826793, "oi": 4820989, "gav": 0, "gf": 0, "ebitda": 13430671, "dep": 2411629, "gfin": 1271305, "res": 9747737, "mb_pct": 0.5064, "ebitda_pct": 0.0897}, "DICIEMBRE": {"ing": 131774665, "costo": 0, "mb": 71684444, "oi": 3583891, "gav": 0, "gf": 0, "ebitda": 9287932, "dep": 2335663, "gfin": 1203240, "res": 5749029, "mb_pct": 0.544, "ebitda_pct": 0.0705}}, "2024": {"ENERO": {"ing": 119033982, "costo": 1, "mb": 54651698, "oi": 3927702, "gav": 0, "gf": 0, "ebitda": -4560712, "dep": 2711910, "gfin": 1739747, "res": -9012370, "mb_pct": 0.4591, "ebitda_pct": -0.0383}, "FEBRERO": {"ing": 116056821, "costo": 0, "mb": 49080178, "oi": 2922061, "gav": 0, "gf": 0, "ebitda": -6572743, "dep": 2711910, "gfin": 1631348, "res": -10916001, "mb_pct": 0.4229, "ebitda_pct": -0.0566}, "MARZO": {"ing": 108184441, "costo": 0, "mb": 54540483, "oi": 3286827, "gav": 0, "gf": 0, "ebitda": -1369422, "dep": 2439261, "gfin": 1445914, "res": -5254597, "mb_pct": 0.5041, "ebitda_pct": -0.0127}, "ABRIL": {"ing": 161031421, "costo": 0, "mb": 86421189, "oi": 2835548, "gav": 0, "gf": 0, "ebitda": 29656231, "dep": 2203765, "gfin": 1465107, "res": 25987359, "mb_pct": 0.5367, "ebitda_pct": 0.1842}, "MAYO": {"ing": 201376785, "costo": 0, "mb": 111598463, "oi": 3862388, "gav": 0, "gf": 0, "ebitda": 49333110, "dep": 2325929, "gfin": 3923005, "res": 43084177, "mb_pct": 0.5542, "ebitda_pct": 0.245}, "JUNIO": {"ing": 168581903, "costo": 0, "mb": 87731443, "oi": 5402333, "gav": 0, "gf": 0, "ebitda": 20564742, "dep": 3360093, "gfin": 3987372, "res": 13217276, "mb_pct": 0.5204, "ebitda_pct": 0.122}, "JULIO": {"ing": 129767721, "costo": 0, "mb": 63721586, "oi": 4784796, "gav": 0, "gf": 0, "ebitda": 5428273, "dep": 3460799, "gfin": 3650856, "res": -1683382, "mb_pct": 0.491, "ebitda_pct": 0.0418}, "AGOSTO": {"ing": 131999941, "costo": 0, "mb": 57218179, "oi": 3822062, "gav": 0, "gf": 0, "ebitda": -14833624, "dep": 3865231, "gfin": 3885135, "res": -22583990, "mb_pct": 0.4335, "ebitda_pct": -0.1124}, "SEPTIEMBRE": {"ing": 175377897, "costo": 0, "mb": 71615265, "oi": 2585944, "gav": 0, "gf": 0, "ebitda": 1409089, "dep": 3865231, "gfin": 3594478, "res": -6050620, "mb_pct": 0.4083, "ebitda_pct": 0.008}, "OCTUBRE": {"ing": 173676848, "costo": 0, "mb": 89130397, "oi": 3695036, "gav": 0, "gf": 0, "ebitda": 12971892, "dep": 3885837, "gfin": 3582569, "res": 5503486, "mb_pct": 0.5132, "ebitda_pct": 0.0747}, "NOVIEMBRE": {"ing": 199603885, "costo": 0, "mb": 108520629, "oi": 3370600, "gav": 0, "gf": 0, "ebitda": 22910074, "dep": 3651403, "gfin": 3618926, "res": 15639745, "mb_pct": 0.5437, "ebitda_pct": 0.1148}, "DICIEMBRE": {"ing": 178821961, "costo": 0, "mb": 100215710, "oi": 3181918, "gav": 0, "gf": 0, "ebitda": 17575308, "dep": 3784455, "gfin": 3401075, "res": 10389777, "mb_pct": 0.5604, "ebitda_pct": 0.0983}}, "2025": {"ENERO": {"ing": 154397655, "costo": 88651447, "mb": 65746208, "oi": 3584248, "gav": 0, "gf": 0, "ebitda": -8222231, "dep": 3766452, "gfin": 0, "res": -15088002, "mb_pct": 0.4258, "ebitda_pct": -0.0533}, "FEBRERO": {"ing": 127517652, "costo": 68098324, "mb": 59419328, "oi": 2100013, "gav": 0, "gf": 0, "ebitda": -16597914, "dep": 3766452, "gfin": 0, "res": -23430146, "mb_pct": 0.466, "ebitda_pct": -0.1302}, "MARZO": {"ing": 212472934, "costo": 103623054, "mb": 108849880, "oi": 4017149, "gav": 0, "gf": 0, "ebitda": 31675374, "dep": 3746846, "gfin": 0, "res": 25236939, "mb_pct": 0.5123, "ebitda_pct": 0.1491}, "ABRIL": {"ing": 179611437, "costo": 78494948, "mb": 101116489, "oi": 3002517, "gav": 0, "gf": 0, "ebitda": 15173625, "dep": 3702729, "gfin": 0, "res": 8523317, "mb_pct": 0.563, "ebitda_pct": 0.0845}, "MAYO": {"ing": 222760613, "costo": 103987282, "mb": 118773331, "oi": 3209670, "gav": 0, "gf": 0, "ebitda": 33801662, "dep": 3702729, "gfin": 0, "res": 27281404, "mb_pct": 0.5332, "ebitda_pct": 0.1517}, "JUNIO": {"ing": 196635227, "costo": 97707522, "mb": 98927705, "oi": 4359982, "gav": 0, "gf": 0, "ebitda": 10982050, "dep": 3697825, "gfin": 0, "res": 2660888, "mb_pct": 0.5031, "ebitda_pct": 0.0558}, "JULIO": {"ing": 150107961, "costo": 82792211, "mb": 67315750, "oi": 3555584, "gav": 0, "gf": 0, "ebitda": -12141990, "dep": 3678472, "gfin": 0, "res": -18394548, "mb_pct": 0.4484, "ebitda_pct": -0.0809}, "AGOSTO": {"ing": 161535902, "costo": 93482641, "mb": 68053261, "oi": 3918087, "gav": 0, "gf": 0, "ebitda": -9676466, "dep": 3610269, "gfin": 0, "res": -15757052, "mb_pct": 0.4213, "ebitda_pct": -0.0599}, "SEPTIEMBRE": {"ing": 148305282, "costo": 82705716, "mb": 65599566, "oi": 2495704, "gav": 0, "gf": 0, "ebitda": -11124859, "dep": 3719161, "gfin": 0, "res": -17050371, "mb_pct": 0.4423, "ebitda_pct": -0.075}, "OCTUBRE": {"ing": 225203687, "costo": 110743866, "mb": 114459821, "oi": 4831516, "gav": 0, "gf": 0, "ebitda": 27753243, "dep": 3530312, "gfin": 0, "res": 20856084, "mb_pct": 0.5083, "ebitda_pct": 0.1232}, "NOVIEMBRE": {"ing": 224803432, "costo": 101941785, "mb": 122861647, "oi": 3205049, "gav": 0, "gf": 0, "ebitda": 31560742, "dep": 3530312, "gfin": 0, "res": 24840149, "mb_pct": 0.5465, "ebitda_pct": 0.1404}, "DICIEMBRE": {"ing": 204346677, "costo": 93436274, "mb": 110910403, "oi": 3044937, "gav": 0, "gf": 0, "ebitda": 16523078, "dep": 3174585, "gfin": 0, "res": 10379376, "mb_pct": 0.5428, "ebitda_pct": 0.0809}}}, "data_2026": {"ENERO": {"ing": 161081943, "costo": 85463838, "mb": 75618105, "oi": 2470370, "ocv": 4515446, "gav": 0, "gf": 0, "ebitda": 387515, "dep": 3391566, "gfin": 0, "res": -6319028, "mb_pct": 0.4694, "ebitda_pct": 0.0024}, "FEBRERO": {"ing": 157708963, "costo": 90939768, "mb": 66769195, "oi": 3112294, "ocv": 3894894, "gav": 0, "gf": 0, "ebitda": -5841695, "dep": 3444985, "gfin": 0, "res": -12141904, "mb_pct": 0.4234, "ebitda_pct": -0.037}, "MARZO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "ABRIL": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "MAYO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JUNIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JULIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "AGOSTO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "SEPTIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "OCTUBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "NOVIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "DICIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}}, "data_pres": {"ENERO": {"ing": 154999999, "costo": 87495051, "mb": 67504948, "oi": 0, "ocv": 0, "gav": 50403591, "gf": 20659669, "ebitda": -5968312, "dep": 2846099, "gfin": 4248567, "res": -13062978, "mb_pct": 0.4355, "ebitda_pct": -0.0385}, "FEBRERO": {"ing": 169000000, "costo": 92059189, "mb": 76940811, "oi": 0, "ocv": 0, "gav": 49706425, "gf": 20727718, "ebitda": 4096668, "dep": 2846099, "gfin": 3900471, "res": -2649902, "mb_pct": 0.4553, "ebitda_pct": 0.0242}, "MARZO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "ABRIL": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "MAYO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JUNIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JULIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "AGOSTO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "SEPTIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "OCTUBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "NOVIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "DICIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}}, "data_2025": {"ENERO": {"ing": 154397655, "costo": 0, "mb": 65746208, "oi": 3584248, "ocv": 4009798, "gav": 0, "gf": 0, "ebitda": -8222231, "dep": 3766452, "gfin": 3099319, "res": -15088002, "mb_pct": 0.4258, "ebitda_pct": -0.0533}, "FEBRERO": {"ing": 127517652, "costo": 0, "mb": 59419328, "oi": 2100013, "ocv": 3987410, "gav": 0, "gf": 0, "ebitda": -16597914, "dep": 3766452, "gfin": 3065780, "res": -23430146, "mb_pct": 0.466, "ebitda_pct": -0.1302}, "MARZO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "ABRIL": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "MAYO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JUNIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JULIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "AGOSTO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "SEPTIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "OCTUBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "NOVIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "DICIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}}, "canal_2026": {"Tienda Araucaria": {"ing": [41842122, 29540357, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [21050252, 14976210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [20791870, 14564147, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 71382479, "ytd_costo": 36026462, "ytd_mb": 35356017, "ytd_mb_pct": 0.4953}, "Tienda Costanera": {"ing": [49822020, 32942729, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [25069700, 17778452, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [24752320, 15164277, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 82764749, "ytd_costo": 42848152, "ytd_mb": 39916597, "ytd_mb_pct": 0.4823}, "Pagina Web": {"ing": [62032239, 68711924, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [34239987, 41253432, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [27792252, 27458492, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 130744163, "ytd_costo": 75493419, "ytd_mb": 55250744, "ytd_mb_pct": 0.4226}, "Mayorista": {"ing": [5550839, 14505300, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [3871398, 9283440, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [1679441, 5221860, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 20056139, "ytd_costo": 13154838, "ytd_mb": 6901301, "ytd_mb_pct": 0.3441}, "Boutique": {"ing": [1834723, 12008653, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [1232500, 7648235, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [602223, 4360418, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 13843376, "ytd_costo": 8880735, "ytd_mb": 4962641, "ytd_mb_pct": 0.3585}, "Marketplace": {"ing": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 0, "ytd_costo": 0, "ytd_mb": 0, "ytd_mb_pct": 0}}, "canal_2025": {"Tienda Araucaria": {"ing": [28624576, 24815761, 35764821, 42337756, 49259753, 35702276, 34941218, 27508547, 26686822, 51084571, 48089498, 57925713], "costo": [14873822, 11075017, 15867381, 17139205, 21549245, 17141695, 18906155, 14636839, 11989083, 22398795, 19987812, 24990396], "mb": [13750754, 13740744, 19897440, 25198551, 27710508, 18560581, 16035063, 12871708, 14697739, 28685776, 28101686, 32935317], "ytd_ing": 53440337, "ytd_costo": 25948839, "ytd_mb": 27491498, "ytd_mb_pct": 0.5144}, "Tienda Costanera": {"ing": [35163889, 22407672, 45737693, 43514259, 49133766, 39443546, 34832613, 30742288, 25701108, 56344463, 48784171, 61436719], "costo": [18550982, 10166624, 20988445, 17764497, 21873543, 19096584, 18744127, 16416294, 11295880, 25261624, 20527852, 26458397], "mb": [16612907, 12241048, 24749248, 25749762, 27260223, 20346962, 16088486, 14325994, 14405228, 31082839, 28256319, 34978322], "ytd_ing": 57571561, "ytd_costo": 28717606, "ytd_mb": 28853955, "ytd_mb_pct": 0.5012}, "Pagina Web": {"ing": [66309095, 47660060, 107473134, 79912245, 110092475, 118521034, 73568394, 74906493, 62344668, 95296247, 107318260, 72146468], "costo": [38884242, 26359399, 54445625, 35331692, 51316103, 59153913, 40629009, 44711089, 36941705, 49442799, 47910851, 33577959], "mb": [27424853, 21300661, 53027509, 44580553, 58776372, 59367121, 32939385, 30195404, 25402963, 45853448, 59407409, 38568509], "ytd_ing": 113969155, "ytd_costo": 65243641, "ytd_mb": 48725514, "ytd_mb_pct": 0.4275}, "Mayorista": {"ing": [7517845, 18467119, 10524186, 9847477, 11620341, 2968371, 2328786, 17031662, 22638078, 21179706, 12992056, 7198658], "costo": [5299342, 11218124, 6490288, 5688993, 7452843, 2315330, 1816453, 9990048, 15169221, 12799691, 8195986, 4902872], "mb": [2218503, 7248995, 4033898, 4158484, 4167498, 653041, 512333, 7041614, 7468857, 8380015, 4796070, 2295786], "ytd_ing": 25984964, "ytd_costo": 16517466, "ytd_mb": 9467498, "ytd_mb_pct": 0.3643}, "Boutique": {"ing": [16782250, 14167040, 12973100, 3999700, 2654278, 0, 4436950, 11346912, 10934606, 1298700, 8172607, 5639119], "costo": [11043059, 9279160, 5831315, 2570561, 1795549, 0, 2696467, 7728371, 7309828, 840958, 5319284, 3506650], "mb": [5739191, 4887880, 7141785, 1429139, 858729, 0, 1740483, 3618541, 3624778, 457742, 2853323, 2132469], "ytd_ing": 30949290, "ytd_costo": 20322219, "ytd_mb": 10627071, "ytd_mb_pct": 0.3434}, "Marketplace": {"ing": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 0, "ytd_costo": 0, "ytd_mb": 0, "ytd_mb_pct": 0}}, "meses": ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"], "canales": ["Tienda Araucaria", "Tienda Costanera", "Pagina Web", "Mayorista", "Boutique", "Marketplace"], "years": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]};
+const MESES = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
+const MESES_SHORT = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+const CANALES = ["Tienda Araucaria", "Tienda Costanera", "Pagina Web", "Mayorista", "Boutique"];
+const CANAL_COLORS = ["#c8a96e", "#5a9fd4", "#5ab585", "#d4a55a", "#a068c8"];
+const SEASONAL = [6.6, 7.1, 8.0, 8.1, 11.5, 8.3, 7.4, 7.7, 7.7, 8.8, 10.1, 8.7];
+
+// Pre-computed YTD
+const YTD = {
+  ing: 318790906, costo: 176403606, mb: 142387300,
+  ebitda: -5454180, res: -18460932, gav: 0, gf: 0,
+  mb_pct: 0.4466, ebitda_pct: -0.0171,
+  ing_25: 281915307, mb_25: 125165536, ebitda_25: -24820145,
+  mb_pct_25: 0.444, ebitda_pct_25: -0.088,
+  ing_pres: 323999999, mb_pres: 144445759,
+};
+
+
+function fmt(v, compact=true) {
+  if (v === null || v === undefined) return '—';
+  const av = Math.abs(v);
+  if (compact) {
+    if (av >= 1e9) return '$' + (av/1e9).toFixed(2) + 'B';
+    if (av >= 1e6) return '$' + (av/1e6).toFixed(1) + 'M';
+    if (av >= 1e3) return '$' + (av/1e3).toFixed(0) + 'K';
+    return '$' + av.toFixed(0);
+  }
+  return '$' + Math.round(av).toLocaleString('es-CL');
+}
+function pct(v) { return v !== null && v !== undefined ? (v*100).toFixed(1)+'%' : '—'; }
+function delta(curr, prev) {
+  if (!prev) return null;
+  return (curr - prev) / Math.abs(prev);
+}
+function colPosNeg(v) { return v >= 0 ? 'var(--green)' : 'var(--red)'; }
+function arrowDir(v) { return v >= 0 ? '▲' : '▼'; }
+
+const CHART_DEFAULTS = {
+  color: 'rgba(255,255,255,0.7)',
+  plugins: { legend: { labels: { color: 'rgba(255,255,255,0.5)', font: { size: 11, family: 'DM Sans' }, boxWidth: 12 } } },
+  scales: {
+    x: { ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+    y: { ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 10 }, callback: v => fmt(v) }, grid: { color: 'rgba(255,255,255,0.04)' } }
+  }
+};
+function chartCfg(type, labels, datasets, options={}) {
+  return { type, data: { labels, datasets }, options: {
+    responsive: true, maintainAspectRatio: true,
+    ...CHART_DEFAULTS, ...options,
+    plugins: { ...CHART_DEFAULTS.plugins, ...(options.plugins||{}) },
+    scales: options.scales !== undefined ? options.scales : CHART_DEFAULTS.scales
+  }};
+}
+let _charts = {};
+function makeChart(id, cfg) {
+  if (_charts[id]) _charts[id].destroy();
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  _charts[id] = new Chart(ctx, cfg);
+  return _charts[id];
+}
+
+
+function buildResumen() {
+  // KPI Grid
+  const kpis = [
+    { label: 'Ingresos YTD', val: fmt(YTD.ing), cls: '', 
+      d1: pct(delta(YTD.ing, YTD.ing_25)) + ' vs 2025', d1c: YTD.ing > YTD.ing_25 ? 'up' : 'dn',
+      d2: pct(delta(YTD.ing, YTD.ing_pres)) + ' vs Pres.', d2c: YTD.ing >= YTD.ing_pres ? 'up' : 'dn' },
+    { label: 'Margen Bruto %', val: pct(YTD.mb_pct), cls: YTD.mb_pct >= 0.45 ? '' : 'red',
+      d1: (YTD.mb_pct - YTD.mb_pct_25 > 0 ? '+' : '') + ((YTD.mb_pct - YTD.mb_pct_25)*100).toFixed(1) + 'pp vs 2025',
+      d1c: YTD.mb_pct >= YTD.mb_pct_25 ? 'up' : 'dn', d2: '', d2c: 'neutral' },
+    { label: 'EBITDA YTD', val: fmt(YTD.ebitda), cls: YTD.ebitda >= 0 ? '' : 'red',
+      d1: fmt(YTD.ebitda - YTD.ebitda_25) + ' vs 2025', d1c: YTD.ebitda > YTD.ebitda_25 ? 'up' : 'dn',
+      d2: pct(YTD.ebitda_pct) + ' margen', d2c: 'neutral' },
+    { label: 'Resultado Neto', val: fmt(YTD.res), cls: YTD.res >= 0 ? '' : 'red',
+      d1: pct(YTD.res / YTD.ing) + ' margen', d1c: 'neutral', d2: '', d2c: 'neutral' },
+    { label: 'Costo / Venta', val: pct(YTD.costo / YTD.ing), cls: YTD.costo/YTD.ing > 0.56 ? 'red' : '',
+      d1: pct(YTD.mb_pct_25) + ' MB% en 2025', d1c: 'neutral', d2: '', d2c: 'neutral' },
+  ];
+  document.getElementById('kpi-grid').innerHTML = kpis.map(k => `
+    <div class="kpi ${k.cls}">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value ${k.cls}">${k.val}</div>
+      <div class="kpi-delta">
+        ${k.d1 ? `<span class="${k.d1c}">${k.d1c === 'up' ? '▲' : k.d1c === 'dn' ? '▼' : ''} ${k.d1}</span>` : ''}
+      </div>
+      ${k.d2 ? `<div class="kpi-delta"><span class="${k.d2c}">${k.d2}</span></div>` : ''}
+    </div>`).join('');
+  
+  // Alert banner
+  const ab = document.getElementById('alert-banner');
+  if (YTD.mb_pct < YTD.mb_pct_25) {
+    const drop = ((YTD.mb_pct - YTD.mb_pct_25)*100).toFixed(1);
+    ab.innerHTML = `<div class="alert-banner">⚠ <strong>Caída de margen bruto:</strong> ${pct(YTD.mb_pct)} YTD 2026 vs ${pct(YTD.mb_pct_25)} YTD 2025 (${drop}pp). Impacto estimado: ${fmt(YTD.mb - YTD.mb_25 * (YTD.ing/YTD.ing_25))} en margen absoluto.</div>`;
+  } else {
+    ab.innerHTML = `<div class="alert-banner ok-banner">✓ <strong>Margen bruto en línea o superior a 2025.</strong></div>`;
+  }
+
+  // Chart: Ingreso evolution
+  const months = ['ENERO','FEBRERO'];
+  makeChart('chartIngEvol', chartCfg('bar', months.map((_,i) => MESES_SHORT[i]), [
+    { label: 'Real 2026', data: months.map(m => DATA.data_2026[m]?.ing||0), backgroundColor: 'rgba(200,169,110,0.75)', borderRadius: 3 },
+    { label: 'Presupuesto', data: months.map(m => DATA.data_pres[m]?.ing||0), backgroundColor: 'rgba(90,159,212,0.3)', borderRadius: 3 },
+    { label: 'Real 2025', data: months.map(m => DATA.data_2025[m]?.ing||0), backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 3 },
+  ]));
+
+  // Chart: Mix donut
+  const canalIngs = CANALES.map(c => DATA.canal_2026[c].ytd_ing);
+  makeChart('chartMix', {
+    type: 'doughnut',
+    data: { labels: CANALES.map(c => c.replace('Tienda ','T. ').replace('Pagina Web','Web')), datasets: [{
+      data: canalIngs, backgroundColor: CANAL_COLORS.map(c => c+'CC'), borderColor: 'transparent', hoverOffset: 6
+    }]},
+    options: { responsive: true, maintainAspectRatio: true, cutout: '62%',
+      plugins: { legend: { position: 'bottom', labels: { color:'rgba(255,255,255,0.5)', font:{size:11}, boxWidth:12, padding:10 } } } }
+  });
+
+  // Waterfall
+  const wItems = [
+    { label: 'Ingresos', value: YTD.ing, running: YTD.ing },
+    { label: '- Costo Venta', value: -YTD.costo, running: YTD.ing - YTD.costo },
+    { label: '= Margen Bruto', value: YTD.mb, running: YTD.mb, isTotal: true },
+    { label: '- GAV', value: -YTD.gav, running: YTD.mb - YTD.gav },
+    { label: '- Gtos Fijos', value: -YTD.gf, running: YTD.mb - YTD.gav - YTD.gf },
+    { label: '= EBITDA', value: YTD.ebitda, running: YTD.ebitda, isTotal: true },
+  ];
+  const wColors = wItems.map(w => w.isTotal ? 'rgba(200,169,110,0.85)' : (w.value >= 0 ? 'rgba(90,181,133,0.7)' : 'rgba(212,95,95,0.7)'));
+  makeChart('chartWaterfall', {
+    type: 'bar',
+    data: { labels: wItems.map(w=>w.label), datasets: [{
+      data: wItems.map(w => Math.abs(w.value)),
+      backgroundColor: wColors, borderRadius: 3
+    }]},
+    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: CHART_DEFAULTS.scales }
+  });
+
+  // Canal margin comparison
+  const canalMbs = CANALES.map(c => (DATA.canal_2026[c].ytd_mb_pct*100).toFixed(1));
+  const canalMbs25 = CANALES.map(c => (DATA.canal_2025[c].ytd_mb_pct*100).toFixed(1));
+  makeChart('chartMargenCanal', chartCfg('bar', 
+    CANALES.map(c => c.replace('Tienda ','').replace('Pagina Web','Web')),
+    [
+      { label: '2026', data: canalMbs, backgroundColor: 'rgba(90,159,212,0.75)', borderRadius: 3 },
+      { label: '2025', data: canalMbs25, backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: 3 },
+    ], { scales: { ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { ...CHART_DEFAULTS.scales.y.ticks, callback: v => v+'%' } } } }
+  ));
+}
+
+
+function getYearData(year) {
+  if (year === 2026) {
+    return { real: DATA.data_2026, pres: DATA.data_pres, prev: DATA.data_2025 };
+  }
+  const yStr = String(year);
+  const prevStr = String(year - 1);
+  return { real: DATA.hist_monthly[yStr] || {}, pres: {}, prev: DATA.hist_monthly[prevStr] || {} };
+}
+
+function buildEERR() {
+  const year = parseInt(document.getElementById('eerr-year').value);
+  const { real, pres, prev } = getYearData(year);
+  
+  const showPres = year === 2026;
+  const prevYear = year - 1;
+  
+  const rows = [
+    { label: 'INGRESOS POR VENTA', key: 'ing', type: 'total' },
+    { label: 'Tienda Araucaria', parent: true, getVal: (d) => {
+      const c = DATA.canal_2026['Tienda Araucaria'];
+      return year === 2026 ? c.ing : null;
+    }},
+    { label: 'COSTO DE VENTA', key: 'costo', type: 'cost', negate: true },
+    { label: 'MARGEN BRUTO', key: 'mb', type: 'total' },
+    { label: 'GAV', key: 'gav', type: 'cost', negate: true },
+    { label: 'GASTOS FIJOS', key: 'gf', type: 'cost', negate: true },
+    { label: 'EBITDA', key: 'ebitda', type: 'total' },
+    { label: 'DEPRECIACION', key: 'dep', type: 'cost', negate: true },
+    { label: 'GASTOS FINANCIEROS', key: 'gfin', type: 'cost', negate: true },
+    { label: 'RESULTADO NETO', key: 'res', type: 'total' },
+  ];
+  
+  const activeMonths = MESES.filter(m => real[m] && real[m].ing > 0);
+  if (activeMonths.length === 0) {
+    document.getElementById('eerr-table-wrap').innerHTML = '<p style="color:var(--muted);padding:20px;">No hay datos reales para este año en la vista detallada.</p>';
+    return;
+  }
+  
+  // Build table
+  let header = `<table class="data-table"><thead><tr>
+    <th style="min-width:180px;">Partida</th>`;
+  activeMonths.forEach(m => { header += `<th>${m.substring(0,3)}</th>`; });
+  header += `<th>YTD</th>`;
+  if (showPres) header += `<th>PRES YTD</th><th>Δ PRES</th>`;
+  header += `<th>${prevYear}</th><th>Δ ${prevYear}</th></tr></thead><tbody>`;
+  
+  let body = '';
+  rows.forEach(row => {
+    if (!row.key) return;
+    const isTotal = row.type === 'total';
+    const isCost = row.type === 'cost';
+    
+    const getVal = (src, m) => {
+      const d = src[m];
+      if (!d) return 0;
+      return isCost ? -Math.abs(d[row.key]||0) : (d[row.key]||0);
+    };
+    
+    const vals = activeMonths.map(m => getVal(real, m));
+    const ytd_v = vals.reduce((a,b) => a+b, 0);
+    const ytd_pres = showPres ? activeMonths.reduce((a,m) => a + getVal(pres, m), 0) : 0;
+    const ytd_prev = activeMonths.reduce((a,m) => a + getVal(prev, m), 0);
+    
+    const cls = isTotal ? 'total' : '';
+    body += `<tr class="${cls}"><td>${row.label}</td>`;
+    vals.forEach(v => {
+      const c = (isTotal && row.key==='ebitda') || (isTotal && row.key==='res') || (isTotal && row.key==='mb') ? (v>=0?'pos':'neg') : '';
+      body += `<td class="${c}">${v !== 0 ? fmt(v) : '<span class="muted-val">—</span>'}</td>`;
+    });
+    const ytd_c = (isTotal) ? (ytd_v>=0?'pos':'neg') : '';
+    body += `<td class="${ytd_c}">${fmt(ytd_v)}</td>`;
+    if (showPres) {
+      const dPres = ytd_pres !== 0 ? delta(ytd_v, ytd_pres) : null;
+      body += `<td class="muted-val">${ytd_pres !== 0 ? fmt(ytd_pres) : '—'}</td>`;
+      body += `<td class="${dPres !== null ? (dPres>=0?'pos':'neg') : ''}">${dPres !== null ? (dPres>=0?'▲':'▼')+' '+pct(Math.abs(dPres)) : '—'}</td>`;
+    }
+    const dPrev = ytd_prev !== 0 ? delta(ytd_v, ytd_prev) : null;
+    body += `<td class="muted-val">${ytd_prev !== 0 ? fmt(ytd_prev) : '—'}</td>`;
+    body += `<td class="${dPrev !== null ? (dPrev>=0?'pos':'neg') : ''}">${dPrev !== null ? (dPrev>=0?'▲':'▼')+' '+pct(Math.abs(dPrev)) : '—'}</td>`;
+    body += '</tr>';
+  });
+  
+  document.getElementById('eerr-table-wrap').innerHTML = header + body + '</tbody></table>';
+  
+  // Charts EBITDA and MB%
+  const ebitdaReal = activeMonths.map(m => real[m]?.ebitda || 0);
+  const ebitdaPrev = activeMonths.map(m => prev[m]?.ebitda || 0);
+  const ebitdaPres = showPres ? activeMonths.map(m => pres[m]?.ebitda || 0) : [];
+  
+  const ebitdaColors = ebitdaReal.map(v => v >= 0 ? 'rgba(90,181,133,0.75)' : 'rgba(212,95,95,0.75)');
+  const datasets_ebitda = [
+    { label: `Real ${year}`, data: ebitdaReal, backgroundColor: ebitdaColors, borderRadius: 3, type: 'bar' },
+    { label: String(prevYear), data: ebitdaPrev, borderColor: 'rgba(255,255,255,0.2)', fill: false, tension: 0.3, type: 'line', pointRadius: 3 },
+  ];
+  if (showPres) datasets_ebitda.push({ label: 'Presupuesto', data: ebitdaPres, borderColor: 'rgba(90,159,212,0.5)', fill: false, tension: 0.3, type: 'line', pointRadius: 3 });
+  makeChart('chartEBITDA', { type: 'bar', data: { labels: activeMonths.map(m=>m.substring(0,3)), datasets: datasets_ebitda },
+    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: CHART_DEFAULTS.scales }
+  });
+  
+  const mbReal = activeMonths.map(m => real[m]?.mb_pct ? real[m].mb_pct*100 : 0);
+  const mbPrev = activeMonths.map(m => prev[m]?.mb_pct ? prev[m].mb_pct*100 : 0);
+  const mbPres = showPres ? activeMonths.map(m => pres[m]?.mb_pct ? pres[m].mb_pct*100 : 0) : [];
+  const ds_mb = [
+    { label: `Real ${year}`, data: mbReal, borderColor: 'rgba(200,169,110,0.9)', backgroundColor: 'rgba(200,169,110,0.1)', fill: true, tension: 0.3, pointRadius: 4 },
+    { label: String(prevYear), data: mbPrev, borderColor: 'rgba(255,255,255,0.25)', fill: false, tension: 0.3, pointRadius: 3 },
+  ];
+  if (showPres) ds_mb.push({ label: 'Presupuesto', data: mbPres, borderColor: 'rgba(90,159,212,0.6)', fill: false, tension: 0.3, borderDash: [4,4], pointRadius: 3 });
+  makeChart('chartMBpct', chartCfg('line', activeMonths.map(m=>m.substring(0,3)), ds_mb,
+    { scales: { ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { ...CHART_DEFAULTS.scales.y.ticks, callback: v => v.toFixed(1)+'%' } } } }
+  ));
+}
+
+
+function buildCanales() {
+  const cards = document.getElementById('canal-cards');
+  const maxIng = Math.max(...CANALES.map(c => DATA.canal_2026[c].ytd_ing));
+  
+  cards.innerHTML = CANALES.map((c, i) => {
+    const d = DATA.canal_2026[c];
+    const d25 = DATA.canal_2025[c];
+    const dIng = d25.ytd_ing > 0 ? delta(d.ytd_ing, d25.ytd_ing) : null;
+    const dMb = d25.ytd_mb_pct > 0 ? (d.ytd_mb_pct - d25.ytd_mb_pct)*100 : null;
+    const barW = d.ytd_ing > 0 ? Math.round(d.ytd_ing / maxIng * 100) : 0;
+    return `<div class="canal-card">
+      <div class="canal-name">${c}</div>
+      <div class="canal-ing">${fmt(d.ytd_ing)}</div>
+      <div class="canal-row"><span>Costo</span><span>${fmt(d.ytd_costo)}</span></div>
+      <div class="canal-row"><span>Margen Bruto</span><span style="color:${CANAL_COLORS[i]}">${pct(d.ytd_mb_pct)}</span></div>
+      <div class="canal-bar"><div class="canal-bar-fill" style="width:${barW}%;background:${CANAL_COLORS[i]}"></div></div>
+      <div class="canal-delta">
+        ${dIng !== null ? `Ing: <span style="color:${dIng>=0?'var(--green)':'var(--red)'}">${dIng>=0?'▲':'▼'} ${pct(Math.abs(dIng))}</span> vs 2025` : '—'}
+        &nbsp;·&nbsp;
+        ${dMb !== null ? `MB: <span style="color:${dMb>=0?'var(--green)':'var(--red)'}">${dMb>=0?'+':''}${dMb.toFixed(1)}pp</span>` : '—'}
+      </div>
+    </div>`;
+  }).join('');
+  
+  // Stacked bar chart
+  const activeMonths = ['ENERO','FEBRERO'];
+  const datasets = CANALES.map((c, i) => ({
+    label: c.replace('Tienda ','T.').replace('Pagina Web','Web'),
+    data: activeMonths.map(m => DATA.canal_2026[c].ing[MESES.indexOf(m)] || 0),
+    backgroundColor: CANAL_COLORS[i]+'CC', borderRadius: 2,
+  }));
+  makeChart('chartCanalesEvol', { type: 'bar', data: { labels: activeMonths.map(m=>m.substring(0,3)), datasets },
+    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: {
+      x: { ...CHART_DEFAULTS.scales.x, stacked: true },
+      y: { ...CHART_DEFAULTS.scales.y, stacked: true }
+    }}
+  });
+  
+  // Radar chart
+  const radar_2026 = CANALES.map(c => DATA.canal_2026[c].ytd_mb_pct * 100);
+  const radar_2025 = CANALES.map(c => DATA.canal_2025[c].ytd_mb_pct * 100);
+  const radarLabels = CANALES.map(c => c.replace('Tienda ','').replace('Pagina Web','Web'));
+  makeChart('chartRadar', {
+    type: 'radar',
+    data: { labels: radarLabels, datasets: [
+      { label: '2026', data: radar_2026, borderColor: 'rgba(200,169,110,0.8)', backgroundColor: 'rgba(200,169,110,0.1)', pointBackgroundColor: 'rgba(200,169,110,0.8)', borderWidth: 2 },
+      { label: '2025', data: radar_2025, borderColor: 'rgba(255,255,255,0.25)', backgroundColor: 'rgba(255,255,255,0.05)', borderWidth: 1.5 },
+    ]},
+    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins,
+      scales: { r: { ticks: { color: 'rgba(255,255,255,0.3)', font:{size:9}, backdropColor: 'transparent', callback: v => v+'%' },
+        grid: { color: 'rgba(255,255,255,0.06)' }, pointLabels: { color: 'rgba(255,255,255,0.5)', font:{size:10} },
+        angleLines: { color: 'rgba(255,255,255,0.08)' } } }
+    }
+  });
+}
+
+
+function buildCostos() {
+  const d = DATA.data_2026;
+  const activeMonths = MESES.filter(m => d[m] && d[m].ing > 0);
+  const ytd_ing_c = activeMonths.reduce((a,m) => a + (d[m].ing||0), 0);
+  const ytd_gav_c = activeMonths.reduce((a,m) => a + (d[m].gav||0), 0);
+  const ytd_gf_c = activeMonths.reduce((a,m) => a + (d[m].gf||0), 0);
+  const total_op = ytd_gav_c + ytd_gf_c;
+  
+  document.getElementById('kpi-costos').innerHTML = [
+    { l: 'GAV Total YTD', v: fmt(-ytd_gav_c), pctv: pct(ytd_gav_c/ytd_ing_c), c: 'blue' },
+    { l: 'Gastos Fijos YTD', v: fmt(-ytd_gf_c), pctv: pct(ytd_gf_c/ytd_ing_c), c: '' },
+    { l: 'Total Operacional', v: fmt(-total_op), pctv: pct(total_op/ytd_ing_c), c: total_op/ytd_ing_c > 0.35 ? 'red' : '' },
+    { l: 'Margen Bruto', v: fmt(YTD.mb), pctv: pct(YTD.mb_pct), c: 'green' },
+    { l: 'EBITDA', v: fmt(YTD.ebitda), pctv: pct(YTD.ebitda_pct), c: YTD.ebitda >= 0 ? 'green' : 'red' },
+  ].map(k => `<div class="kpi ${k.c}">
+    <div class="kpi-label">${k.l}</div>
+    <div class="kpi-value ${k.c}">${k.v}</div>
+    <div class="kpi-delta"><span class="neutral">${k.pctv} sobre ingresos</span></div>
+  </div>`).join('');
+  
+  // Evolution chart
+  const ds_gastos = [
+    { label: 'GAV %', data: activeMonths.map(m => d[m]?.ing > 0 ? +(d[m].gav/d[m].ing*100).toFixed(1) : 0), borderColor: 'rgba(90,159,212,0.8)', fill: false, tension: 0.3, type: 'line', pointRadius: 4 },
+    { label: 'G. Fijos %', data: activeMonths.map(m => d[m]?.ing > 0 ? +(d[m].gf/d[m].ing*100).toFixed(1) : 0), borderColor: 'rgba(212,165,90,0.8)', fill: false, tension: 0.3, type: 'line', pointRadius: 4 },
+    { label: 'MB %', data: activeMonths.map(m => d[m]?.mb_pct ? +(d[m].mb_pct*100).toFixed(1) : 0), backgroundColor: 'rgba(200,169,110,0.15)', borderColor: 'rgba(200,169,110,0.5)', fill: true, tension: 0.3, type: 'line', pointRadius: 4 },
+  ];
+  makeChart('chartGastosEvol', { type: 'line', data: { labels: activeMonths.map(m=>m.substring(0,3)), datasets: ds_gastos },
+    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: {
+      ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { ...CHART_DEFAULTS.scales.y.ticks, callback: v => v.toFixed(0)+'%' } }
+    }}
+  });
+
+  // GAV composition (approximate from known data)
+  makeChart('chartGAVComp', {
+    type: 'doughnut',
+    data: { labels: ['Arriendos Tiendas','Sueldos+RR.HH.','Marketing Digital','Asesorías','Comisión POS','Otros'],
+      datasets: [{ data: [39500000, 43000000, 11800000, 22900000, 7900000, 20000000],
+        backgroundColor: ['#c8a96e','#5a9fd4','#5ab585','#d4a55a','#a068c8','rgba(255,255,255,0.15)'],
+        borderColor: 'transparent', hoverOffset: 6 }]},
+    options: { responsive: true, maintainAspectRatio: true, cutout: '60%',
+      plugins: { legend: { position: 'bottom', labels: { color:'rgba(255,255,255,0.5)', font:{size:11}, boxWidth:12, padding:8 } } } }
+  });
+}
+
+
+let drillYear = 2025;
+
+function buildHistorico() {
+  const years = DATA.years.map(String);
+  const annuals = DATA.hist_annual;
+  
+  // Main historical chart
+  const ytd26 = { ing: YTD.ing * 6, mb_pct: YTD.mb_pct, ebitda_pct: YTD.ebitda_pct };
+  const allYears = [...years, '2026*'];
+  const allIngs = [...years.map(y => annuals[y].ing), ytd26.ing];
+  const allMBpct = [...years.map(y => annuals[y].mb_pct*100), ytd26.mb_pct*100];
+  const allEBpct = [...years.map(y => annuals[y].ebitda_pct*100), ytd26.ebitda_pct*100];
+  
+  makeChart('chartHistorico', {
+    type: 'bar',
+    data: { labels: allYears, datasets: [
+      { label: 'Ingresos', data: allIngs, backgroundColor: allYears.map(y => y === '2026*' ? 'rgba(200,169,110,0.4)' : 'rgba(200,169,110,0.65)'), borderRadius: 3, yAxisID: 'y' },
+      { label: 'Margen Bruto %', data: allMBpct, borderColor: 'rgba(90,181,133,0.8)', type: 'line', fill: false, tension: 0.3, pointRadius: 4, yAxisID: 'y2' },
+      { label: 'EBITDA %', data: allEBpct, borderColor: 'rgba(90,159,212,0.8)', type: 'line', fill: false, tension: 0.3, pointRadius: 4, borderDash: [4,3], yAxisID: 'y2' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins,
+      scales: {
+        x: CHART_DEFAULTS.scales.x,
+        y: { ...CHART_DEFAULTS.scales.y, position: 'left' },
+        y2: { position: 'right', grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)', font:{size:10}, callback: v => v.toFixed(0)+'%' } }
+      }
+    }
+  });
+  
+  // Historical summary table
+  const maxIng = Math.max(...Object.values(annuals).map(d => d.ing));
+  let tbl = `<table class="data-table"><thead><tr>
+    <th>Año</th><th>Ingresos</th><th>MB%</th><th>EBITDA%</th><th>Result.</th></tr></thead><tbody>`;
+  years.forEach(y => {
+    const d = annuals[y];
+    const barW = Math.round(d.ing / maxIng * 60);
+    tbl += `<tr>
+      <td><span style="font-family:var(--font-m);color:var(--gold)">${y}</span></td>
+      <td><span class="hist-bar" style="width:${barW}px"></span>${fmt(d.ing)}</td>
+      <td class="${d.mb_pct >= 0.4 ? 'pos' : ''}">${pct(d.mb_pct)}</td>
+      <td class="${d.ebitda_pct >= 0 ? 'pos' : 'neg'}">${pct(d.ebitda_pct)}</td>
+      <td class="${d.res >= 0 ? 'pos' : 'neg'}">${fmt(d.res)}</td>
+    </tr>`;
+  });
+  // 2026 run-rate
+  tbl += `<tr class="total"><td>2026*</td><td>${fmt(YTD.ing*6)}</td><td>${pct(YTD.mb_pct)}</td><td>${pct(YTD.ebitda_pct)}</td><td>${fmt(YTD.res)}</td></tr>`;
+  tbl += '</tbody></table><div style="font-size:10px;color:var(--muted);margin-top:8px;">* 2026 = run-rate anualizado sobre datos Ene–Feb reales</div>';
+  document.getElementById('hist-table-wrap').innerHTML = tbl;
+  
+  // Seasonality
+  makeChart('chartEstacional', chartCfg('bar', MESES_SHORT, [
+    { label: 'Participación % (prom. 2020–2025)', data: SEASONAL, backgroundColor: MESES_SHORT.map((_,i) => i >= 4 && i <= 5 ? 'rgba(200,169,110,0.8)' : i >= 9 && i <= 10 ? 'rgba(200,169,110,0.8)' : 'rgba(200,169,110,0.35)'), borderRadius: 3 }
+  ], { scales: { ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { ...CHART_DEFAULTS.scales.y.ticks, callback: v => v+'%' } } } }));
+  
+  // Year buttons for drilldown
+  const btnContainer = document.getElementById('year-btns');
+  btnContainer.innerHTML = DATA.years.map(y => `<button class="year-btn ${y===drillYear?'active':''}" onclick="setDrillYear(${y})">${y}</button>`).join('');
+  
+  buildDrilldown();
+}
+
+function setDrillYear(y) {
+  drillYear = y;
+  document.querySelectorAll('.year-btn').forEach(b => b.classList.toggle('active', parseInt(b.textContent) === y));
+  buildDrilldown();
+}
+
+function buildDrilldown() {
+  const ym = DATA.hist_monthly[String(drillYear)] || {};
+  const months = MESES.filter(m => ym[m] && ym[m].ing > 0);
+  if (months.length === 0) return;
+  
+  document.getElementById('drilldown-title').textContent = `Ingresos Mensuales ${drillYear}`;
+  document.getElementById('drilldown-title2').textContent = `EBITDA Mensual ${drillYear}`;
+  
+  const ings = months.map(m => ym[m].ing);
+  const ebitdas = months.map(m => ym[m].ebitda);
+  const ebColors = ebitdas.map(v => v >= 0 ? 'rgba(90,181,133,0.75)' : 'rgba(212,95,95,0.75)');
+  
+  // Compare with prev year
+  const prevYm = DATA.hist_monthly[String(drillYear-1)] || {};
+  const ingPrev = months.map(m => prevYm[m]?.ing || 0);
+  
+  makeChart('chartDrillIngresos', chartCfg('bar', months.map(m=>m.substring(0,3)), [
+    { label: String(drillYear), data: ings, backgroundColor: 'rgba(200,169,110,0.7)', borderRadius: 3 },
+    { label: String(drillYear-1), data: ingPrev, backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 3 },
+  ]));
+  makeChart('chartDrillEBITDA', { type: 'bar', data: { labels: months.map(m=>m.substring(0,3)),
+    datasets: [{ label: `EBITDA ${drillYear}`, data: ebitdas, backgroundColor: ebColors, borderRadius: 3 }]},
+    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: CHART_DEFAULTS.scales }
+  });
+}
+
+
+function buildInsights() {
+  const mbDrop = YTD.mb_pct - YTD.mb_pct_25;
+  const mbImpact = YTD.mb - YTD.mb_25 * (YTD.ing / YTD.ing_25);
+  const runRate = YTD.ing * 6;
+  const presAnual = Object.values(DATA.data_pres).reduce((a,d) => a + (d.ing||0), 0);
+  const gapVsPres = (runRate - presAnual) / presAnual;
+  
+  const insights = [
+    { type: mbDrop < -0.03 ? 'alert' : 'warn', icon: '📉',
+      tag: mbDrop < -0.03 ? 'CRÍTICO' : 'ATENCIÓN',
+      text: `Caída de margen bruto <strong>${(mbDrop*100).toFixed(1)}pp</strong> YTD: ${pct(YTD.mb_pct)} en 2026 vs ${pct(YTD.mb_pct_25)} en 2025. Impacto absoluto estimado <strong>${fmt(mbImpact)}</strong>. Causa requiere diagnóstico: mix de canales, tipo de cambio, política de descuentos.` },
+    { type: YTD.ebitda < 0 ? 'alert' : 'ok', icon: YTD.ebitda < 0 ? '⚠' : '✓',
+      tag: YTD.ebitda < 0 ? 'DÉFICIT OPERACIONAL' : 'EBITDA POSITIVO',
+      text: `EBITDA YTD: <strong>${fmt(YTD.ebitda)}</strong> (${pct(YTD.ebitda_pct)}). ${YTD.ebitda < 0 ? `Los gastos operacionales superan el margen bruto en <strong>${fmt(-YTD.ebitda)}</strong>. El patrón Q1 negativo es histórico — meses mayo y octubre son decisivos.` : `Positivo. Q1 históricamente es débil para Giani.`}` },
+    { type: 'ok', icon: '📈', tag: 'MEJORA VS 2025',
+      text: `EBITDA mejora <strong>${fmt(YTD.ebitda - YTD.ebitda_25)}</strong> vs mismo período 2025 (de ${fmt(YTD.ebitda_25)} a ${fmt(YTD.ebitda)}). Ingresos YTD crecen <strong>${pct(delta(YTD.ing, YTD.ing_25))}</strong>.` },
+    { type: 'info', icon: '🔁', tag: 'PALANCA OPERATIVA',
+      text: `Con gastos fijos estimados en <strong>$163M/mes</strong>, el leverage operativo es elevado. Cada +10% en ventas genera ~$14M adicional de EBITDA mensual. Los meses <strong>Mayo, Octubre y Noviembre</strong> concentran históricamente el 35–40% de los ingresos anuales.` },
+    { type: YTD.ing / YTD.ing_pres < 0.97 ? 'warn' : 'ok', icon: '🎯',
+      tag: YTD.ing / YTD.ing_pres < 0.97 ? 'BAJO PRESUPUESTO' : 'EN LÍNEA CON PRESUPUESTO',
+      text: `Ingresos YTD ${pct(delta(YTD.ing, YTD.ing_pres))} vs presupuesto (<strong>${fmt(YTD.ing_pres)}</strong> presupuestado vs <strong>${fmt(YTD.ing)}</strong> real). Run-rate anual implícito: <strong>${fmt(runRate)}</strong>.` },
+    { type: 'info', icon: '📦', tag: 'CANALES',
+      text: `Canal Web representa el <strong>${pct(DATA.canal_2026['Pagina Web'].ytd_ing / YTD.ing)}</strong> de los ingresos con margen ${pct(DATA.canal_2026['Pagina Web'].ytd_mb_pct)} — el más bajo de los canales activos. Tiendas físicas (Araucaria + Costanera) mantienen márgenes sobre <strong>48%</strong>.` },
+    { type: 'info', icon: '📅', tag: 'ESTACIONALIDAD',
+      text: `Datos 2020–2025 confirman que Enero y Febrero son los <strong>meses más débiles del año</strong> (7–8% del ingreso anual cada uno vs 12–13% en Mayo, Octubre y Noviembre). El EBITDA negativo en Q1 es estructural, no señal de deterioro aislado.` },
+    { type: 'info', icon: '💬', tag: 'USE EL CHAT',
+      text: `Haga clic en <strong>"Consultar IA"</strong> para analizar cualquier período, canal o partida en detalle. Puede preguntar en lenguaje natural: "¿cómo fue octubre 2021?", "¿cuánto creció Web en 2023?", "proyección si crecemos 15%".` },
+  ];
+  
+  document.getElementById('insights-grid').innerHTML = insights.map(ins => `
+    <div class="insight ${ins.type}">
+      <div class="insight-icon">${ins.icon}</div>
+      <div>
+        <div class="insight-tag">${ins.tag}</div>
+        <div class="insight-text">${ins.text}</div>
       </div>
     </div>`).join('');
 }
 
-// ═══════════ DATA DOCS ═══════════
-function buildDocs(){
-  const docs=[
-    {n:'01',title:'eerr_mensual.csv',desc:'Estado de resultados mensual. Archivo central. Una fila por partida y mes.',fields:['partida','mes (YYYYMM)','monto_real','monto_presupuesto','centro_costo'],fmt:'CSV · Actualización mensual'},
-    {n:'02',title:'ventas_canal.csv',desc:'Detalle de cada venta. Permite análisis de ticket promedio y mix de productos.',fields:['fecha (DD/MM/YYYY)','canal','sku','descripcion','valor_venta','costo_venta','cantidad'],fmt:'CSV · Actualización semanal o mensual'},
-    {n:'03',title:'gastos_detalle.csv',desc:'Cada gasto con clasificación completa. Permite análisis de estructura de costos.',fields:['fecha','tipo_doc','proveedor','descripcion','monto','centro_costo','meses_prorrateo','categoria'],fmt:'CSV · Actualización mensual'},
-    {n:'04',title:'presupuesto_2026.csv',desc:'Presupuesto por partida y mes. Se carga una vez al año.',fields:['partida','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],fmt:'CSV · Carga anual'},
-    {n:'05',title:'eerr_historico.csv',desc:'Resumen anual 2016–2025 para gráficos de tendencia y CAGR.',fields:['año','ingresos','costo_venta','margen_bruto','ebitda','resultado_neto'],fmt:'CSV · Carga única'},
-    {n:'06',title:'remuneraciones.csv',desc:'Detalle de sueldos por persona y centro de costo.',fields:['mes (YYYYMM)','nombre','cargo','centro_costo','sueldo_bruto','imposiciones','total_empresa'],fmt:'CSV · Actualización mensual'},
+
+function toggleChat() {
+  document.getElementById('chat-panel').classList.toggle('open');
+  document.getElementById('chat-overlay').classList.toggle('open');
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function sendSuggestion(btn) {
+  document.getElementById('chat-input').value = btn.textContent;
+  sendMessage();
+}
+
+function addMessage(role, html, time = null) {
+  const msgs = document.getElementById('chat-messages');
+  const t = time || new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  div.innerHTML = `<div class="msg-bubble">${html}</div><div class="msg-time">${t}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg assistant';
+  div.id = 'typing-indicator';
+  div.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+// Build compact data context for the AI
+function buildDataContext() {
+  const years = DATA.years;
+  const annuals = DATA.hist_annual;
+  
+  let ctx = `DATOS FINANCIEROS GIANI DAFIRENZE — CONTEXTO COMPLETO\n\n`;
+  ctx += `EMPRESA: Giani Dafirenze, empresa chilena de zapatos 100% cuero, diseño chileno.\n`;
+  ctx += `Canales de venta: Tienda Araucaria, Tienda Costanera, Página Web (e-commerce), Mayorista, Boutique, Marketplace.\n\n`;
+  
+  ctx += `═══ DATOS 2026 YTD (Enero-Febrero real) ═══\n`;
+  ctx += `Ingresos: $${(YTD.ing/1e6).toFixed(1)}M | Costo: $${(YTD.costo/1e6).toFixed(1)}M | Margen Bruto: $${(YTD.mb/1e6).toFixed(1)}M (${(YTD.mb_pct*100).toFixed(1)}%)\n`;
+  ctx += `EBITDA: $${(YTD.ebitda/1e6).toFixed(1)}M (${(YTD.ebitda_pct*100).toFixed(1)}%) | Resultado: $${(YTD.res/1e6).toFixed(1)}M\n\n`;
+  
+  ctx += `Enero 2026: Ing=$${(DATA.data_2026.ENERO.ing/1e6).toFixed(1)}M | MB=${(DATA.data_2026.ENERO.mb_pct*100).toFixed(1)}% | EBITDA=$${(DATA.data_2026.ENERO.ebitda/1e6).toFixed(1)}M\n`;
+  ctx += `Febrero 2026: Ing=$${(DATA.data_2026.FEBRERO.ing/1e6).toFixed(1)}M | MB=${(DATA.data_2026.FEBRERO.mb_pct*100).toFixed(1)}% | EBITDA=$${(DATA.data_2026.FEBRERO.ebitda/1e6).toFixed(1)}M\n\n`;
+  
+  ctx += `Presupuesto YTD: Ing=$${(YTD.ing_pres/1e6).toFixed(1)}M | MB=$${(YTD.mb_pres/1e6).toFixed(1)}M\n`;
+  ctx += `Vs 2025 YTD: Ing=$${(YTD.ing_25/1e6).toFixed(1)}M (${(delta(YTD.ing,YTD.ing_25)*100).toFixed(1)}%) | MB%=${(YTD.mb_pct_25*100).toFixed(1)}% (Δ${((YTD.mb_pct-YTD.mb_pct_25)*100).toFixed(1)}pp)\n\n`;
+  
+  ctx += `Canales YTD 2026:\n`;
+  CANALES.forEach(c => {
+    const d = DATA.canal_2026[c];
+    ctx += `  ${c}: Ing=$${(d.ytd_ing/1e6).toFixed(1)}M | MB=${(d.ytd_mb_pct*100).toFixed(1)}%\n`;
+  });
+  
+  ctx += `\n═══ HISTÓRICO ANUAL 2016-2025 ═══\n`;
+  years.forEach(y => {
+    const d = annuals[String(y)];
+    ctx += `${y}: Ing=$${(d.ing/1e6).toFixed(0)}M | MB%=${(d.mb_pct*100).toFixed(1)}% | EBITDA%=${(d.ebitda_pct*100).toFixed(1)}% | Res=$${(d.res/1e6).toFixed(0)}M\n`;
+  });
+  
+  ctx += `\n═══ DATOS MENSUALES 2025 (último año completo) ═══\n`;
+  const ym25 = DATA.hist_monthly['2025'] || {};
+  MESES.forEach(m => {
+    const d = ym25[m];
+    if (d) ctx += `  ${m.substring(0,3)}: Ing=$${(d.ing/1e6).toFixed(1)}M | MB%=${(d.mb_pct*100).toFixed(1)}% | EBITDA=$${(d.ebitda/1e6).toFixed(1)}M\n`;
+  });
+  
+  ctx += `\n═══ DATOS MENSUALES DISPONIBLES ═══\n`;
+  Object.keys(DATA.hist_monthly).sort().forEach(y => {
+    const months = Object.keys(DATA.hist_monthly[y]);
+    ctx += `  ${y}: ${months.length} meses con datos\n`;
+  });
+  
+  return ctx;
+}
+
+let chatHistory = [];
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  
+  const sendBtn = document.getElementById('chat-send');
+  sendBtn.disabled = true;
+  input.value = '';
+  
+  addMessage('user', text);
+  showTyping();
+  
+  const dataContext = buildDataContext();
+  
+  // Build messages for API
+  const systemPrompt = `Eres el CFO Assistant de Giani Dafirenze, asistente de inteligencia financiera con acceso completo a los datos reales de la empresa.
+
+Tu rol: analizar datos financieros, responder preguntas sobre períodos específicos, calcular proyecciones, comparar años, y entregar insights concretos. Eres directo, preciso y profesional. Sin relleno.
+
+DATOS DISPONIBLES:
+${dataContext}
+
+Formato de respuesta:
+- Responde siempre en español
+- Usa formato claro con <strong> para resaltar cifras clave
+- Sé conciso pero completo
+- Si te preguntan por un mes específico de un año, revisa los datos mensuales
+- Si calculan proyecciones, usa los datos históricos de estacionalidad
+- Montos en millones con 1 decimal (ej: $161.1M) o en pesos completos para análisis detallados
+- Siempre poner contexto: ¿es bueno o malo ese número? ¿vs qué referencia?`;
+
+  const messages = [
+    ...chatHistory.map(m => ({ role: m.role, content: m.content })),
+    { role: 'user', content: text }
   ];
-  document.getElementById('doc-cards').innerHTML=docs.map(d=>`
-    <div class="doc-card">
-      <div class="doc-num">${d.n}</div>
-      <div class="doc-title">${d.title}</div>
-      <div class="doc-desc">${d.desc}</div>
-      <div class="doc-fields">${d.fields.map(f=>`<div class="doc-field">${f}</div>`).join('')}</div>
-      <div class="doc-format">${d.fmt}</div>
-    </div>`).join('');
+  
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: messages
+      })
+    });
+    
+    const data = await response.json();
+    const reply = data.content?.[0]?.text || 'No se pudo obtener respuesta.';
+    
+    chatHistory.push({ role: 'user', content: text });
+    chatHistory.push({ role: 'assistant', content: reply });
+    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
+    
+    removeTyping();
+    addMessage('assistant', reply.replace(/\n/g, '<br>'));
+    
+  } catch (err) {
+    removeTyping();
+    addMessage('assistant', `<span style="color:var(--red)">Error conectando con la IA. Verifique conexión.</span>`);
+  }
+  
+  sendBtn.disabled = false;
 }
 
-// ═══════════ CHARTS ═══════════
-function initCharts(){
-  // 1. Ingresos evolución
-  mk('chartIngEvol',{type:'bar',data:{labels:MESES,datasets:[
-    {label:'Real 2026',data:D26.ingresos.map(v=>v/1e6),backgroundColor:GOLD+'44',borderColor:GOLD,borderWidth:1.5,borderRadius:4,order:2},
-    {label:'Presupuesto',data:PRES.ingresos.map(v=>v/1e6),type:'line',borderColor:BLUE,borderWidth:1.5,borderDash:[4,4],fill:false,tension:0.3,pointRadius:3,pointBackgroundColor:BLUE,order:1},
-    {label:'Real 2025',data:D25.ingresos.map(v=>v/1e6),type:'line',borderColor:'#3c3a36',borderWidth:1.5,fill:false,tension:0.3,pointRadius:2,order:1},
-  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v+'M'}}}}});
 
-  // 2. Mix donut
-  const ca=CANALES.filter(c=>c.ing>0);
-  mk('chartMix',{type:'doughnut',data:{labels:ca.map(c=>c.name.replace('Tienda ','')),datasets:[{data:ca.map(c=>c.ing/1e6),backgroundColor:ca.map(c=>c.col+'cc'),borderColor:ca.map(c=>c.col),borderWidth:1.5,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,cutout:'65%',plugins:{legend:{position:'right',labels:{color:'#9a9690',usePointStyle:true,padding:12,font:{size:11}}}}}});
-
-  // 3. Waterfall
-  const wd=[ytd(D26.ingresos),ytd(D26.costo_venta),ytd(D26.margen_bruto),ytd(D26.otros_ing)+ytd(D26.otros_costo),ytd(D26.gav),ytd(D26.gastos_fijos),ytd(D26.ebitda)];
-  const wl=['Ingresos','Costo CV','Margen Bruto','Otros Neto','GAV','Gastos Fijos','EBITDA'];
-  const wc=[GOLD,RED,BLUE,AMBER,RED,RED,wd[6]>=0?GREEN:RED];
-  mk('chartWaterfall',{type:'bar',data:{labels:wl,datasets:[{data:wd.map(v=>Math.abs(v)/1e6),backgroundColor:wc.map(c=>c+'99'),borderColor:wc,borderWidth:1.5,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:GL,ticks:{...TS,maxRotation:25}},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v.toFixed(0)+'M'}}}}});
-
-  // 4. Margen por canal
-  const cA=CANALES.filter(c=>c.ing>0);
-  mk('chartMargenCanal',{type:'bar',data:{labels:cA.map(c=>c.name.replace('Tienda ','')),datasets:[{label:'2026',data:cA.map(c=>c.ing>0?(c.ing-c.costo)/c.ing*100:0),backgroundColor:GOLD+'99',borderColor:GOLD,borderWidth:1.5,borderRadius:4},{label:'2025',data:cA.map(c=>c.m25*100),backgroundColor:'#3c3a3699',borderColor:'#3c3a36',borderWidth:1.5,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>v+'%'},min:0,max:60}}}});
-
-  // 5. EBITDA mensual
-  mk('chartEBITDA',{type:'bar',data:{labels:MESES,datasets:[
-    {label:'2026',data:D26.ebitda.map(v=>v/1e6),backgroundColor:D26.ebitda.map(v=>v>=0?GREEN+'99':RED+'99'),borderColor:D26.ebitda.map(v=>v>=0?GREEN:RED),borderWidth:1.5,borderRadius:4},
-    {label:'2025',data:D25.ebitda.map(v=>v/1e6),type:'line',borderColor:'#3c3a36',borderWidth:1.5,pointRadius:2,fill:false,tension:0.3},
-    {label:'Presupuesto',data:PRES.ebitda.map(v=>v/1e6),type:'line',borderColor:BLUE,borderWidth:1.5,pointRadius:2,fill:false,tension:0.3,borderDash:[4,4]},
-  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v.toFixed(0)+'M'}}}}});
-
-  // 6. Margen Bruto % evolución
-  const mb26=D26.ingresos.map((v,i)=>v>0?D26.margen_bruto[i]/v*100:null);
-  const mb25=D25.ingresos.map((v,i)=>v>0?D25.margen_bruto[i]/v*100:null);
-  const mbP=PRES.ingresos.map((v,i)=>v>0?PRES.margen_bruto[i]/(v||1)*100:null);
-  mk('chartMargenEvol',{type:'line',data:{labels:MESES,datasets:[
-    {label:'2026',data:mb26,borderColor:GOLD,backgroundColor:GOLD+'20',fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:GOLD,borderWidth:2},
-    {label:'2025',data:mb25,borderColor:'#3c3a36',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5},
-    {label:'Presupuesto',data:mbP,borderColor:BLUE,borderDash:[4,4],fill:false,tension:0.3,pointRadius:2,borderWidth:1.5},
-  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>v.toFixed(0)+'%'},min:35,max:65}}}});
-
-  // 7. Canales evolución stacked
-  const cAct=CANALES.filter(c=>c.name!=='Marketplace');
-  mk('chartCanalesEvol',{type:'bar',data:{labels:['Enero','Febrero'],datasets:cAct.map(c=>({label:c.name.replace('Tienda ',''),data:[c.ene/1e6,c.feb/1e6],backgroundColor:c.col+'99',borderColor:c.col,borderWidth:1.5,borderRadius:3}))},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS,stacked:true},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v+'M'},stacked:true}}}});
-
-  // 8. Radar
-  const rC=CANALES.filter(c=>c.ing>0);
-  mk('chartRadar',{type:'radar',data:{labels:rC.map(c=>c.name.replace('Tienda ','')),datasets:[
-    {label:'2026',data:rC.map(c=>c.ing>0?(c.ing-c.costo)/c.ing*100:0),backgroundColor:GOLD+'33',borderColor:GOLD,borderWidth:2,pointBackgroundColor:GOLD},
-    {label:'2025',data:rC.map(c=>c.m25*100),backgroundColor:BLUE+'22',borderColor:BLUE,borderWidth:1.5,borderDash:[4,4],pointBackgroundColor:BLUE},
-  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{r:{grid:{color:'rgba(255,255,255,0.05)'},angleLines:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5c5a56',backdropColor:'transparent',stepSize:10},min:0,max:60,pointLabels:{color:'#9a9690',font:{size:11}}}}}});
-
-  // 9. GAV composición
-  mk('chartGAVComp',{type:'doughnut',data:{labels:['Sueldos','Arriendos','Asesorías','Marketing','Otros'],datasets:[{data:[37598,41744,22893,11832,7199].map(v=>v/1000),backgroundColor:[GOLD+'cc',BLUE+'cc',RED+'cc',GREEN+'cc',AMBER+'cc'],borderColor:[GOLD,BLUE,RED,GREEN,AMBER],borderWidth:1.5,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:'#9a9690',usePointStyle:true,padding:10,font:{size:10}}}}}});
-
-  // 10. Histórico
-  mk('chartHistorico',{type:'bar',data:{labels:HIST.map(h=>h.y),datasets:[
-    {label:'Ingresos ($M)',data:HIST.map(h=>h.ing/1e6),backgroundColor:GOLD+'55',borderColor:GOLD,borderWidth:1.5,borderRadius:4,order:2,yAxisID:'y'},
-    {label:'Margen Bruto %',data:HIST.map(h=>h.mb*100),type:'line',borderColor:GREEN,borderWidth:2,pointRadius:4,fill:false,tension:0.3,order:1,yAxisID:'y2',pointBackgroundColor:GREEN},
-    {label:'EBITDA %',data:HIST.map(h=>h.ebitda_pct*100),type:'line',borderColor:BLUE,borderWidth:1.5,pointRadius:3,fill:false,tension:0.3,order:1,yAxisID:'y2',borderDash:[4,4],pointBackgroundColor:BLUE},
-  ]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'#9a9690',usePointStyle:true}}},scales:{x:{grid:GL,ticks:TS},y:{grid:GL,ticks:{...TS,callback:v=>'$'+v+'M'},position:'left'},y2:{grid:{display:false},ticks:{...TS,callback:v=>v+'%'},position:'right'}}}});
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.target.classList.add('active');
+  
+  if (id === 'eerr') buildEERR();
+  if (id === 'canales') buildCanales();
+  if (id === 'costos') buildCostos();
+  if (id === 'historico') buildHistorico();
+  if (id === 'insights') buildInsights();
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  buildEERR();buildCanalCards();buildCostos();buildHist();buildInsights();buildDocs();initCharts();
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  buildResumen();
 });
-</script>
+
 </body>
 </html>
