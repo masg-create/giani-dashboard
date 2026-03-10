@@ -443,678 +443,654 @@ select option { background: var(--bg3); }
 </div>
 
 <script>
-const DATA = {"hist_annual": {"2016": {"ing": 605064130, "costo": 442787083, "mb": 162277047, "oi": 3161, "gav": 110246460, "gf": 56079945, "ebitda": -4049358, "dep": 6101077, "gfin": 13170882, "res": -23321318, "mb_pct": 0.2682, "ebitda_pct": -0.0067}, "2017": {"ing": 1046884380, "costo": 691830005, "mb": 355054375, "oi": 17304387, "gav": 162240173, "gf": 62215441, "ebitda": 130598761, "dep": 9907911, "gfin": 12691494, "res": 107999356, "mb_pct": 0.3392, "ebitda_pct": 0.1247}, "2018": {"ing": 1290978073, "costo": 898870669, "mb": 392107404, "oi": 26603762, "gav": 280926431, "gf": 67593959, "ebitda": 43587014, "dep": 10840835, "gfin": 6753953, "res": 25992225, "mb_pct": 0.3037, "ebitda_pct": 0.0338}, "2019": {"ing": 1336390487, "costo": 908409044, "mb": 427981443, "oi": 29076257, "gav": 314529754, "gf": 92509897, "ebitda": 20941793, "dep": 12360765, "gfin": 7457172, "res": 1123855, "mb_pct": 0.3203, "ebitda_pct": 0.0157}, "2020": {"ing": 1099103359, "costo": 604214891, "mb": 494888468, "oi": 56323800, "gav": 247521400, "gf": 37549557, "ebitda": 209817511, "dep": 1661833, "gfin": 4981922, "res": 203173755, "mb_pct": 0.4503, "ebitda_pct": 0.1909}, "2021": {"ing": 1659720995, "costo": 751227993, "mb": 908493002, "oi": 73792233, "gav": 369526082, "gf": 54921195, "ebitda": 480699621, "dep": 12392781, "gfin": 6394696, "res": 461912144, "mb_pct": 0.5474, "ebitda_pct": 0.2896}, "2022": {"ing": 1714809504, "costo": 850585120, "mb": 864224384, "oi": 64478396, "gav": 480232037, "gf": 105608012, "ebitda": 277220813, "dep": 12360571, "gfin": 4094355, "res": 260765887, "mb_pct": 0.504, "ebitda_pct": 0.1617}, "2023": {"ing": 1763895075, "costo": 879861310, "mb": 884033765, "oi": 59149720, "gav": 563085153, "gf": 144897142, "ebitda": 169998185, "dep": 22560240, "gfin": 10811231, "res": 136626714, "mb_pct": 0.5012, "ebitda_pct": 0.0964}, "2024": {"ing": 1863513606, "costo": 929068387, "mb": 934445219, "oi": 43677215, "gav": 596639095, "gf": 190628869, "ebitda": 132512218, "dep": 38265822, "gfin": 35925535, "res": 58320861, "mb_pct": 0.5014, "ebitda_pct": 0.0711}, "2025": {"ing": 2207698459, "costo": 1105665073, "mb": 1102033386, "oi": 41324456, "gav": 692220522, "gf": 270360694, "ebitda": 109706313, "dep": 43626143, "gfin": 36022132, "res": 30058038, "mb_pct": 0.4992, "ebitda_pct": 0.0497}}, "hist_monthly": {"2016": {"ENERO": {"ing": 11666758, "costo": 1, "mb": 3877777, "oi": 0, "gav": 0, "gf": 0, "ebitda": -5193310, "dep": 133333, "gfin": 792550, "res": -6119193, "mb_pct": 0.3324, "ebitda_pct": -0.4451}, "FEBRERO": {"ing": 34807929, "costo": 0, "mb": 6267219, "oi": 0, "gav": 0, "gf": 0, "ebitda": -7074852, "dep": 233620, "gfin": 695992, "res": -8004463, "mb_pct": 0.1801, "ebitda_pct": -0.2033}, "MARZO": {"ing": 26634892, "costo": 0, "mb": 6410828, "oi": 2740, "gav": 0, "gf": 0, "ebitda": -6018628, "dep": 331942, "gfin": 283530, "res": -6634100, "mb_pct": 0.2407, "ebitda_pct": -0.226}, "ABRIL": {"ing": 93144372, "costo": 0, "mb": 23370325, "oi": 0, "gav": 0, "gf": 0, "ebitda": 11318107, "dep": 383585, "gfin": 1071142, "res": 9863380, "mb_pct": 0.2509, "ebitda_pct": 0.1215}, "MAYO": {"ing": 51498508, "costo": 0, "mb": 14235452, "oi": 0, "gav": 0, "gf": 0, "ebitda": 1102595, "dep": 449296, "gfin": 527399, "res": 125900, "mb_pct": 0.2764, "ebitda_pct": 0.0214}, "JUNIO": {"ing": 43462465, "costo": 0, "mb": 16845616, "oi": 0, "gav": 0, "gf": 0, "ebitda": 2476363, "dep": 546768, "gfin": 925281, "res": 1004314, "mb_pct": 0.3876, "ebitda_pct": 0.057}, "JULIO": {"ing": 65998370, "costo": 0, "mb": 20231268, "oi": 2571, "gav": 0, "gf": 0, "ebitda": 5947260, "dep": 546768, "gfin": 807136, "res": 4593357, "mb_pct": 0.3065, "ebitda_pct": 0.0901}, "AGOSTO": {"ing": 53456334, "costo": 0, "mb": 16473699, "oi": 0, "gav": 0, "gf": 0, "ebitda": 1192889, "dep": 583183, "gfin": 1644723, "res": -1035017, "mb_pct": 0.3082, "ebitda_pct": 0.0223}, "SEPTIEMBRE": {"ing": 65356792, "costo": 0, "mb": 14167448, "oi": 2992, "gav": 0, "gf": 0, "ebitda": -484659, "dep": 620844, "gfin": 2179659, "res": -3285162, "mb_pct": 0.2168, "ebitda_pct": -0.0074}, "OCTUBRE": {"ing": 69674098, "costo": 0, "mb": 12049968, "oi": 0, "gav": 0, "gf": 0, "ebitda": -3406380, "dep": 708310, "gfin": 1366185, "res": -5480874, "mb_pct": 0.1729, "ebitda_pct": -0.0489}, "NOVIEMBRE": {"ing": 32278677, "costo": 0, "mb": 9299450, "oi": 0, "gav": 0, "gf": 0, "ebitda": -4451063, "dep": 761070, "gfin": 1560127, "res": -6772260, "mb_pct": 0.2881, "ebitda_pct": -0.1379}, "DICIEMBRE": {"ing": 57084935, "costo": 0, "mb": 19047996, "oi": 0, "gav": 0, "gf": 0, "ebitda": 542319, "dep": 802360, "gfin": 1317158, "res": -1577199, "mb_pct": 0.3337, "ebitda_pct": 0.0095}}, "2017": {"ENERO": {"ing": 69482253, "costo": 1, "mb": 20024389, "oi": 864549, "gav": 0, "gf": 0, "ebitda": 4360226, "dep": 877022, "gfin": 1059811, "res": 2423393, "mb_pct": 0.2882, "ebitda_pct": 0.0628}, "FEBRERO": {"ing": 71097467, "costo": 1, "mb": 18767492, "oi": 809080, "gav": 0, "gf": 0, "ebitda": 2141367, "dep": 877022, "gfin": 1631170, "res": -366825, "mb_pct": 0.264, "ebitda_pct": 0.0301}, "MARZO": {"ing": 97128708, "costo": 0, "mb": 28828354, "oi": 1309911, "gav": 0, "gf": 0, "ebitda": 11367671, "dep": 878125, "gfin": 755079, "res": 9734467, "mb_pct": 0.2968, "ebitda_pct": 0.117}, "ABRIL": {"ing": 99447759, "costo": 0, "mb": 33087978, "oi": 1361312, "gav": 0, "gf": 0, "ebitda": 15717843, "dep": 991083, "gfin": 1155005, "res": 13571755, "mb_pct": 0.3327, "ebitda_pct": 0.1581}, "MAYO": {"ing": 81242614, "costo": 0, "mb": 34348934, "oi": 1565582, "gav": 0, "gf": 0, "ebitda": 15166556, "dep": 957790, "gfin": 782643, "res": 13426123, "mb_pct": 0.4228, "ebitda_pct": 0.1867}, "JUNIO": {"ing": 70336650, "costo": 0, "mb": 27163010, "oi": 1593878, "gav": 0, "gf": 0, "ebitda": 9272174, "dep": 1028096, "gfin": 695170, "res": 7548907, "mb_pct": 0.3862, "ebitda_pct": 0.1318}, "JULIO": {"ing": 102778461, "costo": 0, "mb": 30392491, "oi": 2122555, "gav": 0, "gf": 0, "ebitda": 12196046, "dep": 856080, "gfin": 649834, "res": 10690131, "mb_pct": 0.2957, "ebitda_pct": 0.1187}, "AGOSTO": {"ing": 97249070, "costo": 0, "mb": 33672404, "oi": 1630199, "gav": 0, "gf": 0, "ebitda": 15131597, "dep": 772747, "gfin": 1020632, "res": 13338218, "mb_pct": 0.3462, "ebitda_pct": 0.1556}, "SEPTIEMBRE": {"ing": 87127871, "costo": 0, "mb": 30801146, "oi": 1438202, "gav": 0, "gf": 0, "ebitda": 11469893, "dep": 673914, "gfin": 588592, "res": 10207388, "mb_pct": 0.3535, "ebitda_pct": 0.1316}, "OCTUBRE": {"ing": 89776390, "costo": 0, "mb": 33024174, "oi": 1403020, "gav": 10272140, "gf": 0, "ebitda": 14106918, "dep": 744413, "gfin": 531521, "res": 12830984, "mb_pct": 0.3678, "ebitda_pct": 0.1571}, "NOVIEMBRE": {"ing": 93546544, "costo": 0, "mb": 32334710, "oi": 1188687, "gav": 0, "gf": 11099207, "ebitda": 10137963, "dep": 678702, "gfin": 570636, "res": 8888625, "mb_pct": 0.3457, "ebitda_pct": 0.1084}, "DICIEMBRE": {"ing": 87670593, "costo": 0, "mb": 32609293, "oi": 2017412, "gav": 0, "gf": 0, "ebitda": 9530509, "dep": 572918, "gfin": 3251401, "res": 5706189, "mb_pct": 0.372, "ebitda_pct": 0.1087}}, "2018": {"ENERO": {"ing": 100917007, "costo": 1, "mb": 27579696, "oi": 2048043, "gav": 0, "gf": 0, "ebitda": 7118414, "dep": 612565, "gfin": 652574, "res": 5853275, "mb_pct": 0.2733, "ebitda_pct": 0.0705}, "FEBRERO": {"ing": 96901833, "costo": 1, "mb": 22228661, "oi": 2297032, "gav": 0, "gf": 0, "ebitda": 1686993, "dep": 711989, "gfin": 502930, "res": 472074, "mb_pct": 0.2294, "ebitda_pct": 0.0174}, "MARZO": {"ing": 118589471, "costo": 0, "mb": 37043003, "oi": 2055054, "gav": 0, "gf": 0, "ebitda": 13063653, "dep": 790559, "gfin": 1575473, "res": 10697620, "mb_pct": 0.3124, "ebitda_pct": 0.1102}, "ABRIL": {"ing": 118977199, "costo": 0, "mb": 44566371, "oi": 1594189, "gav": 0, "gf": 0, "ebitda": 14819455, "dep": 696901, "gfin": 459615, "res": 13662939, "mb_pct": 0.3746, "ebitda_pct": 0.1246}, "MAYO": {"ing": 153089156, "costo": 0, "mb": 60304128, "oi": 3226689, "gav": 0, "gf": 0, "ebitda": 29348889, "dep": 661164, "gfin": 339342, "res": 28348383, "mb_pct": 0.3939, "ebitda_pct": 0.1917}, "JUNIO": {"ing": 93852258, "costo": 0, "mb": 24724685, "oi": 3099261, "gav": 0, "gf": 0, "ebitda": -3792510, "dep": 741109, "gfin": 277749, "res": -4811368, "mb_pct": 0.2634, "ebitda_pct": -0.0404}, "JULIO": {"ing": 110872138, "costo": 0, "mb": 30762850, "oi": 3031265, "gav": 0, "gf": 0, "ebitda": -1629854, "dep": 784001, "gfin": 230341, "res": -2644196, "mb_pct": 0.2775, "ebitda_pct": -0.0147}, "AGOSTO": {"ing": 100450014, "costo": 0, "mb": 27279047, "oi": 1996100, "gav": 0, "gf": 0, "ebitda": -4480378, "dep": 995585, "gfin": 219873, "res": -5695836, "mb_pct": 0.2716, "ebitda_pct": -0.0446}, "SEPTIEMBRE": {"ing": 115308439, "costo": 0, "mb": 27682952, "oi": 850236, "gav": 0, "gf": 0, "ebitda": -2998067, "dep": 987195, "gfin": 149229, "res": -4134492, "mb_pct": 0.2401, "ebitda_pct": -0.026}, "OCTUBRE": {"ing": 113825986, "costo": 0, "mb": 32056038, "oi": 2318016, "gav": 0, "gf": 0, "ebitda": 585577, "dep": 1017853, "gfin": 754205, "res": -1186482, "mb_pct": 0.2816, "ebitda_pct": 0.0051}, "NOVIEMBRE": {"ing": 87451684, "costo": 0, "mb": 24378612, "oi": 2905926, "gav": 0, "gf": 0, "ebitda": -6008005, "dep": 1265247, "gfin": 829938, "res": -8103190, "mb_pct": 0.2788, "ebitda_pct": -0.0687}, "DICIEMBRE": {"ing": 80742888, "costo": 0, "mb": 33501361, "oi": 1181951, "gav": 0, "gf": 0, "ebitda": -4127152, "dep": 1576667, "gfin": 762684, "res": -6466503, "mb_pct": 0.4149, "ebitda_pct": -0.0511}}, "2019": {"ENERO": {"ing": 97087617, "costo": 1, "mb": 28450084, "oi": 1495845, "gav": 0, "gf": 0, "ebitda": -1341510, "dep": 1586508, "gfin": 756809, "res": -3684828, "mb_pct": 0.293, "ebitda_pct": -0.0138}, "FEBRERO": {"ing": 129611456, "costo": 1, "mb": 27239937, "oi": 2863434, "gav": 0, "gf": 0, "ebitda": -4573145, "dep": 1472853, "gfin": 883652, "res": -6929650, "mb_pct": 0.2102, "ebitda_pct": -0.0353}, "MARZO": {"ing": 130951424, "costo": 0, "mb": 27240446, "oi": 1793591, "gav": 0, "gf": 0, "ebitda": -8783067, "dep": 1390655, "gfin": 633077, "res": -10806799, "mb_pct": 0.208, "ebitda_pct": -0.0671}, "ABRIL": {"ing": 128658509, "costo": 0, "mb": 49366033, "oi": 1897514, "gav": 0, "gf": 0, "ebitda": 15141653, "dep": 1333823, "gfin": 669638, "res": 13138192, "mb_pct": 0.3837, "ebitda_pct": 0.1177}, "MAYO": {"ing": 131230368, "costo": 0, "mb": 51510705, "oi": 4199186, "gav": 0, "gf": 0, "ebitda": 18826968, "dep": 1273594, "gfin": 791170, "res": 16762204, "mb_pct": 0.3925, "ebitda_pct": 0.1435}, "JUNIO": {"ing": 98939401, "costo": 0, "mb": 37814657, "oi": 1569461, "gav": 0, "gf": 0, "ebitda": -3708931, "dep": 1153266, "gfin": 624983, "res": -5487181, "mb_pct": 0.3822, "ebitda_pct": -0.0375}, "JULIO": {"ing": 136092715, "costo": 0, "mb": 41680595, "oi": 2896805, "gav": 0, "gf": 0, "ebitda": 6319649, "dep": 1076671, "gfin": 556127, "res": 4686851, "mb_pct": 0.3063, "ebitda_pct": 0.0464}, "AGOSTO": {"ing": 104852080, "costo": 0, "mb": 29144378, "oi": 3174459, "gav": 0, "gf": 0, "ebitda": -5368050, "dep": 845985, "gfin": 687947, "res": -6901982, "mb_pct": 0.278, "ebitda_pct": -0.0512}, "SEPTIEMBRE": {"ing": 84595361, "costo": 0, "mb": 26689925, "oi": 1973492, "gav": 0, "gf": 0, "ebitda": -6649156, "dep": 833460, "gfin": 486940, "res": -7969556, "mb_pct": 0.3155, "ebitda_pct": -0.0786}, "OCTUBRE": {"ing": 121724926, "costo": 0, "mb": 36343066, "oi": 2939374, "gav": 0, "gf": 0, "ebitda": 4026356, "dep": 784746, "gfin": 439109, "res": 2802501, "mb_pct": 0.2986, "ebitda_pct": 0.0331}, "NOVIEMBRE": {"ing": 78092308, "costo": 0, "mb": 30125656, "oi": 1785146, "gav": 0, "gf": 0, "ebitda": -2591354, "dep": 472916, "gfin": 567186, "res": -3631456, "mb_pct": 0.3858, "ebitda_pct": -0.0332}, "DICIEMBRE": {"ing": 94554322, "costo": 0, "mb": 42375961, "oi": 2487950, "gav": 0, "gf": 0, "ebitda": 9642380, "dep": 136287, "gfin": 360534, "res": 9145559, "mb_pct": 0.4482, "ebitda_pct": 0.102}}, "2020": {"ENERO": {"ing": 97251594, "costo": 1, "mb": 31150609, "oi": 2555793, "gav": 0, "gf": 0, "ebitda": 2518808, "dep": 41092, "gfin": 98362, "res": 2379354, "mb_pct": 0.3203, "ebitda_pct": 0.0259}, "FEBRERO": {"ing": 126139748, "costo": 1, "mb": 32351253, "oi": 2725403, "gav": 0, "gf": 0, "ebitda": 5414038, "dep": 41092, "gfin": 99751, "res": 5273195, "mb_pct": 0.2565, "ebitda_pct": 0.0429}, "MARZO": {"ing": 75925087, "costo": 0, "mb": 26240053, "oi": 2310191, "gav": 0, "gf": 0, "ebitda": 848932, "dep": 0, "gfin": 795234, "res": 53698, "mb_pct": 0.3456, "ebitda_pct": 0.0112}, "ABRIL": {"ing": 68962352, "costo": 0, "mb": 33095642, "oi": 4214168, "gav": 0, "gf": 0, "ebitda": 14852446, "dep": 0, "gfin": 67003, "res": 14785444, "mb_pct": 0.4799, "ebitda_pct": 0.2154}, "MAYO": {"ing": 86048020, "costo": 0, "mb": 48490772, "oi": 4143014, "gav": 0, "gf": 0, "ebitda": 25700384, "dep": 0, "gfin": 59118, "res": 25641266, "mb_pct": 0.5635, "ebitda_pct": 0.2987}, "JUNIO": {"ing": 72066245, "costo": 0, "mb": 37898010, "oi": 4028567, "gav": 0, "gf": 0, "ebitda": 17568470, "dep": 0, "gfin": 59700, "res": 17508769, "mb_pct": 0.5259, "ebitda_pct": 0.2438}, "JULIO": {"ing": 52541030, "costo": 0, "mb": 26690342, "oi": 3685216, "gav": 0, "gf": 0, "ebitda": 8187266, "dep": 0, "gfin": 42948, "res": 8144318, "mb_pct": 0.508, "ebitda_pct": 0.1558}, "AGOSTO": {"ing": 112750982, "costo": 0, "mb": 55242884, "oi": 6123056, "gav": 0, "gf": 0, "ebitda": 32701710, "dep": 0, "gfin": 50573, "res": 32651137, "mb_pct": 0.49, "ebitda_pct": 0.29}, "SEPTIEMBRE": {"ing": 99933734, "costo": 0, "mb": 48853431, "oi": 7444844, "gav": 0, "gf": 0, "ebitda": 23502498, "dep": 100138, "gfin": 58195, "res": 23344165, "mb_pct": 0.4889, "ebitda_pct": 0.2352}, "OCTUBRE": {"ing": 67576654, "costo": 0, "mb": 34994899, "oi": 6078416, "gav": 0, "gf": 0, "ebitda": 11970278, "dep": 418945, "gfin": 53773, "res": 11497560, "mb_pct": 0.5179, "ebitda_pct": 0.1771}, "NOVIEMBRE": {"ing": 129929960, "costo": 0, "mb": 60496145, "oi": 6334098, "gav": 0, "gf": 0, "ebitda": 37368612, "dep": 418945, "gfin": 32324, "res": 36917343, "mb_pct": 0.4656, "ebitda_pct": 0.2876}, "DICIEMBRE": {"ing": 109977953, "costo": 0, "mb": 59384428, "oi": 6681034, "gav": 0, "gf": 0, "ebitda": 29184069, "dep": 641619, "gfin": 3564943, "res": 24977507, "mb_pct": 0.54, "ebitda_pct": 0.2654}}, "2021": {"ENERO": {"ing": 98611673, "costo": 1, "mb": 56192488, "oi": 5308563, "gav": 0, "gf": 0, "ebitda": 26478164, "dep": 733049, "gfin": 549514, "res": 25195601, "mb_pct": 0.5698, "ebitda_pct": 0.2685}, "FEBRERO": {"ing": 110552383, "costo": 0, "mb": 53624969, "oi": 5370440, "gav": 0, "gf": 0, "ebitda": 23149538, "dep": 871988, "gfin": 536460, "res": 21741090, "mb_pct": 0.4851, "ebitda_pct": 0.2094}, "MARZO": {"ing": 146855320, "costo": 0, "mb": 76896362, "oi": 5999179, "gav": 0, "gf": 0, "ebitda": 38719403, "dep": 871988, "gfin": 728125, "res": 37119290, "mb_pct": 0.5236, "ebitda_pct": 0.2637}, "ABRIL": {"ing": 132903356, "costo": 0, "mb": 73940346, "oi": 6333817, "gav": 0, "gf": 0, "ebitda": 41661587, "dep": 871988, "gfin": 787476, "res": 40002123, "mb_pct": 0.5563, "ebitda_pct": 0.3135}, "MAYO": {"ing": 198894631, "costo": 0, "mb": 112691714, "oi": 9491819, "gav": 0, "gf": 0, "ebitda": 78273591, "dep": 871988, "gfin": 535398, "res": 76866205, "mb_pct": 0.5666, "ebitda_pct": 0.3935}, "JUNIO": {"ing": 132263279, "costo": 0, "mb": 72532004, "oi": 7213288, "gav": 0, "gf": 0, "ebitda": 39045874, "dep": 871988, "gfin": 520950, "res": 37652936, "mb_pct": 0.5484, "ebitda_pct": 0.2952}, "JULIO": {"ing": 133223991, "costo": 0, "mb": 78053862, "oi": 6269403, "gav": 0, "gf": 0, "ebitda": 42128660, "dep": 871988, "gfin": 470516, "res": 40786156, "mb_pct": 0.5859, "ebitda_pct": 0.3162}, "AGOSTO": {"ing": 114392012, "costo": 0, "mb": 65460716, "oi": 5168495, "gav": 0, "gf": 0, "ebitda": 27749291, "dep": 1365671, "gfin": 518951, "res": 25864669, "mb_pct": 0.5722, "ebitda_pct": 0.2426}, "SEPTIEMBRE": {"ing": 114510517, "costo": 0, "mb": 62856787, "oi": 5238369, "gav": 0, "gf": 0, "ebitda": 27640903, "dep": 1265533, "gfin": 446399, "res": 25928971, "mb_pct": 0.5489, "ebitda_pct": 0.2414}, "OCTUBRE": {"ing": 164673612, "costo": 0, "mb": 87270097, "oi": 7454022, "gav": 0, "gf": 0, "ebitda": 49567923, "dep": 1265533, "gfin": 479982, "res": 47822408, "mb_pct": 0.53, "ebitda_pct": 0.301}, "NOVIEMBRE": {"ing": 163685807, "costo": 0, "mb": 87384255, "oi": 5323647, "gav": 0, "gf": 0, "ebitda": 50972092, "dep": 1265533, "gfin": 455822, "res": 49250737, "mb_pct": 0.5339, "ebitda_pct": 0.3114}, "DICIEMBRE": {"ing": 149154414, "costo": 0, "mb": 81589402, "oi": 4621191, "gav": 0, "gf": 0, "ebitda": 35312594, "dep": 1265533, "gfin": 365103, "res": 33681958, "mb_pct": 0.547, "ebitda_pct": 0.2368}}, "2022": {"ENERO": {"ing": 96394031, "costo": 1, "mb": 49904238, "oi": 4663931, "gav": 0, "gf": 0, "ebitda": 8085388, "dep": 986130, "gfin": 387517, "res": 6711741, "mb_pct": 0.5177, "ebitda_pct": 0.0839}, "FEBRERO": {"ing": 109240184, "costo": 0, "mb": 51660866, "oi": 4898729, "gav": 0, "gf": 0, "ebitda": 10302371, "dep": 986130, "gfin": 395890, "res": 8920350, "mb_pct": 0.4729, "ebitda_pct": 0.0943}, "MARZO": {"ing": 154014821, "costo": 0, "mb": 74622809, "oi": 4853303, "gav": 0, "gf": 0, "ebitda": 26212404, "dep": 986130, "gfin": 331188, "res": 24895086, "mb_pct": 0.4845, "ebitda_pct": 0.1702}, "ABRIL": {"ing": 157467022, "costo": 0, "mb": 91106042, "oi": 5179268, "gav": 0, "gf": 0, "ebitda": 47008640, "dep": 986130, "gfin": 339724, "res": 45682786, "mb_pct": 0.5786, "ebitda_pct": 0.2985}, "MAYO": {"ing": 243184758, "costo": 0, "mb": 126389330, "oi": 7621149, "gav": 0, "gf": 0, "ebitda": 81524286, "dep": 986130, "gfin": 399861, "res": 80138295, "mb_pct": 0.5197, "ebitda_pct": 0.3352}, "JUNIO": {"ing": 154208566, "costo": 0, "mb": 79110456, "oi": 6066944, "gav": 0, "gf": 0, "ebitda": 24951216, "dep": 1074573, "gfin": 374946, "res": 23501697, "mb_pct": 0.513, "ebitda_pct": 0.1618}, "JULIO": {"ing": 166483271, "costo": 0, "mb": 71678921, "oi": 8927558, "gav": 0, "gf": 0, "ebitda": 18794167, "dep": 1074573, "gfin": 314175, "res": 17405419, "mb_pct": 0.4305, "ebitda_pct": 0.1129}, "AGOSTO": {"ing": 126181346, "costo": 0, "mb": 52508965, "oi": 7034706, "gav": 0, "gf": 0, "ebitda": 2407564, "dep": 1040961, "gfin": 309782, "res": 1056821, "mb_pct": 0.4161, "ebitda_pct": 0.0191}, "SEPTIEMBRE": {"ing": 77566361, "costo": 0, "mb": 41664215, "oi": 3057006, "gav": 0, "gf": 0, "ebitda": -7633272, "dep": 1040961, "gfin": 285522, "res": -8959755, "mb_pct": 0.5371, "ebitda_pct": -0.0984}, "OCTUBRE": {"ing": 152542762, "costo": 0, "mb": 78878039, "oi": 4759785, "gav": 0, "gf": 0, "ebitda": 28163154, "dep": 1040961, "gfin": 265466, "res": 26856727, "mb_pct": 0.5171, "ebitda_pct": 0.1846}, "NOVIEMBRE": {"ing": 162796827, "costo": 0, "mb": 84890372, "oi": 3966472, "gav": 0, "gf": 0, "ebitda": 32838081, "dep": 1040961, "gfin": 393244, "res": 31403876, "mb_pct": 0.5214, "ebitda_pct": 0.2017}, "DICIEMBRE": {"ing": 114729555, "costo": 0, "mb": 61810132, "oi": 3449545, "gav": 0, "gf": 0, "ebitda": 4566814, "dep": 1116928, "gfin": 297040, "res": 3152846, "mb_pct": 0.5387, "ebitda_pct": 0.0398}}, "2023": {"ENERO": {"ing": 107727858, "costo": 1, "mb": 51231308, "oi": 4920849, "gav": 0, "gf": 0, "ebitda": 478341, "dep": 936260, "gfin": 278162, "res": -736081, "mb_pct": 0.4756, "ebitda_pct": 0.0044}, "FEBRERO": {"ing": 112118059, "costo": 0, "mb": 46109376, "oi": 5615073, "gav": 0, "gf": 0, "ebitda": -3951316, "dep": 936260, "gfin": 238392, "res": -5125968, "mb_pct": 0.4113, "ebitda_pct": -0.0352}, "MARZO": {"ing": 141844038, "costo": 0, "mb": 69957486, "oi": 5553905, "gav": 0, "gf": 0, "ebitda": 15466549, "dep": 1228515, "gfin": 214429, "res": 14023604, "mb_pct": 0.4932, "ebitda_pct": 0.109}, "ABRIL": {"ing": 143387705, "costo": 0, "mb": 80848017, "oi": 4028676, "gav": 0, "gf": 0, "ebitda": 22552410, "dep": 1560299, "gfin": 204579, "res": 20787532, "mb_pct": 0.5638, "ebitda_pct": 0.1573}, "MAYO": {"ing": 247058565, "costo": 0, "mb": 134390621, "oi": 6150634, "gav": 0, "gf": 0, "ebitda": 65958437, "dep": 2265638, "gfin": 187641, "res": 63505158, "mb_pct": 0.544, "ebitda_pct": 0.267}, "JUNIO": {"ing": 143657859, "costo": 0, "mb": 79598500, "oi": 3963735, "gav": 0, "gf": 0, "ebitda": 13726909, "dep": 2177195, "gfin": 1714665, "res": 9835049, "mb_pct": 0.5541, "ebitda_pct": 0.0956}, "JULIO": {"ing": 141306866, "costo": 0, "mb": 68786083, "oi": 5967659, "gav": 0, "gf": 0, "ebitda": 9119626, "dep": 2177195, "gfin": 1329977, "res": 5612454, "mb_pct": 0.4868, "ebitda_pct": 0.0645}, "AGOSTO": {"ing": 129883765, "costo": 0, "mb": 57299919, "oi": 4490625, "gav": 0, "gf": 0, "ebitda": -5068622, "dep": 2177195, "gfin": 1411089, "res": -8656906, "mb_pct": 0.4412, "ebitda_pct": -0.039}, "SEPTIEMBRE": {"ing": 164668375, "costo": 0, "mb": 72036462, "oi": 4530159, "gav": 0, "gf": 0, "ebitda": 15881748, "dep": 2177195, "gfin": 1487980, "res": 12216573, "mb_pct": 0.4375, "ebitda_pct": 0.0964}, "OCTUBRE": {"ing": 150742946, "costo": 0, "mb": 76264756, "oi": 5523525, "gav": 0, "gf": 0, "ebitda": 13115501, "dep": 2177195, "gfin": 1269772, "res": 9668534, "mb_pct": 0.5059, "ebitda_pct": 0.087}, "NOVIEMBRE": {"ing": 149724374, "costo": 0, "mb": 75826793, "oi": 4820989, "gav": 0, "gf": 0, "ebitda": 13430671, "dep": 2411629, "gfin": 1271305, "res": 9747737, "mb_pct": 0.5064, "ebitda_pct": 0.0897}, "DICIEMBRE": {"ing": 131774665, "costo": 0, "mb": 71684444, "oi": 3583891, "gav": 0, "gf": 0, "ebitda": 9287932, "dep": 2335663, "gfin": 1203240, "res": 5749029, "mb_pct": 0.544, "ebitda_pct": 0.0705}}, "2024": {"ENERO": {"ing": 119033982, "costo": 1, "mb": 54651698, "oi": 3927702, "gav": 0, "gf": 0, "ebitda": -4560712, "dep": 2711910, "gfin": 1739747, "res": -9012370, "mb_pct": 0.4591, "ebitda_pct": -0.0383}, "FEBRERO": {"ing": 116056821, "costo": 0, "mb": 49080178, "oi": 2922061, "gav": 0, "gf": 0, "ebitda": -6572743, "dep": 2711910, "gfin": 1631348, "res": -10916001, "mb_pct": 0.4229, "ebitda_pct": -0.0566}, "MARZO": {"ing": 108184441, "costo": 0, "mb": 54540483, "oi": 3286827, "gav": 0, "gf": 0, "ebitda": -1369422, "dep": 2439261, "gfin": 1445914, "res": -5254597, "mb_pct": 0.5041, "ebitda_pct": -0.0127}, "ABRIL": {"ing": 161031421, "costo": 0, "mb": 86421189, "oi": 2835548, "gav": 0, "gf": 0, "ebitda": 29656231, "dep": 2203765, "gfin": 1465107, "res": 25987359, "mb_pct": 0.5367, "ebitda_pct": 0.1842}, "MAYO": {"ing": 201376785, "costo": 0, "mb": 111598463, "oi": 3862388, "gav": 0, "gf": 0, "ebitda": 49333110, "dep": 2325929, "gfin": 3923005, "res": 43084177, "mb_pct": 0.5542, "ebitda_pct": 0.245}, "JUNIO": {"ing": 168581903, "costo": 0, "mb": 87731443, "oi": 5402333, "gav": 0, "gf": 0, "ebitda": 20564742, "dep": 3360093, "gfin": 3987372, "res": 13217276, "mb_pct": 0.5204, "ebitda_pct": 0.122}, "JULIO": {"ing": 129767721, "costo": 0, "mb": 63721586, "oi": 4784796, "gav": 0, "gf": 0, "ebitda": 5428273, "dep": 3460799, "gfin": 3650856, "res": -1683382, "mb_pct": 0.491, "ebitda_pct": 0.0418}, "AGOSTO": {"ing": 131999941, "costo": 0, "mb": 57218179, "oi": 3822062, "gav": 0, "gf": 0, "ebitda": -14833624, "dep": 3865231, "gfin": 3885135, "res": -22583990, "mb_pct": 0.4335, "ebitda_pct": -0.1124}, "SEPTIEMBRE": {"ing": 175377897, "costo": 0, "mb": 71615265, "oi": 2585944, "gav": 0, "gf": 0, "ebitda": 1409089, "dep": 3865231, "gfin": 3594478, "res": -6050620, "mb_pct": 0.4083, "ebitda_pct": 0.008}, "OCTUBRE": {"ing": 173676848, "costo": 0, "mb": 89130397, "oi": 3695036, "gav": 0, "gf": 0, "ebitda": 12971892, "dep": 3885837, "gfin": 3582569, "res": 5503486, "mb_pct": 0.5132, "ebitda_pct": 0.0747}, "NOVIEMBRE": {"ing": 199603885, "costo": 0, "mb": 108520629, "oi": 3370600, "gav": 0, "gf": 0, "ebitda": 22910074, "dep": 3651403, "gfin": 3618926, "res": 15639745, "mb_pct": 0.5437, "ebitda_pct": 0.1148}, "DICIEMBRE": {"ing": 178821961, "costo": 0, "mb": 100215710, "oi": 3181918, "gav": 0, "gf": 0, "ebitda": 17575308, "dep": 3784455, "gfin": 3401075, "res": 10389777, "mb_pct": 0.5604, "ebitda_pct": 0.0983}}, "2025": {"ENERO": {"ing": 154397655, "costo": 88651447, "mb": 65746208, "oi": 3584248, "gav": 0, "gf": 0, "ebitda": -8222231, "dep": 3766452, "gfin": 0, "res": -15088002, "mb_pct": 0.4258, "ebitda_pct": -0.0533}, "FEBRERO": {"ing": 127517652, "costo": 68098324, "mb": 59419328, "oi": 2100013, "gav": 0, "gf": 0, "ebitda": -16597914, "dep": 3766452, "gfin": 0, "res": -23430146, "mb_pct": 0.466, "ebitda_pct": -0.1302}, "MARZO": {"ing": 212472934, "costo": 103623054, "mb": 108849880, "oi": 4017149, "gav": 0, "gf": 0, "ebitda": 31675374, "dep": 3746846, "gfin": 0, "res": 25236939, "mb_pct": 0.5123, "ebitda_pct": 0.1491}, "ABRIL": {"ing": 179611437, "costo": 78494948, "mb": 101116489, "oi": 3002517, "gav": 0, "gf": 0, "ebitda": 15173625, "dep": 3702729, "gfin": 0, "res": 8523317, "mb_pct": 0.563, "ebitda_pct": 0.0845}, "MAYO": {"ing": 222760613, "costo": 103987282, "mb": 118773331, "oi": 3209670, "gav": 0, "gf": 0, "ebitda": 33801662, "dep": 3702729, "gfin": 0, "res": 27281404, "mb_pct": 0.5332, "ebitda_pct": 0.1517}, "JUNIO": {"ing": 196635227, "costo": 97707522, "mb": 98927705, "oi": 4359982, "gav": 0, "gf": 0, "ebitda": 10982050, "dep": 3697825, "gfin": 0, "res": 2660888, "mb_pct": 0.5031, "ebitda_pct": 0.0558}, "JULIO": {"ing": 150107961, "costo": 82792211, "mb": 67315750, "oi": 3555584, "gav": 0, "gf": 0, "ebitda": -12141990, "dep": 3678472, "gfin": 0, "res": -18394548, "mb_pct": 0.4484, "ebitda_pct": -0.0809}, "AGOSTO": {"ing": 161535902, "costo": 93482641, "mb": 68053261, "oi": 3918087, "gav": 0, "gf": 0, "ebitda": -9676466, "dep": 3610269, "gfin": 0, "res": -15757052, "mb_pct": 0.4213, "ebitda_pct": -0.0599}, "SEPTIEMBRE": {"ing": 148305282, "costo": 82705716, "mb": 65599566, "oi": 2495704, "gav": 0, "gf": 0, "ebitda": -11124859, "dep": 3719161, "gfin": 0, "res": -17050371, "mb_pct": 0.4423, "ebitda_pct": -0.075}, "OCTUBRE": {"ing": 225203687, "costo": 110743866, "mb": 114459821, "oi": 4831516, "gav": 0, "gf": 0, "ebitda": 27753243, "dep": 3530312, "gfin": 0, "res": 20856084, "mb_pct": 0.5083, "ebitda_pct": 0.1232}, "NOVIEMBRE": {"ing": 224803432, "costo": 101941785, "mb": 122861647, "oi": 3205049, "gav": 0, "gf": 0, "ebitda": 31560742, "dep": 3530312, "gfin": 0, "res": 24840149, "mb_pct": 0.5465, "ebitda_pct": 0.1404}, "DICIEMBRE": {"ing": 204346677, "costo": 93436274, "mb": 110910403, "oi": 3044937, "gav": 0, "gf": 0, "ebitda": 16523078, "dep": 3174585, "gfin": 0, "res": 10379376, "mb_pct": 0.5428, "ebitda_pct": 0.0809}}}, "data_2026": {"ENERO": {"ing": 161081943, "costo": 85463838, "mb": 75618105, "oi": 2470370, "ocv": 4515446, "gav": 0, "gf": 0, "ebitda": 387515, "dep": 3391566, "gfin": 0, "res": -6319028, "mb_pct": 0.4694, "ebitda_pct": 0.0024}, "FEBRERO": {"ing": 157708963, "costo": 90939768, "mb": 66769195, "oi": 3112294, "ocv": 3894894, "gav": 0, "gf": 0, "ebitda": -5841695, "dep": 3444985, "gfin": 0, "res": -12141904, "mb_pct": 0.4234, "ebitda_pct": -0.037}, "MARZO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "ABRIL": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "MAYO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JUNIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JULIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "AGOSTO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "SEPTIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "OCTUBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "NOVIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "DICIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}}, "data_pres": {"ENERO": {"ing": 154999999, "costo": 87495051, "mb": 67504948, "oi": 0, "ocv": 0, "gav": 50403591, "gf": 20659669, "ebitda": -5968312, "dep": 2846099, "gfin": 4248567, "res": -13062978, "mb_pct": 0.4355, "ebitda_pct": -0.0385}, "FEBRERO": {"ing": 169000000, "costo": 92059189, "mb": 76940811, "oi": 0, "ocv": 0, "gav": 49706425, "gf": 20727718, "ebitda": 4096668, "dep": 2846099, "gfin": 3900471, "res": -2649902, "mb_pct": 0.4553, "ebitda_pct": 0.0242}, "MARZO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "ABRIL": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "MAYO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JUNIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JULIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "AGOSTO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "SEPTIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "OCTUBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "NOVIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "DICIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}}, "data_2025": {"ENERO": {"ing": 154397655, "costo": 0, "mb": 65746208, "oi": 3584248, "ocv": 4009798, "gav": 0, "gf": 0, "ebitda": -8222231, "dep": 3766452, "gfin": 3099319, "res": -15088002, "mb_pct": 0.4258, "ebitda_pct": -0.0533}, "FEBRERO": {"ing": 127517652, "costo": 0, "mb": 59419328, "oi": 2100013, "ocv": 3987410, "gav": 0, "gf": 0, "ebitda": -16597914, "dep": 3766452, "gfin": 3065780, "res": -23430146, "mb_pct": 0.466, "ebitda_pct": -0.1302}, "MARZO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "ABRIL": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "MAYO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JUNIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "JULIO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "AGOSTO": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "SEPTIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "OCTUBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "NOVIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}, "DICIEMBRE": {"ing": 0, "costo": 0, "mb": 0, "oi": 0, "ocv": 0, "gav": 0, "gf": 0, "ebitda": 0, "dep": 0, "gfin": 0, "res": 0, "mb_pct": 0, "ebitda_pct": 0}}, "canal_2026": {"Tienda Araucaria": {"ing": [41842122, 29540357, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [21050252, 14976210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [20791870, 14564147, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 71382479, "ytd_costo": 36026462, "ytd_mb": 35356017, "ytd_mb_pct": 0.4953}, "Tienda Costanera": {"ing": [49822020, 32942729, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [25069700, 17778452, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [24752320, 15164277, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 82764749, "ytd_costo": 42848152, "ytd_mb": 39916597, "ytd_mb_pct": 0.4823}, "Pagina Web": {"ing": [62032239, 68711924, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [34239987, 41253432, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [27792252, 27458492, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 130744163, "ytd_costo": 75493419, "ytd_mb": 55250744, "ytd_mb_pct": 0.4226}, "Mayorista": {"ing": [5550839, 14505300, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [3871398, 9283440, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [1679441, 5221860, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 20056139, "ytd_costo": 13154838, "ytd_mb": 6901301, "ytd_mb_pct": 0.3441}, "Boutique": {"ing": [1834723, 12008653, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [1232500, 7648235, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [602223, 4360418, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 13843376, "ytd_costo": 8880735, "ytd_mb": 4962641, "ytd_mb_pct": 0.3585}, "Marketplace": {"ing": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 0, "ytd_costo": 0, "ytd_mb": 0, "ytd_mb_pct": 0}}, "canal_2025": {"Tienda Araucaria": {"ing": [28624576, 24815761, 35764821, 42337756, 49259753, 35702276, 34941218, 27508547, 26686822, 51084571, 48089498, 57925713], "costo": [14873822, 11075017, 15867381, 17139205, 21549245, 17141695, 18906155, 14636839, 11989083, 22398795, 19987812, 24990396], "mb": [13750754, 13740744, 19897440, 25198551, 27710508, 18560581, 16035063, 12871708, 14697739, 28685776, 28101686, 32935317], "ytd_ing": 53440337, "ytd_costo": 25948839, "ytd_mb": 27491498, "ytd_mb_pct": 0.5144}, "Tienda Costanera": {"ing": [35163889, 22407672, 45737693, 43514259, 49133766, 39443546, 34832613, 30742288, 25701108, 56344463, 48784171, 61436719], "costo": [18550982, 10166624, 20988445, 17764497, 21873543, 19096584, 18744127, 16416294, 11295880, 25261624, 20527852, 26458397], "mb": [16612907, 12241048, 24749248, 25749762, 27260223, 20346962, 16088486, 14325994, 14405228, 31082839, 28256319, 34978322], "ytd_ing": 57571561, "ytd_costo": 28717606, "ytd_mb": 28853955, "ytd_mb_pct": 0.5012}, "Pagina Web": {"ing": [66309095, 47660060, 107473134, 79912245, 110092475, 118521034, 73568394, 74906493, 62344668, 95296247, 107318260, 72146468], "costo": [38884242, 26359399, 54445625, 35331692, 51316103, 59153913, 40629009, 44711089, 36941705, 49442799, 47910851, 33577959], "mb": [27424853, 21300661, 53027509, 44580553, 58776372, 59367121, 32939385, 30195404, 25402963, 45853448, 59407409, 38568509], "ytd_ing": 113969155, "ytd_costo": 65243641, "ytd_mb": 48725514, "ytd_mb_pct": 0.4275}, "Mayorista": {"ing": [7517845, 18467119, 10524186, 9847477, 11620341, 2968371, 2328786, 17031662, 22638078, 21179706, 12992056, 7198658], "costo": [5299342, 11218124, 6490288, 5688993, 7452843, 2315330, 1816453, 9990048, 15169221, 12799691, 8195986, 4902872], "mb": [2218503, 7248995, 4033898, 4158484, 4167498, 653041, 512333, 7041614, 7468857, 8380015, 4796070, 2295786], "ytd_ing": 25984964, "ytd_costo": 16517466, "ytd_mb": 9467498, "ytd_mb_pct": 0.3643}, "Boutique": {"ing": [16782250, 14167040, 12973100, 3999700, 2654278, 0, 4436950, 11346912, 10934606, 1298700, 8172607, 5639119], "costo": [11043059, 9279160, 5831315, 2570561, 1795549, 0, 2696467, 7728371, 7309828, 840958, 5319284, 3506650], "mb": [5739191, 4887880, 7141785, 1429139, 858729, 0, 1740483, 3618541, 3624778, 457742, 2853323, 2132469], "ytd_ing": 30949290, "ytd_costo": 20322219, "ytd_mb": 10627071, "ytd_mb_pct": 0.3434}, "Marketplace": {"ing": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 0, "ytd_costo": 0, "ytd_mb": 0, "ytd_mb_pct": 0}}, "meses": ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"], "canales": ["Tienda Araucaria", "Tienda Costanera", "Pagina Web", "Mayorista", "Boutique", "Marketplace"], "years": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]};
-const MESES = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
-const MESES_SHORT = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
-const CANALES = ["Tienda Araucaria", "Tienda Costanera", "Pagina Web", "Mayorista", "Boutique"];
-const CANAL_COLORS = ["#c8a96e", "#5a9fd4", "#5ab585", "#d4a55a", "#a068c8"];
-const SEASONAL = [6.6, 7.1, 8.0, 8.1, 11.5, 8.3, 7.4, 7.7, 7.7, 8.8, 10.1, 8.7];
 
-// Pre-computed YTD
-const YTD = {
-  ing: 318790906, costo: 176403606, mb: 142387300,
-  ebitda: -5454180, res: -18460932, gav: 0, gf: 0,
-  mb_pct: 0.4466, ebitda_pct: -0.0171,
-  ing_25: 281915307, mb_25: 125165536, ebitda_25: -24820145,
-  mb_pct_25: 0.444, ebitda_pct_25: -0.088,
-  ing_pres: 323999999, mb_pres: 144445759,
-};
+/* ═══════════════════════════════════════════════
+   GIANI DAFIRENZE — Dashboard v3
+   Datos reales 2016-2026 · Chat IA integrado
+═══════════════════════════════════════════════ */
 
+const DATA       = {"hist_annual": {"2016": {"ing": 605064130, "costo": 442787083, "mb": 162277047, "oi": 3161, "gav": 110246460, "gf": 56079945, "ebitda": -4049358, "dep": 6101077, "gfin": 13170882, "res": -23321318, "mb_pct": 0.2682, "ebitda_pct": -0.0067}, "2017": {"ing": 1046884380, "costo": 691830005, "mb": 355054375, "oi": 17304387, "gav": 162240173, "gf": 62215441, "ebitda": 130598761, "dep": 9907911, "gfin": 12691494, "res": 107999356, "mb_pct": 0.3392, "ebitda_pct": 0.1247}, "2018": {"ing": 1290978073, "costo": 898870669, "mb": 392107404, "oi": 26603762, "gav": 280926431, "gf": 67593959, "ebitda": 43587014, "dep": 10840835, "gfin": 6753953, "res": 25992225, "mb_pct": 0.3037, "ebitda_pct": 0.0338}, "2019": {"ing": 1336390487, "costo": 908409044, "mb": 427981443, "oi": 29076257, "gav": 314529754, "gf": 92509897, "ebitda": 20941793, "dep": 12360765, "gfin": 7457172, "res": 1123855, "mb_pct": 0.3203, "ebitda_pct": 0.0157}, "2020": {"ing": 1099103359, "costo": 604214891, "mb": 494888468, "oi": 56323800, "gav": 247521400, "gf": 37549557, "ebitda": 209817511, "dep": 1661833, "gfin": 4981922, "res": 203173755, "mb_pct": 0.4503, "ebitda_pct": 0.1909}, "2021": {"ing": 1659720995, "costo": 751227993, "mb": 908493002, "oi": 73792233, "gav": 369526082, "gf": 54921195, "ebitda": 480699621, "dep": 12392781, "gfin": 6394696, "res": 461912144, "mb_pct": 0.5474, "ebitda_pct": 0.2896}, "2022": {"ing": 1714809504, "costo": 850585120, "mb": 864224384, "oi": 64478396, "gav": 480232037, "gf": 105608012, "ebitda": 277220813, "dep": 12360571, "gfin": 4094355, "res": 260765887, "mb_pct": 0.504, "ebitda_pct": 0.1617}, "2023": {"ing": 1763895075, "costo": 879861310, "mb": 884033765, "oi": 59149720, "gav": 563085153, "gf": 144897142, "ebitda": 169998185, "dep": 22560240, "gfin": 10811231, "res": 136626714, "mb_pct": 0.5012, "ebitda_pct": 0.0964}, "2024": {"ing": 1863513606, "costo": 929068387, "mb": 934445219, "oi": 43677215, "gav": 596639095, "gf": 190628869, "ebitda": 132512218, "dep": 38265822, "gfin": 35925535, "res": 58320861, "mb_pct": 0.5014, "ebitda_pct": 0.0711}, "2025": {"ing": 2207698459, "costo": 1105665073, "mb": 1102033386, "oi": 41324456, "gav": 692220522, "gf": 270360694, "ebitda": 109706313, "dep": 43626143, "gfin": 36022132, "res": 30058038, "mb_pct": 0.4992, "ebitda_pct": 0.0497}}, "hist_monthly": {"2016": {"ENERO": {"ing": 11666758, "costo": 7788981, "mb": 3877777, "otros_ing": 0, "otros_cv": 0, "gav": 4368082, "gf": 4703005, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": -5193310, "dep": 133333, "gfin": 792550, "res": -6119193, "mb_pct": 0.3324, "ebitda_pct": -0.4451}, "FEBRERO": {"ing": 34807929, "costo": 28540710, "mb": 6267219, "otros_ing": 0, "otros_cv": 0, "gav": 8834763, "gf": 4507308, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": -7074852, "dep": 233620, "gfin": 695992, "res": -8004463, "mb_pct": 0.1801, "ebitda_pct": -0.2033}, "MARZO": {"ing": 26634892, "costo": 20224064, "mb": 6410828, "otros_ing": 2740, "otros_cv": 0, "gav": 8054902, "gf": 4374554, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": -6018628, "dep": 331942, "gfin": 283530, "res": -6634100, "mb_pct": 0.2407, "ebitda_pct": -0.226}, "ABRIL": {"ing": 93144372, "costo": 69774047, "mb": 23370325, "otros_ing": 0, "otros_cv": 0, "gav": 7634258, "gf": 4417960, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": 11318107, "dep": 383585, "gfin": 1071142, "res": 9863380, "mb_pct": 0.2509, "ebitda_pct": 0.1215}, "MAYO": {"ing": 51498508, "costo": 37263056, "mb": 14235452, "otros_ing": 0, "otros_cv": 0, "gav": 8708897, "gf": 4423960, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": 1102595, "dep": 449296, "gfin": 527399, "res": 125900, "mb_pct": 0.2764, "ebitda_pct": 0.0214}, "JUNIO": {"ing": 43462465, "costo": 26616849, "mb": 16845616, "otros_ing": 0, "otros_cv": 0, "gav": 9860311, "gf": 4508942, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": 2476363, "dep": 546768, "gfin": 925281, "res": 1004314, "mb_pct": 0.3876, "ebitda_pct": 0.057}, "JULIO": {"ing": 65998370, "costo": 45767102, "mb": 20231268, "otros_ing": -2571, "otros_cv": 0, "gav": 9820505, "gf": 4463503, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": 5947260, "dep": 546768, "gfin": 807136, "res": 4593357, "mb_pct": 0.3065, "ebitda_pct": 0.0901}, "AGOSTO": {"ing": 53456334, "costo": 36982634, "mb": 16473699, "otros_ing": 0, "otros_cv": 0, "gav": 10764083, "gf": 4516727, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": 1192889, "dep": 583183, "gfin": 1644723, "res": -1035017, "mb_pct": 0.3082, "ebitda_pct": 0.0223}, "SEPTIEMBRE": {"ing": 65356792, "costo": 51189344, "mb": 14167448, "otros_ing": 2992, "otros_cv": 0, "gav": 10228039, "gf": 4424068, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": -484659, "dep": 620844, "gfin": 2179659, "res": -3285162, "mb_pct": 0.2168, "ebitda_pct": -0.0074}, "OCTUBRE": {"ing": 69674098, "costo": 57624130, "mb": 12049968, "otros_ing": 0, "otros_cv": 0, "gav": 10935255, "gf": 4521093, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": -3406380, "dep": 708310, "gfin": 1366185, "res": -5480874, "mb_pct": 0.1729, "ebitda_pct": -0.0489}, "NOVIEMBRE": {"ing": 32278677, "costo": 22979227, "mb": 9299450, "otros_ing": 0, "otros_cv": 0, "gav": 9201507, "gf": 4549006, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": -4451063, "dep": 761070, "gfin": 1560127, "res": -6772260, "mb_pct": 0.2881, "ebitda_pct": -0.1379}, "DICIEMBRE": {"ing": 57084935, "costo": 38036939, "mb": 19047996, "otros_ing": 0, "otros_cv": 0, "gav": 11835858, "gf": 6669819, "regalos": 0, "robos": 0, "gastos_total": 0, "ebitda": 542319, "dep": 802360, "gfin": 1317158, "res": -1577199, "mb_pct": 0.3337, "ebitda_pct": 0.0095}}, "2017": {"ENERO": {"ing": 69482253, "costo": 49457864, "mb": 20024389, "otros_ing": 864549, "otros_cv": 864549, "gav": 10961952, "gf": 4702211, "regalos": 0, "robos": 0, "gastos_total": 15664163, "ebitda": 4360226, "dep": 877022, "gfin": 1059811, "res": 2423393, "mb_pct": 0.2882, "ebitda_pct": 0.0628}, "FEBRERO": {"ing": 71097467, "costo": 52329975, "mb": 18767492, "otros_ing": 809080, "otros_cv": 809080, "gav": 11718522, "gf": 4907603, "regalos": 0, "robos": 0, "gastos_total": 16626125, "ebitda": 2141367, "dep": 877022, "gfin": 1631170, "res": -366825, "mb_pct": 0.264, "ebitda_pct": 0.0301}, "MARZO": {"ing": 97128708, "costo": 68300354, "mb": 28828354, "otros_ing": 1309911, "otros_cv": 1309911, "gav": 12536862, "gf": 4923821, "regalos": 0, "robos": 0, "gastos_total": 17460683, "ebitda": 11367671, "dep": 878125, "gfin": 755079, "res": 9734467, "mb_pct": 0.2968, "ebitda_pct": 0.117}, "ABRIL": {"ing": 99447759, "costo": 66359781, "mb": 33087978, "otros_ing": 1361312, "otros_cv": 1361312, "gav": 12251419, "gf": 5118716, "regalos": 0, "robos": 0, "gastos_total": 17370135, "ebitda": 15717843, "dep": 991083, "gfin": 1155005, "res": 13571755, "mb_pct": 0.3327, "ebitda_pct": 0.1581}, "MAYO": {"ing": 81242614, "costo": 46893680, "mb": 34348934, "otros_ing": 1565582, "otros_cv": 1565582, "gav": 13773216, "gf": 5409162, "regalos": 0, "robos": 0, "gastos_total": 19182378, "ebitda": 15166556, "dep": 957790, "gfin": 782643, "res": 13426123, "mb_pct": 0.4228, "ebitda_pct": 0.1867}, "JUNIO": {"ing": 70336650, "costo": 43173640, "mb": 27163010, "otros_ing": 1593878, "otros_cv": 1593878, "gav": 12910918, "gf": 4979918, "regalos": 0, "robos": 0, "gastos_total": 17890836, "ebitda": 9272174, "dep": 1028096, "gfin": 695170, "res": 7548907, "mb_pct": 0.3862, "ebitda_pct": 0.1318}, "JULIO": {"ing": 102778461, "costo": 72385970, "mb": 30392491, "otros_ing": 2122555, "otros_cv": 2122555, "gav": 13166821, "gf": 5029624, "regalos": 0, "robos": 0, "gastos_total": 18196445, "ebitda": 12196046, "dep": 856080, "gfin": 649834, "res": 10690131, "mb_pct": 0.2957, "ebitda_pct": 0.1187}, "AGOSTO": {"ing": 97249070, "costo": 63576666, "mb": 33672404, "otros_ing": 1630199, "otros_cv": 1630199, "gav": 13380255, "gf": 5160552, "regalos": 0, "robos": 0, "gastos_total": 18540807, "ebitda": 15131597, "dep": 772747, "gfin": 1020632, "res": 13338218, "mb_pct": 0.3462, "ebitda_pct": 0.1556}, "SEPTIEMBRE": {"ing": 87127871, "costo": 56326725, "mb": 30801146, "otros_ing": 1438202, "otros_cv": 1438202, "gav": 13969413, "gf": 5361840, "regalos": 0, "robos": 0, "gastos_total": 19331253, "ebitda": 11469893, "dep": 673914, "gfin": 588592, "res": 10207388, "mb_pct": 0.3535, "ebitda_pct": 0.1316}, "OCTUBRE": {"ing": 89776390, "costo": 56752216, "mb": 33024174, "otros_ing": 1403020, "otros_cv": 1403020, "gav": 13365820, "gf": 5551436, "regalos": 0, "robos": 0, "gastos_total": 18917256, "ebitda": 14106918, "dep": 744413, "gfin": 531521, "res": 12830984, "mb_pct": 0.3678, "ebitda_pct": 0.1571}, "NOVIEMBRE": {"ing": 93546544, "costo": 61211834, "mb": 32334710, "otros_ing": 1188687, "otros_cv": 1188687, "gav": 16591311, "gf": 5605436, "regalos": 0, "robos": 0, "gastos_total": 22196747, "ebitda": 10137963, "dep": 678702, "gfin": 570636, "res": 8888625, "mb_pct": 0.3457, "ebitda_pct": 0.1084}, "DICIEMBRE": {"ing": 87670593, "costo": 55061300, "mb": 32609293, "otros_ing": 2017412, "otros_cv": 2017412, "gav": 17613664, "gf": 5465120, "regalos": 0, "robos": 0, "gastos_total": 23078784, "ebitda": 9530509, "dep": 572918, "gfin": 3251401, "res": 5706189, "mb_pct": 0.372, "ebitda_pct": 0.1087}}, "2018": {"ENERO": {"ing": 100917007, "costo": 73337311, "mb": 27579696, "otros_ing": 2048043, "otros_cv": 2048043, "gav": 15212091, "gf": 5249191, "regalos": 0, "robos": 0, "gastos_total": 20461282, "ebitda": 7118414, "dep": 612565, "gfin": 652574, "res": 5853275, "mb_pct": 0.2733, "ebitda_pct": 0.0705}, "FEBRERO": {"ing": 96901833, "costo": 74673172, "mb": 22228661, "otros_ing": 2297032, "otros_cv": 2297032, "gav": 15293201, "gf": 5248467, "regalos": 0, "robos": 0, "gastos_total": 20541668, "ebitda": 1686993, "dep": 711989, "gfin": 502930, "res": 472074, "mb_pct": 0.2294, "ebitda_pct": 0.0174}, "MARZO": {"ing": 118589471, "costo": 81546468, "mb": 37043003, "otros_ing": 2055054, "otros_cv": 2055054, "gav": 18679751, "gf": 5299599, "regalos": 0, "robos": 0, "gastos_total": 23979350, "ebitda": 13063653, "dep": 790559, "gfin": 1575473, "res": 10697620, "mb_pct": 0.3124, "ebitda_pct": 0.1102}, "ABRIL": {"ing": 118977199, "costo": 74410828, "mb": 44566371, "otros_ing": 1594189, "otros_cv": 1594189, "gav": 23538359, "gf": 6208557, "regalos": 0, "robos": 0, "gastos_total": 29746916, "ebitda": 14819455, "dep": 696901, "gfin": 459615, "res": 13662939, "mb_pct": 0.3746, "ebitda_pct": 0.1246}, "MAYO": {"ing": 153089156, "costo": 92785028, "mb": 60304128, "otros_ing": 3226689, "otros_cv": 3226689, "gav": 25115448, "gf": 5839791, "regalos": 0, "robos": 0, "gastos_total": 30955239, "ebitda": 29348889, "dep": 661164, "gfin": 339342, "res": 28348383, "mb_pct": 0.3939, "ebitda_pct": 0.1917}, "JUNIO": {"ing": 93852258, "costo": 69127573, "mb": 24724685, "otros_ing": 3099261, "otros_cv": 3099261, "gav": 23172180, "gf": 5345015, "regalos": 0, "robos": 0, "gastos_total": 28517195, "ebitda": -3792510, "dep": 741109, "gfin": 277749, "res": -4811368, "mb_pct": 0.2634, "ebitda_pct": -0.0404}, "JULIO": {"ing": 110872138, "costo": 80109288, "mb": 30762850, "otros_ing": 3031265, "otros_cv": 3031265, "gav": 27048523, "gf": 5344181, "regalos": 0, "robos": 0, "gastos_total": 32392704, "ebitda": -1629854, "dep": 784001, "gfin": 230341, "res": -2644196, "mb_pct": 0.2775, "ebitda_pct": -0.0147}, "AGOSTO": {"ing": 100450014, "costo": 73170967, "mb": 27279047, "otros_ing": 1996100, "otros_cv": 1996100, "gav": 26390476, "gf": 5368949, "regalos": 0, "robos": 0, "gastos_total": 31759425, "ebitda": -4480378, "dep": 995585, "gfin": 219873, "res": -5695836, "mb_pct": 0.2716, "ebitda_pct": -0.0446}, "SEPTIEMBRE": {"ing": 115308439, "costo": 87625487, "mb": 27682952, "otros_ing": 850236, "otros_cv": 850236, "gav": 25291339, "gf": 5389680, "regalos": 0, "robos": 0, "gastos_total": 30681019, "ebitda": -2998067, "dep": 987195, "gfin": 149229, "res": -4134492, "mb_pct": 0.2401, "ebitda_pct": -0.026}, "OCTUBRE": {"ing": 113825986, "costo": 81769948, "mb": 32056038, "otros_ing": 2318016, "otros_cv": 2318016, "gav": 24978946, "gf": 6491515, "regalos": 0, "robos": 0, "gastos_total": 31470461, "ebitda": 585577, "dep": 1017853, "gfin": 754205, "res": -1186482, "mb_pct": 0.2816, "ebitda_pct": 0.0051}, "NOVIEMBRE": {"ing": 87451684, "costo": 63073072, "mb": 24378612, "otros_ing": 2905926, "otros_cv": 2905926, "gav": 24421416, "gf": 5965201, "regalos": 0, "robos": 0, "gastos_total": 30386617, "ebitda": -6008005, "dep": 1265247, "gfin": 829938, "res": -8103190, "mb_pct": 0.2788, "ebitda_pct": -0.0687}, "DICIEMBRE": {"ing": 80742888, "costo": 47241527, "mb": 33501361, "otros_ing": 1181951, "otros_cv": 1181951, "gav": 31784700, "gf": 5843813, "regalos": 0, "robos": 0, "gastos_total": 37628513, "ebitda": -4127152, "dep": 1576667, "gfin": 762684, "res": -6466503, "mb_pct": 0.4149, "ebitda_pct": -0.0511}}, "2019": {"ENERO": {"ing": 97087617, "costo": 68637533, "mb": 28450084, "otros_ing": 1495845, "otros_cv": 1495845, "gav": 22326124, "gf": 7465471, "regalos": 0, "robos": 0, "gastos_total": 29791595, "ebitda": -1341510, "dep": 1586508, "gfin": 756809, "res": -3684828, "mb_pct": 0.293, "ebitda_pct": -0.0138}, "FEBRERO": {"ing": 129611456, "costo": 102371519, "mb": 27239937, "otros_ing": 2863434, "otros_cv": 2863434, "gav": 24267382, "gf": 7545700, "regalos": 0, "robos": 0, "gastos_total": 31813082, "ebitda": -4573145, "dep": 1472853, "gfin": 883652, "res": -6929650, "mb_pct": 0.2102, "ebitda_pct": -0.0353}, "MARZO": {"ing": 130951424, "costo": 103710978, "mb": 27240446, "otros_ing": 1793591, "otros_cv": 1793591, "gav": 28495088, "gf": 7528425, "regalos": 0, "robos": 0, "gastos_total": 36023513, "ebitda": -8783067, "dep": 1390655, "gfin": 633077, "res": -10806799, "mb_pct": 0.208, "ebitda_pct": -0.0671}, "ABRIL": {"ing": 128658509, "costo": 79292476, "mb": 49366033, "otros_ing": 1897514, "otros_cv": 1897514, "gav": 26710601, "gf": 7513779, "regalos": 0, "robos": 0, "gastos_total": 34224380, "ebitda": 15141653, "dep": 1333823, "gfin": 669638, "res": 13138192, "mb_pct": 0.3837, "ebitda_pct": 0.1177}, "MAYO": {"ing": 131230368, "costo": 79719663, "mb": 51510705, "otros_ing": 4199186, "otros_cv": 4199186, "gav": 24506963, "gf": 8176774, "regalos": 0, "robos": 0, "gastos_total": 32683737, "ebitda": 18826968, "dep": 1273594, "gfin": 791170, "res": 16762204, "mb_pct": 0.3925, "ebitda_pct": 0.1435}, "JUNIO": {"ing": 98939401, "costo": 61124744, "mb": 37814657, "otros_ing": 1569461, "otros_cv": 1569461, "gav": 33533417, "gf": 7990171, "regalos": 0, "robos": 0, "gastos_total": 41523588, "ebitda": -3708931, "dep": 1153266, "gfin": 624983, "res": -5487181, "mb_pct": 0.3822, "ebitda_pct": -0.0375}, "JULIO": {"ing": 136092715, "costo": 94412120, "mb": 41680595, "otros_ing": 2896805, "otros_cv": 2896805, "gav": 27782453, "gf": 7578493, "regalos": 0, "robos": 0, "gastos_total": 35360946, "ebitda": 6319649, "dep": 1076671, "gfin": 556127, "res": 4686851, "mb_pct": 0.3063, "ebitda_pct": 0.0464}, "AGOSTO": {"ing": 104852080, "costo": 75707702, "mb": 29144378, "otros_ing": 3174459, "otros_cv": 3174459, "gav": 26747002, "gf": 7765426, "regalos": 0, "robos": 0, "gastos_total": 34512428, "ebitda": -5368050, "dep": 845985, "gfin": 687947, "res": -6901982, "mb_pct": 0.278, "ebitda_pct": -0.0512}, "SEPTIEMBRE": {"ing": 84595361, "costo": 57905436, "mb": 26689925, "otros_ing": 1973492, "otros_cv": 1973492, "gav": 25550640, "gf": 7788442, "regalos": 0, "robos": 0, "gastos_total": 33339082, "ebitda": -6649156, "dep": 833460, "gfin": 486940, "res": -7969556, "mb_pct": 0.3155, "ebitda_pct": -0.0786}, "OCTUBRE": {"ing": 121724926, "costo": 85381860, "mb": 36343066, "otros_ing": 2939374, "otros_cv": 2939374, "gav": 24582457, "gf": 7734253, "regalos": 0, "robos": 0, "gastos_total": 32316710, "ebitda": 4026356, "dep": 784746, "gfin": 439109, "res": 2802501, "mb_pct": 0.2986, "ebitda_pct": 0.0331}, "NOVIEMBRE": {"ing": 78092308, "costo": 47966652, "mb": 30125656, "otros_ing": 1785146, "otros_cv": 1785146, "gav": 25177566, "gf": 7539443, "regalos": 0, "robos": 0, "gastos_total": 32717009, "ebitda": -2591354, "dep": 472916, "gfin": 567186, "res": -3631456, "mb_pct": 0.3858, "ebitda_pct": -0.0332}, "DICIEMBRE": {"ing": 94554322, "costo": 52178361, "mb": 42375961, "otros_ing": 2487950, "otros_cv": 2487950, "gav": 24850062, "gf": 7883520, "regalos": 0, "robos": 0, "gastos_total": 32733582, "ebitda": 9642380, "dep": 136287, "gfin": 360534, "res": 9145559, "mb_pct": 0.4482, "ebitda_pct": 0.102}}, "2020": {"ENERO": {"ing": 97251594, "costo": 66100985, "mb": 31150609, "otros_ing": 2555793, "otros_cv": 2555793, "gav": 20872083, "gf": 7759718, "regalos": 0, "robos": 0, "gastos_total": 28631801, "ebitda": 2518808, "dep": 41092, "gfin": 98362, "res": 2379354, "mb_pct": 0.3203, "ebitda_pct": 0.0259}, "FEBRERO": {"ing": 126139748, "costo": 93788495, "mb": 32351253, "otros_ing": 2725403, "otros_cv": 2725403, "gav": 19118221, "gf": 7818994, "regalos": 0, "robos": 0, "gastos_total": 26937215, "ebitda": 5414038, "dep": 41092, "gfin": 99751, "res": 5273195, "mb_pct": 0.2565, "ebitda_pct": 0.0429}, "MARZO": {"ing": 75925087, "costo": 49685034, "mb": 26240053, "otros_ing": 2310191, "otros_cv": 2310191, "gav": 18885029, "gf": 6506092, "regalos": 0, "robos": 0, "gastos_total": 25391121, "ebitda": 848932, "dep": 0, "gfin": 795234, "res": 53698, "mb_pct": 0.3456, "ebitda_pct": 0.0112}, "ABRIL": {"ing": 68962352, "costo": 35866710, "mb": 33095642, "otros_ing": 4214168, "otros_cv": 4214168, "gav": 16270747, "gf": 1972449, "regalos": 0, "robos": 0, "gastos_total": 18243196, "ebitda": 14852446, "dep": 0, "gfin": 67003, "res": 14785444, "mb_pct": 0.4799, "ebitda_pct": 0.2154}, "MAYO": {"ing": 86048020, "costo": 37557248, "mb": 48490772, "otros_ing": 4143014, "otros_cv": 4143014, "gav": 21317353, "gf": 1473035, "regalos": 0, "robos": 0, "gastos_total": 22790388, "ebitda": 25700384, "dep": 0, "gfin": 59118, "res": 25641266, "mb_pct": 0.5635, "ebitda_pct": 0.2987}, "JUNIO": {"ing": 72066245, "costo": 34168235, "mb": 37898010, "otros_ing": 4028567, "otros_cv": 4028567, "gav": 18877925, "gf": 1451615, "regalos": 0, "robos": 0, "gastos_total": 20329540, "ebitda": 17568470, "dep": 0, "gfin": 59700, "res": 17508769, "mb_pct": 0.5259, "ebitda_pct": 0.2438}, "JULIO": {"ing": 52541030, "costo": 25850688, "mb": 26690342, "otros_ing": 3685216, "otros_cv": 3685216, "gav": 17118075, "gf": 1385001, "regalos": 0, "robos": 0, "gastos_total": 18503076, "ebitda": 8187266, "dep": 0, "gfin": 42948, "res": 8144318, "mb_pct": 0.508, "ebitda_pct": 0.1558}, "AGOSTO": {"ing": 112750982, "costo": 57508098, "mb": 55242884, "otros_ing": 6123056, "otros_cv": 6123056, "gav": 21783110, "gf": 758064, "regalos": 0, "robos": 0, "gastos_total": 22541174, "ebitda": 32701710, "dep": 0, "gfin": 50573, "res": 32651137, "mb_pct": 0.49, "ebitda_pct": 0.29}, "SEPTIEMBRE": {"ing": 99933734, "costo": 51080303, "mb": 48853431, "otros_ing": 7444844, "otros_cv": 7444844, "gav": 24386021, "gf": 964913, "regalos": 0, "robos": 0, "gastos_total": 25350934, "ebitda": 23502498, "dep": 100138, "gfin": 58195, "res": 23344165, "mb_pct": 0.4889, "ebitda_pct": 0.2352}, "OCTUBRE": {"ing": 67576654, "costo": 32581755, "mb": 34994899, "otros_ing": 6078416, "otros_cv": 6078416, "gav": 20942902, "gf": 2081719, "regalos": 0, "robos": 0, "gastos_total": 23024621, "ebitda": 11970278, "dep": 418945, "gfin": 53773, "res": 11497560, "mb_pct": 0.5179, "ebitda_pct": 0.1771}, "NOVIEMBRE": {"ing": 129929960, "costo": 69433815, "mb": 60496145, "otros_ing": 6334098, "otros_cv": 6334098, "gav": 23058305, "gf": 69228, "regalos": 0, "robos": 0, "gastos_total": 23127533, "ebitda": 37368612, "dep": 418945, "gfin": 32324, "res": 36917343, "mb_pct": 0.4656, "ebitda_pct": 0.2876}, "DICIEMBRE": {"ing": 109977953, "costo": 50593525, "mb": 59384428, "otros_ing": 6681034, "otros_cv": 6681034, "gav": 24891630, "gf": 5308729, "regalos": 0, "robos": 0, "gastos_total": 30200359, "ebitda": 29184069, "dep": 641619, "gfin": 3564943, "res": 24977507, "mb_pct": 0.54, "ebitda_pct": 0.2654}}, "2021": {"ENERO": {"ing": 98611673, "costo": 42419185, "mb": 56192488, "otros_ing": 5308563, "otros_cv": 4363974, "gav": 28917615, "gf": 1741298, "regalos": 0, "robos": 0, "gastos_total": 30658913, "ebitda": 26478164, "dep": 733049, "gfin": 549514, "res": 25195601, "mb_pct": 0.5698, "ebitda_pct": 0.2685}, "FEBRERO": {"ing": 110552383, "costo": 56927414, "mb": 53624969, "otros_ing": 5370440, "otros_cv": 6238133, "gav": 28952416, "gf": 655322, "regalos": 0, "robos": 0, "gastos_total": 29607738, "ebitda": 23149538, "dep": 871988, "gfin": 536460, "res": 21741090, "mb_pct": 0.4851, "ebitda_pct": 0.2094}, "MARZO": {"ing": 146855320, "costo": 69958958, "mb": 76896362, "otros_ing": 5999179, "otros_cv": 8222483, "gav": 31665979, "gf": 4287675, "regalos": 0, "robos": 0, "gastos_total": 35953654, "ebitda": 38719403, "dep": 871988, "gfin": 728125, "res": 37119290, "mb_pct": 0.5236, "ebitda_pct": 0.2637}, "ABRIL": {"ing": 132903356, "costo": 58963010, "mb": 73940346, "otros_ing": 6333817, "otros_cv": 8050491, "gav": 29428190, "gf": 1133895, "regalos": 0, "robos": 0, "gastos_total": 30562085, "ebitda": 41661587, "dep": 871988, "gfin": 787476, "res": 40002123, "mb_pct": 0.5563, "ebitda_pct": 0.3135}, "MAYO": {"ing": 198894631, "costo": 86202917, "mb": 112691714, "otros_ing": 9491819, "otros_cv": 7420415, "gav": 32189600, "gf": 4299927, "regalos": 0, "robos": 0, "gastos_total": 36489527, "ebitda": 78273591, "dep": 871988, "gfin": 535398, "res": 76866205, "mb_pct": 0.5666, "ebitda_pct": 0.3935}, "JUNIO": {"ing": 132263279, "costo": 59731275, "mb": 72532004, "otros_ing": 7213288, "otros_cv": 7644877, "gav": 29611944, "gf": 3442596, "regalos": 0, "robos": 0, "gastos_total": 33054540, "ebitda": 39045874, "dep": 871988, "gfin": 520950, "res": 37652936, "mb_pct": 0.5484, "ebitda_pct": 0.2952}, "JULIO": {"ing": 133223991, "costo": 55170129, "mb": 78053862, "otros_ing": 6269403, "otros_cv": 7333757, "gav": 29431800, "gf": 5429048, "regalos": 0, "robos": 0, "gastos_total": 34860848, "ebitda": 42128660, "dep": 871988, "gfin": 470516, "res": 40786156, "mb_pct": 0.5859, "ebitda_pct": 0.3162}, "AGOSTO": {"ing": 114392012, "costo": 48931296, "mb": 65460716, "otros_ing": 5168495, "otros_cv": 4994007, "gav": 31426044, "gf": 6459870, "regalos": 0, "robos": 0, "gastos_total": 37885914, "ebitda": 27749291, "dep": 1365671, "gfin": 518951, "res": 25864669, "mb_pct": 0.5722, "ebitda_pct": 0.2426}, "SEPTIEMBRE": {"ing": 114510517, "costo": 51653730, "mb": 62856787, "otros_ing": 5238369, "otros_cv": 5089850, "gav": 28574960, "gf": 6789443, "regalos": 0, "robos": 0, "gastos_total": 35364403, "ebitda": 27640903, "dep": 1265533, "gfin": 446399, "res": 25928971, "mb_pct": 0.5489, "ebitda_pct": 0.2414}, "OCTUBRE": {"ing": 164673612, "costo": 77403515, "mb": 87270097, "otros_ing": 7454022, "otros_cv": 7101436, "gav": 31237235, "gf": 6817524, "regalos": 0, "robos": 0, "gastos_total": 38054759, "ebitda": 49567923, "dep": 1265533, "gfin": 479982, "res": 47822408, "mb_pct": 0.53, "ebitda_pct": 0.301}, "NOVIEMBRE": {"ing": 163685807, "costo": 76301552, "mb": 87384255, "otros_ing": 5323647, "otros_cv": 4742628, "gav": 30103014, "gf": 6890168, "regalos": 0, "robos": 0, "gastos_total": 36993182, "ebitda": 50972092, "dep": 1265533, "gfin": 455822, "res": 49250737, "mb_pct": 0.5339, "ebitda_pct": 0.3114}, "DICIEMBRE": {"ing": 149154414, "costo": 67565012, "mb": 81589402, "otros_ing": 4621191, "otros_cv": 5936285, "gav": 37987286, "gf": 6974428, "regalos": 0, "robos": 0, "gastos_total": 44961714, "ebitda": 35312594, "dep": 1265533, "gfin": 365103, "res": 33681958, "mb_pct": 0.547, "ebitda_pct": 0.2368}}, "2022": {"ENERO": {"ing": 96394031, "costo": 46489793, "mb": 49904238, "otros_ing": 4663931, "otros_cv": 4142839, "gav": 34150280, "gf": 8189662, "regalos": 0, "robos": 0, "gastos_total": 42339942, "ebitda": 8085388, "dep": 986130, "gfin": 387517, "res": 6711741, "mb_pct": 0.5177, "ebitda_pct": 0.0839}, "FEBRERO": {"ing": 109240184, "costo": 57579318, "mb": 51660866, "otros_ing": 4898729, "otros_cv": 5076290, "gav": 32944610, "gf": 8236324, "regalos": 0, "robos": 0, "gastos_total": 41180934, "ebitda": 10302371, "dep": 986130, "gfin": 395890, "res": 8920350, "mb_pct": 0.4729, "ebitda_pct": 0.0943}, "MARZO": {"ing": 154014821, "costo": 79392012, "mb": 74622809, "otros_ing": 4853303, "otros_cv": 5504242, "gav": 39420739, "gf": 8338727, "regalos": 0, "robos": 0, "gastos_total": 47759466, "ebitda": 26212404, "dep": 986130, "gfin": 331188, "res": 24895086, "mb_pct": 0.4845, "ebitda_pct": 0.1702}, "ABRIL": {"ing": 157467022, "costo": 66360980, "mb": 91106042, "otros_ing": 5179268, "otros_cv": 5008432, "gav": 35903036, "gf": 8365202, "regalos": 0, "robos": 0, "gastos_total": 44268238, "ebitda": 47008640, "dep": 986130, "gfin": 339724, "res": 45682786, "mb_pct": 0.5786, "ebitda_pct": 0.2985}, "MAYO": {"ing": 243184758, "costo": 116795428, "mb": 126389330, "otros_ing": 7621149, "otros_cv": 5210676, "gav": 38863951, "gf": 8411566, "regalos": 0, "robos": 0, "gastos_total": 47275517, "ebitda": 81524286, "dep": 986130, "gfin": 399861, "res": 80138295, "mb_pct": 0.5197, "ebitda_pct": 0.3352}, "JUNIO": {"ing": 154208566, "costo": 75098110, "mb": 79110456, "otros_ing": 6066944, "otros_cv": 6491386, "gav": 45052176, "gf": 8682621, "regalos": 0, "robos": 0, "gastos_total": 53734797, "ebitda": 24951216, "dep": 1074573, "gfin": 374946, "res": 23501697, "mb_pct": 0.513, "ebitda_pct": 0.1618}, "JULIO": {"ing": 166483271, "costo": 94804350, "mb": 71678921, "otros_ing": 8927558, "otros_cv": 9055536, "gav": 44078914, "gf": 8677862, "regalos": 0, "robos": 0, "gastos_total": 52756776, "ebitda": 18794167, "dep": 1074573, "gfin": 314175, "res": 17405419, "mb_pct": 0.4305, "ebitda_pct": 0.1129}, "AGOSTO": {"ing": 126181346, "costo": 73672381, "mb": 52508965, "otros_ing": 7034706, "otros_cv": 6538133, "gav": 41136126, "gf": 9461848, "regalos": 0, "robos": 0, "gastos_total": 50597974, "ebitda": 2407564, "dep": 1040961, "gfin": 309782, "res": 1056821, "mb_pct": 0.4161, "ebitda_pct": 0.0191}, "SEPTIEMBRE": {"ing": 77566361, "costo": 35902146, "mb": 41664215, "otros_ing": 3057006, "otros_cv": 4094566, "gav": 38928204, "gf": 9331723, "regalos": 0, "robos": 0, "gastos_total": 48259927, "ebitda": -7633272, "dep": 1040961, "gfin": 285522, "res": -8959755, "mb_pct": 0.5371, "ebitda_pct": -0.0984}, "OCTUBRE": {"ing": 152542762, "costo": 73664723, "mb": 78878039, "otros_ing": 4759785, "otros_cv": 4871868, "gav": 41200445, "gf": 9402357, "regalos": 0, "robos": 0, "gastos_total": 50602802, "ebitda": 28163154, "dep": 1040961, "gfin": 265466, "res": 26856727, "mb_pct": 0.5171, "ebitda_pct": 0.1846}, "NOVIEMBRE": {"ing": 162796827, "costo": 77906455, "mb": 84890372, "otros_ing": 3966472, "otros_cv": 4153558, "gav": 42348361, "gf": 9516844, "regalos": 0, "robos": 0, "gastos_total": 51865205, "ebitda": 32838081, "dep": 1040961, "gfin": 393244, "res": 31403876, "mb_pct": 0.5214, "ebitda_pct": 0.2017}, "DICIEMBRE": {"ing": 114729555, "costo": 52919423, "mb": 61810132, "otros_ing": 3449545, "otros_cv": 5494393, "gav": 46205195, "gf": 8993276, "regalos": 0, "robos": 0, "gastos_total": 55198471, "ebitda": 4566814, "dep": 1116928, "gfin": 297040, "res": 3152846, "mb_pct": 0.5387, "ebitda_pct": 0.0398}}, "2023": {"ENERO": {"ing": 107727858, "costo": 56496550, "mb": 51231308, "otros_ing": 4920849, "otros_cv": 4927917, "gav": 39904377, "gf": 10841522, "regalos": 0, "robos": 0, "gastos_total": 50745899, "ebitda": 478341, "dep": 936260, "gfin": 278162, "res": -736081, "mb_pct": 0.4756, "ebitda_pct": 0.0044}, "FEBRERO": {"ing": 112118059, "costo": 66008683, "mb": 46109376, "otros_ing": 5615073, "otros_cv": 5289952, "gav": 39740653, "gf": 10645160, "regalos": 0, "robos": 0, "gastos_total": 50385813, "ebitda": -3951316, "dep": 936260, "gfin": 238392, "res": -5125968, "mb_pct": 0.4113, "ebitda_pct": -0.0352}, "MARZO": {"ing": 141844038, "costo": 71886552, "mb": 69957486, "otros_ing": 5553905, "otros_cv": 5573450, "gav": 43508967, "gf": 10962425, "regalos": 0, "robos": 0, "gastos_total": 54471392, "ebitda": 15466549, "dep": 1228515, "gfin": 214429, "res": 14023604, "mb_pct": 0.4932, "ebitda_pct": 0.109}, "ABRIL": {"ing": 143387705, "costo": 62539688, "mb": 80848017, "otros_ing": 4028676, "otros_cv": 4414649, "gav": 46674644, "gf": 11234990, "regalos": 0, "robos": 0, "gastos_total": 57909634, "ebitda": 22552410, "dep": 1560299, "gfin": 204579, "res": 20787532, "mb_pct": 0.5638, "ebitda_pct": 0.1573}, "MAYO": {"ing": 247058565, "costo": 112667944, "mb": 134390621, "otros_ing": 6150634, "otros_cv": 5709097, "gav": 55780358, "gf": 13093363, "regalos": 0, "robos": 0, "gastos_total": 68873721, "ebitda": 65958437, "dep": 2265638, "gfin": 187641, "res": 63505158, "mb_pct": 0.544, "ebitda_pct": 0.267}, "JUNIO": {"ing": 143657859, "costo": 64059359, "mb": 79598500, "otros_ing": 3963735, "otros_cv": 7362560, "gav": 49372707, "gf": 13100058, "regalos": 0, "robos": 0, "gastos_total": 62472765, "ebitda": 13726909, "dep": 2177195, "gfin": 1714665, "res": 9835049, "mb_pct": 0.5541, "ebitda_pct": 0.0956}, "JULIO": {"ing": 141306866, "costo": 72520783, "mb": 68786083, "otros_ing": 5967659, "otros_cv": 5988621, "gav": 46534855, "gf": 13110641, "regalos": 0, "robos": 0, "gastos_total": 59645496, "ebitda": 9119626, "dep": 2177195, "gfin": 1329977, "res": 5612454, "mb_pct": 0.4868, "ebitda_pct": 0.0645}, "AGOSTO": {"ing": 129883765, "costo": 72583846, "mb": 57299919, "otros_ing": 4490625, "otros_cv": 5055777, "gav": 48933237, "gf": 12870151, "regalos": 0, "robos": 0, "gastos_total": 61803388, "ebitda": -5068622, "dep": 2177195, "gfin": 1411089, "res": -8656906, "mb_pct": 0.4412, "ebitda_pct": -0.039}, "SEPTIEMBRE": {"ing": 164668375, "costo": 92631913, "mb": 72036462, "otros_ing": 4530159, "otros_cv": 4899376, "gav": 42896191, "gf": 12889307, "regalos": 0, "robos": 0, "gastos_total": 55785498, "ebitda": 15881748, "dep": 2177195, "gfin": 1487980, "res": 12216573, "mb_pct": 0.4375, "ebitda_pct": 0.0964}, "OCTUBRE": {"ing": 150742946, "costo": 74478190, "mb": 76264756, "otros_ing": 5523525, "otros_cv": 5997749, "gav": 49812009, "gf": 12863023, "regalos": 0, "robos": 0, "gastos_total": 62675032, "ebitda": 13115501, "dep": 2177195, "gfin": 1269772, "res": 9668534, "mb_pct": 0.5059, "ebitda_pct": 0.087}, "NOVIEMBRE": {"ing": 149724374, "costo": 73897581, "mb": 75826793, "otros_ing": 4820989, "otros_cv": 5346706, "gav": 50265133, "gf": 11605272, "regalos": 0, "robos": 0, "gastos_total": 61870405, "ebitda": 13430671, "dep": 2411629, "gfin": 1271305, "res": 9747737, "mb_pct": 0.5064, "ebitda_pct": 0.0897}, "DICIEMBRE": {"ing": 131774665, "costo": 60090221, "mb": 71684444, "otros_ing": 3583891, "otros_cv": 4637152, "gav": 49662022, "gf": 11681230, "regalos": 0, "robos": 0, "gastos_total": 61343252, "ebitda": 9287932, "dep": 2335663, "gfin": 1203240, "res": 5749029, "mb_pct": 0.544, "ebitda_pct": 0.0705}}, "2024": {"ENERO": {"ing": 119033982, "costo": 64382284, "mb": 54651698, "otros_ing": 3927702, "otros_cv": 4394783, "gav": 46815562, "gf": 11760560, "regalos": 169207, "robos": 0, "gastos_total": 58745329, "ebitda": -4560712, "dep": 2711910, "gfin": 1739747, "res": -9012370, "mb_pct": 0.4591, "ebitda_pct": -0.0383}, "FEBRERO": {"ing": 116056821, "costo": 66976643, "mb": 49080178, "otros_ing": 2922061, "otros_cv": 4068676, "gav": 42514194, "gf": 11784314, "regalos": 207798, "robos": 0, "gastos_total": 54506306, "ebitda": -6572743, "dep": 2711910, "gfin": 1631348, "res": -10916001, "mb_pct": 0.4229, "ebitda_pct": -0.0566}, "MARZO": {"ing": 108184441, "costo": 53643958, "mb": 54540483, "otros_ing": 3286827, "otros_cv": 4028668, "gav": 42708394, "gf": 12121853, "regalos": 337818, "robos": 0, "gastos_total": 55168064, "ebitda": -1369422, "dep": 2439261, "gfin": 1445914, "res": -5254597, "mb_pct": 0.5041, "ebitda_pct": -0.0127}, "ABRIL": {"ing": 161031421, "costo": 74610232, "mb": 86421189, "otros_ing": 2835548, "otros_cv": 4381111, "gav": 43481443, "gf": 10963193, "regalos": 112083, "robos": 662676, "gastos_total": 55219395, "ebitda": 29656231, "dep": 2203765, "gfin": 1465107, "res": 25987359, "mb_pct": 0.5367, "ebitda_pct": 0.1842}, "MAYO": {"ing": 201376785, "costo": 89778322, "mb": 111598463, "otros_ing": 3862388, "otros_cv": 4860944, "gav": 49984525, "gf": 10502621, "regalos": 779651, "robos": 0, "gastos_total": 61266797, "ebitda": 49333110, "dep": 2325929, "gfin": 3923005, "res": 43084177, "mb_pct": 0.5542, "ebitda_pct": 0.245}, "JUNIO": {"ing": 168581903, "costo": 80850460, "mb": 87731443, "otros_ing": 5402333, "otros_cv": 5959728, "gav": 55003830, "gf": 10546460, "regalos": 695213, "robos": 363804, "gastos_total": 66609307, "ebitda": 20564742, "dep": 3360093, "gfin": 3987372, "res": 13217276, "mb_pct": 0.5204, "ebitda_pct": 0.122}, "JULIO": {"ing": 129767721, "costo": 66046135, "mb": 63721586, "otros_ing": 4784796, "otros_cv": 4688563, "gav": 47671977, "gf": 10582749, "regalos": 134820, "robos": 0, "gastos_total": 58389545, "ebitda": 5428273, "dep": 3460799, "gfin": 3650856, "res": -1683382, "mb_pct": 0.491, "ebitda_pct": 0.0418}, "AGOSTO": {"ing": 131999941, "costo": 74781762, "mb": 57218179, "otros_ing": 3822062, "otros_cv": 3716084, "gav": 51685441, "gf": 20124355, "regalos": 347986, "robos": 0, "gastos_total": 72157782, "ebitda": -14833624, "dep": 3865231, "gfin": 3885135, "res": -22583990, "mb_pct": 0.4335, "ebitda_pct": -0.1124}, "SEPTIEMBRE": {"ing": 175377897, "costo": 103762632, "mb": 71615265, "otros_ing": 2585944, "otros_cv": 2658271, "gav": 47615552, "gf": 21949071, "regalos": 569225, "robos": 0, "gastos_total": 70133848, "ebitda": 1409089, "dep": 3865231, "gfin": 3594478, "res": -6050620, "mb_pct": 0.4083, "ebitda_pct": 0.008}, "OCTUBRE": {"ing": 173676848, "costo": 84546451, "mb": 89130397, "otros_ing": 3695036, "otros_cv": 5413961, "gav": 52322711, "gf": 21638817, "regalos": 478052, "robos": 0, "gastos_total": 74439580, "ebitda": 12971892, "dep": 3885837, "gfin": 3582569, "res": 5503486, "mb_pct": 0.5132, "ebitda_pct": 0.0747}, "NOVIEMBRE": {"ing": 199603885, "costo": 91083256, "mb": 108520629, "otros_ing": 3370600, "otros_cv": 3359579, "gav": 57495849, "gf": 27717202, "regalos": 408524, "robos": 0, "gastos_total": 85621575, "ebitda": 22910074, "dep": 3651403, "gfin": 3618926, "res": 15639745, "mb_pct": 0.5437, "ebitda_pct": 0.1148}, "DICIEMBRE": {"ing": 178821961, "costo": 78606251, "mb": 100215710, "otros_ing": 3181918, "otros_cv": 4900822, "gav": 59339617, "gf": 20937675, "regalos": 644207, "robos": 0, "gastos_total": 80921498, "ebitda": 17575308, "dep": 3784455, "gfin": 3401075, "res": 10389777, "mb_pct": 0.5604, "ebitda_pct": 0.0983}}, "2025": {"ENERO": {"ing": 154397655, "costo": 88651447, "mb": 65746208, "otros_ing": 3584248, "otros_cv": 4009798, "gav": 51265128, "gf": 21893531, "regalos": 384230, "robos": 0, "gastos_total": 73542889, "ebitda": -8222231, "dep": 3766452, "gfin": 3099319, "res": -15088002, "mb_pct": 0.4258, "ebitda_pct": -0.0533}, "FEBRERO": {"ing": 127517652, "costo": 68098324, "mb": 59419328, "otros_ing": 2100013, "otros_cv": 3987410, "gav": 52213303, "gf": 21733078, "regalos": 183464, "robos": 0, "gastos_total": 74129845, "ebitda": -16597914, "dep": 3766452, "gfin": 3065780, "res": -23430146, "mb_pct": 0.466, "ebitda_pct": -0.1302}, "MARZO": {"ing": 212472934, "costo": 103623054, "mb": 108849880, "otros_ing": 4017149, "otros_cv": 4635377, "gav": 54172137, "gf": 21978521, "regalos": 405620, "robos": 0, "gastos_total": 76556278, "ebitda": 31675374, "dep": 3746846, "gfin": 2691589, "res": 25236939, "mb_pct": 0.5123, "ebitda_pct": 0.1491}, "ABRIL": {"ing": 179611437, "costo": 78494948, "mb": 101116489, "otros_ing": 3002517, "otros_cv": 4993908, "gav": 61081612, "gf": 22200374, "regalos": 669488, "robos": 0, "gastos_total": 83951473, "ebitda": 15173625, "dep": 3702729, "gfin": 2947579, "res": 8523317, "mb_pct": 0.563, "ebitda_pct": 0.0845}, "MAYO": {"ing": 222760613, "costo": 103987282, "mb": 118773331, "otros_ing": 3209670, "otros_cv": 4862118, "gav": 60814834, "gf": 22199459, "regalos": 304927, "robos": 0, "gastos_total": 83319220, "ebitda": 33801662, "dep": 3702729, "gfin": 2817529, "res": 27281404, "mb_pct": 0.5332, "ebitda_pct": 0.1517}, "JUNIO": {"ing": 196635227, "costo": 97707522, "mb": 98927705, "otros_ing": 4359982, "otros_cv": 6603528, "gav": 62339094, "gf": 22084264, "regalos": 1278751, "robos": 0, "gastos_total": 85702109, "ebitda": 10982050, "dep": 3697825, "gfin": 4623337, "res": 2660888, "mb_pct": 0.5031, "ebitda_pct": 0.0558}, "JULIO": {"ing": 150107961, "costo": 82792211, "mb": 67315750, "otros_ing": 3555584, "otros_cv": 5195647, "gav": 55541555, "gf": 22168976, "regalos": 107147, "robos": 0, "gastos_total": 77817677, "ebitda": -12141990, "dep": 3678472, "gfin": 2574086, "res": -18394548, "mb_pct": 0.4484, "ebitda_pct": -0.0809}, "AGOSTO": {"ing": 161535902, "costo": 93482641, "mb": 68053261, "otros_ing": 3918087, "otros_cv": 4814685, "gav": 54152008, "gf": 22135980, "regalos": 545140, "robos": 0, "gastos_total": 76833128, "ebitda": -9676466, "dep": 3610269, "gfin": 2470317, "res": -15757052, "mb_pct": 0.4213, "ebitda_pct": -0.0599}, "SEPTIEMBRE": {"ing": 148305282, "costo": 82705716, "mb": 65599566, "otros_ing": 2495704, "otros_cv": 3617500, "gav": 53054198, "gf": 22134154, "regalos": 414277, "robos": 0, "gastos_total": 75602629, "ebitda": -11124859, "dep": 3719161, "gfin": 2206351, "res": -17050371, "mb_pct": 0.4423, "ebitda_pct": -0.075}, "OCTUBRE": {"ing": 225203687, "costo": 110743866, "mb": 114459821, "otros_ing": 4831516, "otros_cv": 7982942, "gav": 60254647, "gf": 22261060, "regalos": 1039445, "robos": 0, "gastos_total": 83555151, "ebitda": 27753243, "dep": 3530312, "gfin": 3366847, "res": 20856084, "mb_pct": 0.5083, "ebitda_pct": 0.1232}, "NOVIEMBRE": {"ing": 224803432, "costo": 101941785, "mb": 122861647, "otros_ing": 3205049, "otros_cv": 6644559, "gav": 59446613, "gf": 27943833, "regalos": 470949, "robos": 0, "gastos_total": 87861395, "ebitda": 31560742, "dep": 3530312, "gfin": 3190281, "res": 24840149, "mb_pct": 0.5465, "ebitda_pct": 0.1404}, "DICIEMBRE": {"ing": 204346677, "costo": 93436274, "mb": 110910403, "otros_ing": 3044937, "otros_cv": 7523226, "gav": 67885393, "gf": 21627466, "regalos": 396176, "robos": 0, "gastos_total": 89909036, "ebitda": 16523078, "dep": 3174585, "gfin": 2969117, "res": 10379376, "mb_pct": 0.5428, "ebitda_pct": 0.0809}}}, "data_2026": {"ENERO": {"ing": 161081943, "costo": 85463838, "mb": 75618105, "otros_ing": 2470370, "otros_cv": 4515446, "gav": 51465134, "gf": 21554679, "regalos": 165701, "robos": 0, "gastos_total": 73185514, "ebitda": 387515, "dep": 3391566, "gfin": 3314977, "res": -6319028, "mb_pct": 0.4694, "ebitda_pct": 0.0024}, "FEBRERO": {"ing": 157708963, "costo": 90939768, "mb": 66769195, "otros_ing": 3112294, "otros_cv": 3894894, "gav": 50597804, "gf": 21185485, "regalos": 45000, "robos": 0, "gastos_total": 71828289, "ebitda": -5841695, "dep": 3444985, "gfin": 2855224, "res": -12141904, "mb_pct": 0.4234, "ebitda_pct": -0.037}}, "data_pres": {"ENERO": {"ing": 154999999, "costo": 87495051, "mb": 67504948, "otros_ing": 0, "otros_cv": 0, "gav": 50403591, "gf": 20659669, "regalos": 0, "robos": 0, "gastos_total": 71063260, "ebitda": -5968312, "dep": 2846099, "gfin": 4248567, "res": -13062978, "mb_pct": 0.4355, "ebitda_pct": -0.0385}, "FEBRERO": {"ing": 169000000, "costo": 92059189, "mb": 76940811, "otros_ing": 0, "otros_cv": 0, "gav": 49706425, "gf": 20727718, "regalos": 0, "robos": 0, "gastos_total": 70434143, "ebitda": 4096668, "dep": 2846099, "gfin": 3900471, "res": -2649902, "mb_pct": 0.4553, "ebitda_pct": 0.0242}, "MARZO": {"ing": 235999999, "costo": 116916279, "mb": 119083720, "otros_ing": 0, "otros_cv": 0, "gav": 56047533, "gf": 20795993, "regalos": 0, "robos": 0, "gastos_total": 76843526, "ebitda": 39830194, "dep": 2846099, "gfin": 3702484, "res": 33281611, "mb_pct": 0.5046, "ebitda_pct": 0.1688}, "ABRIL": {"ing": 210000001, "costo": 95358657, "mb": 114641344, "otros_ing": 0, "otros_cv": 0, "gav": 52041720, "gf": 20864497, "regalos": 0, "robos": 0, "gastos_total": 72906217, "ebitda": 39325127, "dep": 2793929, "gfin": 3905240, "res": 32625958, "mb_pct": 0.5459, "ebitda_pct": 0.1873}, "MAYO": {"ing": 239500000, "costo": 113166772, "mb": 126333228, "otros_ing": 0, "otros_cv": 0, "gav": 57360839, "gf": 20933228, "regalos": 0, "robos": 0, "gastos_total": 78294067, "ebitda": 45629161, "dep": 2793929, "gfin": 3848690, "res": 38986542, "mb_pct": 0.5275, "ebitda_pct": 0.1905}, "JUNIO": {"ing": 215500000, "costo": 107263867, "mb": 108236133, "otros_ing": 0, "otros_cv": 0, "gav": 54702687, "gf": 21002189, "regalos": 0, "robos": 0, "gastos_total": 75704876, "ebitda": 30121257, "dep": 2661719, "gfin": 3736293, "res": 23723245, "mb_pct": 0.5023, "ebitda_pct": 0.1398}, "JULIO": {"ing": 170000000, "costo": 94336114, "mb": 75663886, "otros_ing": 0, "otros_cv": 0, "gav": 52146658, "gf": 21071380, "regalos": 0, "robos": 0, "gastos_total": 73218038, "ebitda": 35848, "dep": 2661719, "gfin": 3663781, "res": -6289652, "mb_pct": 0.4451, "ebitda_pct": 0.0002}, "AGOSTO": {"ing": 156182660, "costo": 92517219, "mb": 63665441, "otros_ing": 0, "otros_cv": 0, "gav": 51672046, "gf": 21140801, "regalos": 0, "robos": 0, "gastos_total": 72812847, "ebitda": -11557406, "dep": 2661719, "gfin": 3720205, "res": -17939330, "mb_pct": 0.4076, "ebitda_pct": -0.074}, "SEPTIEMBRE": {"ing": 162999999, "costo": 91537380, "mb": 71462619, "otros_ing": 0, "otros_cv": 0, "gav": 51390600, "gf": 21210454, "regalos": 0, "robos": 0, "gastos_total": 72601054, "ebitda": -3548435, "dep": 2552828, "gfin": 3601881, "res": -9703144, "mb_pct": 0.4384, "ebitda_pct": -0.0218}, "OCTUBRE": {"ing": 246000000, "costo": 123602536, "mb": 122397464, "otros_ing": 0, "otros_cv": 0, "gav": 57400915, "gf": 21280338, "regalos": 0, "robos": 0, "gastos_total": 78681253, "ebitda": 41306211, "dep": 2552828, "gfin": 3687484, "res": 35065899, "mb_pct": 0.4976, "ebitda_pct": 0.1679}, "NOVIEMBRE": {"ing": 244000000, "costo": 111012637, "mb": 132987363, "otros_ing": 0, "otros_cv": 0, "gav": 65528618, "gf": 21350456, "regalos": 0, "robos": 0, "gastos_total": 86879074, "ebitda": 43698289, "dep": 2552828, "gfin": 3336147, "res": 37809314, "mb_pct": 0.545, "ebitda_pct": 0.1791}, "DICIEMBRE": {"ing": 198000000, "costo": 88979988, "mb": 109020012, "otros_ing": 0, "otros_cv": 0, "gav": 56268599, "gf": 21420808, "regalos": 0, "robos": 0, "gastos_total": 77689407, "ebitda": 28920605, "dep": 2552828, "gfin": 3361678, "res": 23006099, "mb_pct": 0.5506, "ebitda_pct": 0.1461}}, "data_2025": {"ENERO": {"ing": 154397655, "costo": 88651447, "mb": 65746208, "otros_ing": 3584248, "otros_cv": 4009798, "gav": 51265128, "gf": 21893531, "regalos": 384230, "robos": 0, "gastos_total": 73542889, "ebitda": -8222231, "dep": 3766452, "gfin": 3099319, "res": -15088002, "mb_pct": 0.4258, "ebitda_pct": -0.0533}, "FEBRERO": {"ing": 127517652, "costo": 68098324, "mb": 59419328, "otros_ing": 2100013, "otros_cv": 3987410, "gav": 52213303, "gf": 21733078, "regalos": 183464, "robos": 0, "gastos_total": 74129845, "ebitda": -16597914, "dep": 3766452, "gfin": 3065780, "res": -23430146, "mb_pct": 0.466, "ebitda_pct": -0.1302}, "MARZO": {"ing": 212472934, "costo": 103623054, "mb": 108849880, "otros_ing": 4017149, "otros_cv": 4635377, "gav": 54172137, "gf": 21978521, "regalos": 405620, "robos": 0, "gastos_total": 76556278, "ebitda": 31675374, "dep": 3746846, "gfin": 2691589, "res": 25236939, "mb_pct": 0.5123, "ebitda_pct": 0.1491}, "ABRIL": {"ing": 179611437, "costo": 78494948, "mb": 101116489, "otros_ing": 3002517, "otros_cv": 4993908, "gav": 61081612, "gf": 22200374, "regalos": 669488, "robos": 0, "gastos_total": 83951473, "ebitda": 15173625, "dep": 3702729, "gfin": 2947579, "res": 8523317, "mb_pct": 0.563, "ebitda_pct": 0.0845}, "MAYO": {"ing": 222760613, "costo": 103987282, "mb": 118773331, "otros_ing": 3209670, "otros_cv": 4862118, "gav": 60814834, "gf": 22199459, "regalos": 304927, "robos": 0, "gastos_total": 83319220, "ebitda": 33801662, "dep": 3702729, "gfin": 2817529, "res": 27281404, "mb_pct": 0.5332, "ebitda_pct": 0.1517}, "JUNIO": {"ing": 196635227, "costo": 97707522, "mb": 98927705, "otros_ing": 4359982, "otros_cv": 6603528, "gav": 62339094, "gf": 22084264, "regalos": 1278751, "robos": 0, "gastos_total": 85702109, "ebitda": 10982050, "dep": 3697825, "gfin": 4623337, "res": 2660888, "mb_pct": 0.5031, "ebitda_pct": 0.0558}, "JULIO": {"ing": 150107961, "costo": 82792211, "mb": 67315750, "otros_ing": 3555584, "otros_cv": 5195647, "gav": 55541555, "gf": 22168976, "regalos": 107147, "robos": 0, "gastos_total": 77817677, "ebitda": -12141990, "dep": 3678472, "gfin": 2574086, "res": -18394548, "mb_pct": 0.4484, "ebitda_pct": -0.0809}, "AGOSTO": {"ing": 161535902, "costo": 93482641, "mb": 68053261, "otros_ing": 3918087, "otros_cv": 4814685, "gav": 54152008, "gf": 22135980, "regalos": 545140, "robos": 0, "gastos_total": 76833128, "ebitda": -9676466, "dep": 3610269, "gfin": 2470317, "res": -15757052, "mb_pct": 0.4213, "ebitda_pct": -0.0599}, "SEPTIEMBRE": {"ing": 148305282, "costo": 82705716, "mb": 65599566, "otros_ing": 2495704, "otros_cv": 3617500, "gav": 53054198, "gf": 22134154, "regalos": 414277, "robos": 0, "gastos_total": 75602629, "ebitda": -11124859, "dep": 3719161, "gfin": 2206351, "res": -17050371, "mb_pct": 0.4423, "ebitda_pct": -0.075}, "OCTUBRE": {"ing": 225203687, "costo": 110743866, "mb": 114459821, "otros_ing": 4831516, "otros_cv": 7982942, "gav": 60254647, "gf": 22261060, "regalos": 1039445, "robos": 0, "gastos_total": 83555151, "ebitda": 27753243, "dep": 3530312, "gfin": 3366847, "res": 20856084, "mb_pct": 0.5083, "ebitda_pct": 0.1232}, "NOVIEMBRE": {"ing": 224803432, "costo": 101941785, "mb": 122861647, "otros_ing": 3205049, "otros_cv": 6644559, "gav": 59446613, "gf": 27943833, "regalos": 470949, "robos": 0, "gastos_total": 87861395, "ebitda": 31560742, "dep": 3530312, "gfin": 3190281, "res": 24840149, "mb_pct": 0.5465, "ebitda_pct": 0.1404}, "DICIEMBRE": {"ing": 204346677, "costo": 93436274, "mb": 110910403, "otros_ing": 3044937, "otros_cv": 7523226, "gav": 67885393, "gf": 21627466, "regalos": 396176, "robos": 0, "gastos_total": 89909036, "ebitda": 16523078, "dep": 3174585, "gfin": 2969117, "res": 10379376, "mb_pct": 0.5428, "ebitda_pct": 0.0809}}, "canal_2026": {"Tienda Araucaria": {"ing": [41842122, 29540357, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [21050252, 14976210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [20791870, 14564147, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 71382479, "ytd_costo": 36026462, "ytd_mb": 35356017, "ytd_mb_pct": 0.4953}, "Tienda Costanera": {"ing": [49822020, 32942729, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [25069700, 17778452, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [24752320, 15164277, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 82764749, "ytd_costo": 42848152, "ytd_mb": 39916597, "ytd_mb_pct": 0.4823}, "Pagina Web": {"ing": [62032239, 68711924, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [34239987, 41253432, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [27792252, 27458492, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 130744163, "ytd_costo": 75493419, "ytd_mb": 55250744, "ytd_mb_pct": 0.4226}, "Mayorista": {"ing": [5550839, 14505300, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [3871398, 9283440, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [1679441, 5221860, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 20056139, "ytd_costo": 13154838, "ytd_mb": 6901301, "ytd_mb_pct": 0.3441}, "Boutique": {"ing": [1834723, 12008653, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [1232500, 7648235, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [602223, 4360418, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 13843376, "ytd_costo": 8880735, "ytd_mb": 4962641, "ytd_mb_pct": 0.3585}, "Marketplace": {"ing": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 0, "ytd_costo": 0, "ytd_mb": 0, "ytd_mb_pct": 0}}, "canal_2025": {"Tienda Araucaria": {"ing": [28624576, 24815761, 35764821, 42337756, 49259753, 35702276, 34941218, 27508547, 26686822, 51084571, 48089498, 57925713], "costo": [14873822, 11075017, 15867381, 17139205, 21549245, 17141695, 18906155, 14636839, 11989083, 22398795, 19987812, 24990396], "mb": [13750754, 13740744, 19897440, 25198551, 27710508, 18560581, 16035063, 12871708, 14697739, 28685776, 28101686, 32935317], "ytd_ing": 53440337, "ytd_costo": 25948839, "ytd_mb": 27491498, "ytd_mb_pct": 0.5144}, "Tienda Costanera": {"ing": [35163889, 22407672, 45737693, 43514259, 49133766, 39443546, 34832613, 30742288, 25701108, 56344463, 48784171, 61436719], "costo": [18550982, 10166624, 20988445, 17764497, 21873543, 19096584, 18744127, 16416294, 11295880, 25261624, 20527852, 26458397], "mb": [16612907, 12241048, 24749248, 25749762, 27260223, 20346962, 16088486, 14325994, 14405228, 31082839, 28256319, 34978322], "ytd_ing": 57571561, "ytd_costo": 28717606, "ytd_mb": 28853955, "ytd_mb_pct": 0.5012}, "Pagina Web": {"ing": [66309095, 47660060, 107473134, 79912245, 110092475, 118521034, 73568394, 74906493, 62344668, 95296247, 107318260, 72146468], "costo": [38884242, 26359399, 54445625, 35331692, 51316103, 59153913, 40629009, 44711089, 36941705, 49442799, 47910851, 33577959], "mb": [27424853, 21300661, 53027509, 44580553, 58776372, 59367121, 32939385, 30195404, 25402963, 45853448, 59407409, 38568509], "ytd_ing": 113969155, "ytd_costo": 65243641, "ytd_mb": 48725514, "ytd_mb_pct": 0.4275}, "Mayorista": {"ing": [7517845, 18467119, 10524186, 9847477, 11620341, 2968371, 2328786, 17031662, 22638078, 21179706, 12992056, 7198658], "costo": [5299342, 11218124, 6490288, 5688993, 7452843, 2315330, 1816453, 9990048, 15169221, 12799691, 8195986, 4902872], "mb": [2218503, 7248995, 4033898, 4158484, 4167498, 653041, 512333, 7041614, 7468857, 8380015, 4796070, 2295786], "ytd_ing": 25984964, "ytd_costo": 16517466, "ytd_mb": 9467498, "ytd_mb_pct": 0.3643}, "Boutique": {"ing": [16782250, 14167040, 12973100, 3999700, 2654278, 0, 4436950, 11346912, 10934606, 1298700, 8172607, 5639119], "costo": [11043059, 9279160, 5831315, 2570561, 1795549, 0, 2696467, 7728371, 7309828, 840958, 5319284, 3506650], "mb": [5739191, 4887880, 7141785, 1429139, 858729, 0, 1740483, 3618541, 3624778, 457742, 2853323, 2132469], "ytd_ing": 30949290, "ytd_costo": 20322219, "ytd_mb": 10627071, "ytd_mb_pct": 0.3434}, "Marketplace": {"ing": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "costo": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mb": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "ytd_ing": 0, "ytd_costo": 0, "ytd_mb": 0, "ytd_mb_pct": 0}}, "meses": ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"], "meses_short": ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"], "canales": ["Tienda Araucaria", "Tienda Costanera", "Pagina Web", "Mayorista", "Boutique", "Marketplace"], "canal_colors": ["#c8a96e", "#5a9fd4", "#5ab585", "#d4a55a", "#a068c8", "#888888"], "years": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025], "seasonal": [6.6, 7.1, 8.0, 8.1, 11.5, 8.3, 7.4, 7.7, 7.7, 8.8, 10.1, 8.7]};
+const MESES      = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
+const MSHORT     = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+const CANALES    = ["Tienda Araucaria", "Tienda Costanera", "Pagina Web", "Mayorista", "Boutique", "Marketplace"];
+const CCOLORS    = ["#c8a96e", "#5a9fd4", "#5ab585", "#d4a55a", "#a068c8", "#888888"];
+const SEASONAL   = [6.6, 7.1, 8.0, 8.1, 11.5, 8.3, 7.4, 7.7, 7.7, 8.8, 10.1, 8.7];
+const YTD        = {"ing": 318790906, "costo": 176403606, "mb": 142387300, "gav": 102062938, "gf": 42740164, "ebitda": -5454180, "dep": 6836551, "gfin": 6170201, "res": -18460932, "otros_ing": 5582664, "otros_cv": 8410340, "regalos": 210701, "robos": 0, "ing_25": 281915307, "mb_25": 125165536, "ebitda_25": -24820145, "res_25": -38518148, "ing_pres": 323999999, "mb_pres": 144445759, "mb_pct": 0.4466, "ebitda_pct": -0.0171, "mb_pct_25": 0.444, "ebitda_pct_25": -0.088};
 
-function fmt(v, compact=true) {
+/* ── FORMATTING ─────────────────────────────── */
+function fmtM(v) {                          // "$123.4M" compact
   if (v === null || v === undefined) return '—';
-  const av = Math.abs(v);
-  if (compact) {
-    if (av >= 1e9) return '$' + (av/1e9).toFixed(2) + 'B';
-    if (av >= 1e6) return '$' + (av/1e6).toFixed(1) + 'M';
-    if (av >= 1e3) return '$' + (av/1e3).toFixed(0) + 'K';
-    return '$' + av.toFixed(0);
-  }
-  return '$' + Math.round(av).toLocaleString('es-CL');
+  const s = v < 0 ? '-' : '';
+  const a = Math.abs(v);
+  if (a >= 1e9) return s + '$' + (a/1e9).toFixed(2) + 'B';
+  if (a >= 1e6) return s + '$' + (a/1e6).toFixed(1) + 'M';
+  if (a >= 1e3) return s + '$' + (a/1e3).toFixed(0) + 'K';
+  return s + '$' + Math.round(a).toLocaleString('es-CL');
 }
-function pct(v) { return v !== null && v !== undefined ? (v*100).toFixed(1)+'%' : '—'; }
-function delta(curr, prev) {
-  if (!prev) return null;
+function fmtF(v) {                          // "$123,456,789" full with sign
+  if (v === null || v === undefined) return '—';
+  const s = v < 0 ? '-' : '';
+  return s + '$' + Math.abs(Math.round(v)).toLocaleString('es-CL');
+}
+function fmtP(v) {                          // "44.7%"
+  return (v !== null && v !== undefined) ? (v*100).toFixed(1)+'%' : '—';
+}
+function fmtSign(v) {                       // "+12.3%" or "-4.5%"
+  if (!v && v !== 0) return '—';
+  return (v>=0?'+':'')+fmtP(v);
+}
+function dlt(curr, prev) {
+  if (!prev || prev === 0) return null;
   return (curr - prev) / Math.abs(prev);
 }
-function colPosNeg(v) { return v >= 0 ? 'var(--green)' : 'var(--red)'; }
-function arrowDir(v) { return v >= 0 ? '▲' : '▼'; }
-
-const CHART_DEFAULTS = {
-  color: 'rgba(255,255,255,0.7)',
-  plugins: { legend: { labels: { color: 'rgba(255,255,255,0.5)', font: { size: 11, family: 'DM Sans' }, boxWidth: 12 } } },
-  scales: {
-    x: { ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
-    y: { ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 10 }, callback: v => fmt(v) }, grid: { color: 'rgba(255,255,255,0.04)' } }
-  }
-};
-function chartCfg(type, labels, datasets, options={}) {
-  return { type, data: { labels, datasets }, options: {
-    responsive: true, maintainAspectRatio: true,
-    ...CHART_DEFAULTS, ...options,
-    plugins: { ...CHART_DEFAULTS.plugins, ...(options.plugins||{}) },
-    scales: options.scales !== undefined ? options.scales : CHART_DEFAULTS.scales
-  }};
+// Sign-aware cell class: green if positive is good, red if negative is bad
+function cls(v, invert=false) {
+  if (v === 0 || v === null) return '';
+  const pos = v > 0;
+  return (pos !== invert) ? 'pos' : 'neg';
 }
-let _charts = {};
-function makeChart(id, cfg) {
+
+/* ── CHART HELPERS ──────────────────────────── */
+const _charts = {};
+function mkChart(id, cfg) {
   if (_charts[id]) _charts[id].destroy();
-  const ctx = document.getElementById(id);
-  if (!ctx) return;
-  _charts[id] = new Chart(ctx, cfg);
-  return _charts[id];
+  const el = document.getElementById(id);
+  if (!el) return;
+  _charts[id] = new Chart(el, cfg);
+}
+const TX = { color:'rgba(255,255,255,0.4)', font:{size:10,family:'DM Sans'} };
+const TXL = { color:'rgba(255,255,255,0.5)', font:{size:11,family:'DM Sans'}, boxWidth:12 };
+const GRD = { color:'rgba(255,255,255,0.04)' };
+const BASE_SCALES = {
+  x: { ticks:TX, grid:GRD },
+  y: { ticks:{...TX, callback: v => fmtM(v)}, grid:GRD }
+};
+const BASE_PCT_SCALES = {
+  x: { ticks:TX, grid:GRD },
+  y: { ticks:{...TX, callback: v => v.toFixed(1)+'%'}, grid:GRD }
+};
+function baseOpts(extraOpts={}) {
+  return {
+    responsive:true, maintainAspectRatio:true,
+    plugins:{ legend:{ labels:TXL }, tooltip:{ callbacks:{ label: ctx => ' '+fmtM(ctx.raw) } } },
+    scales: BASE_SCALES,
+    ...extraOpts
+  };
 }
 
+/* ── NAVIGATION ─────────────────────────────── */
+function showSection(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+  if (id === 'eerr')      buildEERR();
+  if (id === 'canales')   buildCanales();
+  if (id === 'costos')    buildCostos();
+  if (id === 'historico') buildHistorico();
+  if (id === 'insights')  buildInsights();
+}
 
+/* ════════════════════════════════════════════
+   SECCIÓN: RESUMEN
+════════════════════════════════════════════ */
 function buildResumen() {
-  // KPI Grid
+  // ── Alert Banner ──
+  const mbDiff = YTD.mb_pct - YTD.mb_pct_25;
+  const ab = document.getElementById('alert-banner');
+  if (mbDiff < -0.02) {
+    ab.innerHTML = `<div class="alert-banner">⚠ <strong>Alerta margen bruto:</strong> ${fmtP(YTD.mb_pct)} YTD 2026 vs ${fmtP(YTD.mb_pct_25)} YTD 2025 (${(mbDiff*100).toFixed(1)}pp). Impacto absoluto: ${fmtM(YTD.mb - YTD.mb_25*(YTD.ing/YTD.ing_25))}.</div>`;
+  } else {
+    ab.innerHTML = `<div class="alert-banner ok-banner">✓ <strong>Margen bruto en línea con 2025.</strong> YTD ${fmtP(YTD.mb_pct)} vs ${fmtP(YTD.mb_pct_25)} en 2025.</div>`;
+  }
+
+  // ── KPIs ──
   const kpis = [
-    { label: 'Ingresos YTD', val: fmt(YTD.ing), cls: '', 
-      d1: pct(delta(YTD.ing, YTD.ing_25)) + ' vs 2025', d1c: YTD.ing > YTD.ing_25 ? 'up' : 'dn',
-      d2: pct(delta(YTD.ing, YTD.ing_pres)) + ' vs Pres.', d2c: YTD.ing >= YTD.ing_pres ? 'up' : 'dn' },
-    { label: 'Margen Bruto %', val: pct(YTD.mb_pct), cls: YTD.mb_pct >= 0.45 ? '' : 'red',
-      d1: (YTD.mb_pct - YTD.mb_pct_25 > 0 ? '+' : '') + ((YTD.mb_pct - YTD.mb_pct_25)*100).toFixed(1) + 'pp vs 2025',
-      d1c: YTD.mb_pct >= YTD.mb_pct_25 ? 'up' : 'dn', d2: '', d2c: 'neutral' },
-    { label: 'EBITDA YTD', val: fmt(YTD.ebitda), cls: YTD.ebitda >= 0 ? '' : 'red',
-      d1: fmt(YTD.ebitda - YTD.ebitda_25) + ' vs 2025', d1c: YTD.ebitda > YTD.ebitda_25 ? 'up' : 'dn',
-      d2: pct(YTD.ebitda_pct) + ' margen', d2c: 'neutral' },
-    { label: 'Resultado Neto', val: fmt(YTD.res), cls: YTD.res >= 0 ? '' : 'red',
-      d1: pct(YTD.res / YTD.ing) + ' margen', d1c: 'neutral', d2: '', d2c: 'neutral' },
-    { label: 'Costo / Venta', val: pct(YTD.costo / YTD.ing), cls: YTD.costo/YTD.ing > 0.56 ? 'red' : '',
-      d1: pct(YTD.mb_pct_25) + ' MB% en 2025', d1c: 'neutral', d2: '', d2c: 'neutral' },
+    { lbl:'Ingresos YTD',    val:fmtM(YTD.ing),    badge:fmtSign(dlt(YTD.ing,YTD.ing_25))+' vs 2025', badgeCls:cls(dlt(YTD.ing,YTD.ing_25)), sub:fmtSign(dlt(YTD.ing,YTD.ing_pres))+' vs Pres.', subCls:cls(dlt(YTD.ing,YTD.ing_pres)) },
+    { lbl:'Margen Bruto %',  val:fmtP(YTD.mb_pct), badge:((mbDiff>=0?'+':'')+( mbDiff*100).toFixed(1))+'pp vs 2025', badgeCls:mbDiff>=0?'pos':'neg', sub:'', subCls:'' },
+    { lbl:'EBITDA YTD',      val:fmtM(YTD.ebitda), badge:fmtSign(dlt(YTD.ebitda,YTD.ebitda_25))+' vs 2025', badgeCls:cls(dlt(YTD.ebitda,YTD.ebitda_25)), sub:fmtP(YTD.ebitda_pct)+' margen', subCls:YTD.ebitda_pct>=0?'pos':'neg' },
+    { lbl:'Resultado Neto',  val:fmtM(YTD.res),    badge:fmtP(YTD.res/YTD.ing)+' margen', badgeCls:YTD.res>=0?'pos':'neg', sub:'', subCls:'' },
+    { lbl:'Costo / Venta',   val:fmtP(YTD.costo/YTD.ing), badge:'MB% 2025: '+fmtP(YTD.mb_pct_25), badgeCls:'', sub:'', subCls:'' },
   ];
   document.getElementById('kpi-grid').innerHTML = kpis.map(k => `
-    <div class="kpi ${k.cls}">
-      <div class="kpi-label">${k.label}</div>
-      <div class="kpi-value ${k.cls}">${k.val}</div>
-      <div class="kpi-delta">
-        ${k.d1 ? `<span class="${k.d1c}">${k.d1c === 'up' ? '▲' : k.d1c === 'dn' ? '▼' : ''} ${k.d1}</span>` : ''}
-      </div>
-      ${k.d2 ? `<div class="kpi-delta"><span class="${k.d2c}">${k.d2}</span></div>` : ''}
+    <div class="kpi ${k.lbl.includes('EBITDA')&&YTD.ebitda<0?'red':k.lbl.includes('Resultado')&&YTD.res<0?'red':''}">
+      <div class="kpi-label">${k.lbl}</div>
+      <div class="kpi-value ${k.lbl.includes('EBITDA')&&YTD.ebitda<0?'red':k.lbl.includes('Resultado')&&YTD.res<0?'red':''}">${k.val}</div>
+      <div class="kpi-delta ${k.badgeCls}">${k.badge}</div>
+      ${k.sub ? `<div class="kpi-delta ${k.subCls}">${k.sub}</div>` : ''}
     </div>`).join('');
-  
-  // Alert banner
-  const ab = document.getElementById('alert-banner');
-  if (YTD.mb_pct < YTD.mb_pct_25) {
-    const drop = ((YTD.mb_pct - YTD.mb_pct_25)*100).toFixed(1);
-    ab.innerHTML = `<div class="alert-banner">⚠ <strong>Caída de margen bruto:</strong> ${pct(YTD.mb_pct)} YTD 2026 vs ${pct(YTD.mb_pct_25)} YTD 2025 (${drop}pp). Impacto estimado: ${fmt(YTD.mb - YTD.mb_25 * (YTD.ing/YTD.ing_25))} en margen absoluto.</div>`;
-  } else {
-    ab.innerHTML = `<div class="alert-banner ok-banner">✓ <strong>Margen bruto en línea o superior a 2025.</strong></div>`;
-  }
 
-  // Chart: Ingreso evolution
-  const months = ['ENERO','FEBRERO'];
-  makeChart('chartIngEvol', chartCfg('bar', months.map((_,i) => MESES_SHORT[i]), [
-    { label: 'Real 2026', data: months.map(m => DATA.data_2026[m]?.ing||0), backgroundColor: 'rgba(200,169,110,0.75)', borderRadius: 3 },
-    { label: 'Presupuesto', data: months.map(m => DATA.data_pres[m]?.ing||0), backgroundColor: 'rgba(90,159,212,0.3)', borderRadius: 3 },
-    { label: 'Real 2025', data: months.map(m => DATA.data_2025[m]?.ing||0), backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 3 },
-  ]));
-
-  // Chart: Mix donut
-  const canalIngs = CANALES.map(c => DATA.canal_2026[c].ytd_ing);
-  makeChart('chartMix', {
-    type: 'doughnut',
-    data: { labels: CANALES.map(c => c.replace('Tienda ','T. ').replace('Pagina Web','Web')), datasets: [{
-      data: canalIngs, backgroundColor: CANAL_COLORS.map(c => c+'CC'), borderColor: 'transparent', hoverOffset: 6
-    }]},
-    options: { responsive: true, maintainAspectRatio: true, cutout: '62%',
-      plugins: { legend: { position: 'bottom', labels: { color:'rgba(255,255,255,0.5)', font:{size:11}, boxWidth:12, padding:10 } } } }
+  // ── Ingreso Evolution ──
+  const am = ['ENERO','FEBRERO'];
+  mkChart('chartIngEvol', {
+    type:'bar',
+    data:{ labels:am.map((_,i)=>MSHORT[i]), datasets:[
+      { label:'Real 2026', data:am.map(m=>DATA.data_2026[m]?.ing||0), backgroundColor:'rgba(200,169,110,0.8)', borderRadius:3 },
+      { label:'Presupuesto', data:am.map(m=>DATA.data_pres[m]?.ing||0), backgroundColor:'rgba(90,159,212,0.4)', borderRadius:3 },
+      { label:'Real 2025', data:am.map(m=>DATA.data_2025[m]?.ing||0), backgroundColor:'rgba(255,255,255,0.12)', borderRadius:3 },
+    ]},
+    options: baseOpts()
   });
 
-  // Waterfall
-  const wItems = [
-    { label: 'Ingresos', value: YTD.ing, running: YTD.ing },
-    { label: '- Costo Venta', value: -YTD.costo, running: YTD.ing - YTD.costo },
-    { label: '= Margen Bruto', value: YTD.mb, running: YTD.mb, isTotal: true },
-    { label: '- GAV', value: -YTD.gav, running: YTD.mb - YTD.gav },
-    { label: '- Gtos Fijos', value: -YTD.gf, running: YTD.mb - YTD.gav - YTD.gf },
-    { label: '= EBITDA', value: YTD.ebitda, running: YTD.ebitda, isTotal: true },
+  // ── Canal Mix donut ──
+  const cIngs = CANALES.map(c => DATA.canal_2026[c].ytd_ing);
+  mkChart('chartMix', {
+    type:'doughnut',
+    data:{ labels:CANALES.map(c=>c.replace('Tienda ','').replace('Pagina Web','Web')),
+      datasets:[{ data:cIngs, backgroundColor:CCOLORS.map(c=>c+'BB'), borderColor:'transparent', hoverOffset:6 }]},
+    options:{ responsive:true, maintainAspectRatio:true, cutout:'62%',
+      plugins:{ legend:{ position:'bottom', labels:{...TXL,padding:10} },
+        tooltip:{ callbacks:{ label: ctx => ' '+fmtM(ctx.raw)+' ('+((ctx.raw/YTD.ing)*100).toFixed(1)+'%)' } } } }
+  });
+
+  // ── Waterfall ──
+  const wf = [
+    { l:'Ingresos',    v:YTD.ing,    bar:true },
+    { l:'- Cto Venta', v:-YTD.costo, bar:false },
+    { l:'= MB',        v:YTD.mb,     bar:true, tot:true },
+    { l:'- GAV',       v:-YTD.gav,   bar:false },
+    { l:'- Gtos Fijos',v:-YTD.gf,    bar:false },
+    { l:'= EBITDA',    v:YTD.ebitda, bar:true, tot:true },
   ];
-  const wColors = wItems.map(w => w.isTotal ? 'rgba(200,169,110,0.85)' : (w.value >= 0 ? 'rgba(90,181,133,0.7)' : 'rgba(212,95,95,0.7)'));
-  makeChart('chartWaterfall', {
-    type: 'bar',
-    data: { labels: wItems.map(w=>w.label), datasets: [{
-      data: wItems.map(w => Math.abs(w.value)),
-      backgroundColor: wColors, borderRadius: 3
+  mkChart('chartWaterfall', {
+    type:'bar',
+    data:{ labels:wf.map(w=>w.l), datasets:[{
+      data:wf.map(w=>Math.abs(w.v)),
+      backgroundColor:wf.map(w => w.tot ? 'rgba(200,169,110,0.85)' : w.v>=0 ? 'rgba(90,181,133,0.7)' : 'rgba(212,95,95,0.7)'),
+      borderRadius:3
     }]},
-    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: CHART_DEFAULTS.scales }
+    options: baseOpts({ plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label: ctx => ' '+fmtM(wf[ctx.dataIndex].v) } } } })
   });
 
-  // Canal margin comparison
-  const canalMbs = CANALES.map(c => (DATA.canal_2026[c].ytd_mb_pct*100).toFixed(1));
-  const canalMbs25 = CANALES.map(c => (DATA.canal_2025[c].ytd_mb_pct*100).toFixed(1));
-  makeChart('chartMargenCanal', chartCfg('bar', 
-    CANALES.map(c => c.replace('Tienda ','').replace('Pagina Web','Web')),
-    [
-      { label: '2026', data: canalMbs, backgroundColor: 'rgba(90,159,212,0.75)', borderRadius: 3 },
-      { label: '2025', data: canalMbs25, backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: 3 },
-    ], { scales: { ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { ...CHART_DEFAULTS.scales.y.ticks, callback: v => v+'%' } } } }
-  ));
+  // ── Canal MB% comparison ──
+  mkChart('chartMargenCanal', {
+    type:'bar',
+    data:{ labels:CANALES.map(c=>c.replace('Tienda ','').replace('Pagina Web','Web')), datasets:[
+      { label:'2026', data:CANALES.map(c=>(DATA.canal_2026[c].ytd_mb_pct*100).toFixed(1)), backgroundColor:'rgba(90,159,212,0.75)', borderRadius:3 },
+      { label:'2025', data:CANALES.map(c=>(DATA.canal_2025[c].ytd_mb_pct*100).toFixed(1)), backgroundColor:'rgba(255,255,255,0.15)', borderRadius:3 },
+    ]},
+    options: baseOpts({ scales: BASE_PCT_SCALES,
+      plugins:{ legend:{ labels:TXL }, tooltip:{ callbacks:{ label: ctx => ' '+ctx.raw+'%' } } } })
+  });
 }
 
+/* ════════════════════════════════════════════
+   SECCIÓN: EERR MENSUAL
+════════════════════════════════════════════ */
+// Partidas en orden real del EERR con sus propiedades
+const EERR_ROWS = [
+  { key:'ing',          lbl:'INGRESO POR VENTA',             type:'total', sign:1  },
+  { key:'costo',        lbl:'Costo por Venta',               type:'cost',  sign:-1 },
+  { key:'mb',           lbl:'MARGEN BRUTO',                  type:'total', sign:1  },
+  { key:'otros_ing',    lbl:'Otros Ingresos',                type:'sub',   sign:1  },
+  { key:'otros_cv',     lbl:'Otros Costo por Venta',         type:'sub',   sign:-1 },
+  { key:'gav',          lbl:'GAV',                           type:'cost',  sign:-1 },
+  { key:'gf',           lbl:'Gastos Fijos',                  type:'cost',  sign:-1 },
+  { key:'regalos',      lbl:'Regalos Marca',                 type:'sub',   sign:-1 },
+  { key:'robos',        lbl:'Robos',                         type:'sub',   sign:-1 },
+  { key:'gastos_total', lbl:'Gastos Totales',                type:'cost',  sign:-1 },
+  { key:'ebitda',       lbl:'EBITDA',                        type:'total', sign:1  },
+  { key:'dep',          lbl:'Depreciación y Amortización',   type:'sub',   sign:-1 },
+  { key:'gfin',         lbl:'Gastos Financieros',            type:'sub',   sign:-1 },
+  { key:'res',          lbl:'RESULTADO ANTES IMPUESTO',      type:'total', sign:1  },
+];
 
-function getYearData(year) {
-  if (year === 2026) {
-    return { real: DATA.data_2026, pres: DATA.data_pres, prev: DATA.data_2025 };
-  }
-  const yStr = String(year);
-  const prevStr = String(year - 1);
-  return { real: DATA.hist_monthly[yStr] || {}, pres: {}, prev: DATA.hist_monthly[prevStr] || {} };
+function getMonthlyData(year) {
+  if (year === 2026) return { real:DATA.data_2026, pres:DATA.data_pres, prev:DATA.data_2025, prevYear:2025 };
+  const ys = String(year); const ps = String(year-1);
+  return { real:DATA.hist_monthly[ys]||{}, pres:{}, prev:DATA.hist_monthly[ps]||{}, prevYear:year-1 };
 }
 
 function buildEERR() {
   const year = parseInt(document.getElementById('eerr-year').value);
-  const { real, pres, prev } = getYearData(year);
-  
-  const showPres = year === 2026;
-  const prevYear = year - 1;
-  
-  const rows = [
-    { label: 'INGRESOS POR VENTA', key: 'ing', type: 'total' },
-    { label: 'Tienda Araucaria', parent: true, getVal: (d) => {
-      const c = DATA.canal_2026['Tienda Araucaria'];
-      return year === 2026 ? c.ing : null;
-    }},
-    { label: 'COSTO DE VENTA', key: 'costo', type: 'cost', negate: true },
-    { label: 'MARGEN BRUTO', key: 'mb', type: 'total' },
-    { label: 'GAV', key: 'gav', type: 'cost', negate: true },
-    { label: 'GASTOS FIJOS', key: 'gf', type: 'cost', negate: true },
-    { label: 'EBITDA', key: 'ebitda', type: 'total' },
-    { label: 'DEPRECIACION', key: 'dep', type: 'cost', negate: true },
-    { label: 'GASTOS FINANCIEROS', key: 'gfin', type: 'cost', negate: true },
-    { label: 'RESULTADO NETO', key: 'res', type: 'total' },
-  ];
-  
-  const activeMonths = MESES.filter(m => real[m] && real[m].ing > 0);
-  if (activeMonths.length === 0) {
-    document.getElementById('eerr-table-wrap').innerHTML = '<p style="color:var(--muted);padding:20px;">No hay datos reales para este año en la vista detallada.</p>';
+  const { real, pres, prev, prevYear } = getMonthlyData(year);
+  const hasPres = year === 2026;
+  const months = MESES.filter(m => real[m] && real[m].ing > 0);
+
+  if (!months.length) {
+    document.getElementById('eerr-table-wrap').innerHTML = '<p style="color:var(--muted);padding:20px">Sin datos reales para este año.</p>';
     return;
   }
-  
-  // Build table
-  let header = `<table class="data-table"><thead><tr>
-    <th style="min-width:180px;">Partida</th>`;
-  activeMonths.forEach(m => { header += `<th>${m.substring(0,3)}</th>`; });
-  header += `<th>YTD</th>`;
-  if (showPres) header += `<th>PRES YTD</th><th>Δ PRES</th>`;
-  header += `<th>${prevYear}</th><th>Δ ${prevYear}</th></tr></thead><tbody>`;
-  
-  let body = '';
-  rows.forEach(row => {
-    if (!row.key) return;
+
+  // ── Table ──
+  let html = `<div style="overflow-x:auto"><table class="data-table"><thead><tr>
+    <th style="min-width:200px;text-align:left">Partida</th>`;
+  months.forEach(m => html += `<th>${m.substring(0,3)}</th>`);
+  html += `<th>YTD</th>`;
+  if (hasPres) html += `<th>PRES YTD</th><th>Δ PRES</th>`;
+  html += `<th>${prevYear} YTD</th><th>Δ ${prevYear}</th></tr></thead><tbody>`;
+
+  EERR_ROWS.forEach(row => {
     const isTotal = row.type === 'total';
-    const isCost = row.type === 'cost';
-    
-    const getVal = (src, m) => {
-      const d = src[m];
-      if (!d) return 0;
-      return isCost ? -Math.abs(d[row.key]||0) : (d[row.key]||0);
+    const isSub   = row.type === 'sub';
+    // Get signed value: costs shown as negative
+    const getV = (src, m) => {
+      const d = src[m]; if (!d) return null;
+      const raw = d[row.key]; if (raw === undefined || raw === null) return null;
+      // raw values stored as absolute; apply sign for display
+      return Math.abs(raw) === 0 ? 0 : raw * row.sign;
     };
-    
-    const vals = activeMonths.map(m => getVal(real, m));
-    const ytd_v = vals.reduce((a,b) => a+b, 0);
-    const ytd_pres = showPres ? activeMonths.reduce((a,m) => a + getVal(pres, m), 0) : 0;
-    const ytd_prev = activeMonths.reduce((a,m) => a + getVal(prev, m), 0);
-    
-    const cls = isTotal ? 'total' : '';
-    body += `<tr class="${cls}"><td>${row.label}</td>`;
+
+    const vals = months.map(m => getV(real, m));
+    const ytdV = vals.reduce((a,v) => a + (v||0), 0);
+    const presV = hasPres ? months.reduce((a,m) => a + (getV(pres,m)||0), 0) : null;
+    const prevV = months.reduce((a,m) => a + (getV(prev,m)||0), 0);
+
+    // Skip rows where all vals are zero (e.g. robos=0 every month)
+    if (vals.every(v => !v) && !ytdV) return;
+
+    const rowCls = isTotal ? 'total' : isSub ? 'subtotal' : '';
+    html += `<tr class="${rowCls}"><td>${row.lbl}</td>`;
+
     vals.forEach(v => {
-      const c = (isTotal && row.key==='ebitda') || (isTotal && row.key==='res') || (isTotal && row.key==='mb') ? (v>=0?'pos':'neg') : '';
-      body += `<td class="${c}">${v !== 0 ? fmt(v) : '<span class="muted-val">—</span>'}</td>`;
+      if (v === null || v === undefined) { html += '<td class="muted-val">—</td>'; return; }
+      const c = (isTotal && row.key!=='ing' && row.key!=='mb') ? (v>=0?'pos':'neg') :
+                (row.key==='costo'||row.key==='gav'||row.key==='gf') ? '' : '';
+      html += `<td class="${c}">${fmtF(v)}</td>`;
     });
-    const ytd_c = (isTotal) ? (ytd_v>=0?'pos':'neg') : '';
-    body += `<td class="${ytd_c}">${fmt(ytd_v)}</td>`;
-    if (showPres) {
-      const dPres = ytd_pres !== 0 ? delta(ytd_v, ytd_pres) : null;
-      body += `<td class="muted-val">${ytd_pres !== 0 ? fmt(ytd_pres) : '—'}</td>`;
-      body += `<td class="${dPres !== null ? (dPres>=0?'pos':'neg') : ''}">${dPres !== null ? (dPres>=0?'▲':'▼')+' '+pct(Math.abs(dPres)) : '—'}</td>`;
+
+    // YTD
+    const ytdC = isTotal && row.key!=='ing' ? (ytdV>=0?'pos':'neg') : '';
+    html += `<td class="${ytdC}">${fmtF(ytdV)}</td>`;
+
+    // vs Presupuesto
+    if (hasPres) {
+      const dP = presV ? dlt(ytdV, presV) : null;
+      html += `<td class="muted-val">${presV !== null ? fmtF(presV) : '—'}</td>`;
+      html += `<td class="${dP!==null?cls(dP):''}">
+        ${dP!==null ? (dP>=0?'▲':'▼')+' '+fmtP(Math.abs(dP)) : '—'}</td>`;
     }
-    const dPrev = ytd_prev !== 0 ? delta(ytd_v, ytd_prev) : null;
-    body += `<td class="muted-val">${ytd_prev !== 0 ? fmt(ytd_prev) : '—'}</td>`;
-    body += `<td class="${dPrev !== null ? (dPrev>=0?'pos':'neg') : ''}">${dPrev !== null ? (dPrev>=0?'▲':'▼')+' '+pct(Math.abs(dPrev)) : '—'}</td>`;
-    body += '</tr>';
+
+    // vs año anterior
+    const dPv = prevV ? dlt(ytdV, prevV) : null;
+    html += `<td class="muted-val">${prevV ? fmtF(prevV) : '—'}</td>`;
+    html += `<td class="${dPv!==null?cls(dPv):''}">
+      ${dPv!==null ? (dPv>=0?'▲':'▼')+' '+fmtP(Math.abs(dPv)) : '—'}</td>`;
+    html += '</tr>';
   });
-  
-  document.getElementById('eerr-table-wrap').innerHTML = header + body + '</tbody></table>';
-  
-  // Charts EBITDA and MB%
-  const ebitdaReal = activeMonths.map(m => real[m]?.ebitda || 0);
-  const ebitdaPrev = activeMonths.map(m => prev[m]?.ebitda || 0);
-  const ebitdaPres = showPres ? activeMonths.map(m => pres[m]?.ebitda || 0) : [];
-  
-  const ebitdaColors = ebitdaReal.map(v => v >= 0 ? 'rgba(90,181,133,0.75)' : 'rgba(212,95,95,0.75)');
-  const datasets_ebitda = [
-    { label: `Real ${year}`, data: ebitdaReal, backgroundColor: ebitdaColors, borderRadius: 3, type: 'bar' },
-    { label: String(prevYear), data: ebitdaPrev, borderColor: 'rgba(255,255,255,0.2)', fill: false, tension: 0.3, type: 'line', pointRadius: 3 },
+
+  html += '</tbody></table></div>';
+  document.getElementById('eerr-table-wrap').innerHTML = html;
+
+  // ── Charts EBITDA + MB% ──
+  const eR = months.map(m => real[m]?.ebitda||0);
+  const eP = months.map(m => prev[m]?.ebitda||0);
+  const ePres = hasPres ? months.map(m => pres[m]?.ebitda||0) : [];
+  const eBgColors = eR.map(v => v>=0?'rgba(90,181,133,0.75)':'rgba(212,95,95,0.75)');
+
+  const ds_eb = [
+    { label:`Real ${year}`, data:eR, backgroundColor:eBgColors, borderRadius:3, type:'bar', order:1 },
+    { label:String(prevYear), data:eP, borderColor:'rgba(255,255,255,0.25)', fill:false, tension:0.3, type:'line', pointRadius:3, order:0 },
   ];
-  if (showPres) datasets_ebitda.push({ label: 'Presupuesto', data: ebitdaPres, borderColor: 'rgba(90,159,212,0.5)', fill: false, tension: 0.3, type: 'line', pointRadius: 3 });
-  makeChart('chartEBITDA', { type: 'bar', data: { labels: activeMonths.map(m=>m.substring(0,3)), datasets: datasets_ebitda },
-    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: CHART_DEFAULTS.scales }
-  });
-  
-  const mbReal = activeMonths.map(m => real[m]?.mb_pct ? real[m].mb_pct*100 : 0);
-  const mbPrev = activeMonths.map(m => prev[m]?.mb_pct ? prev[m].mb_pct*100 : 0);
-  const mbPres = showPres ? activeMonths.map(m => pres[m]?.mb_pct ? pres[m].mb_pct*100 : 0) : [];
+  if (hasPres) ds_eb.push({ label:'Presupuesto', data:ePres, borderColor:'rgba(90,159,212,0.6)', fill:false, tension:0.3, type:'line', borderDash:[4,4], pointRadius:3, order:0 });
+  mkChart('chartEBITDA', { type:'bar', data:{ labels:months.map(m=>m.substring(0,3)), datasets:ds_eb },
+    options: baseOpts() });
+
+  const mbR = months.map(m => real[m]?.mb_pct ? +(real[m].mb_pct*100).toFixed(2) : 0);
+  const mbPv= months.map(m => prev[m]?.mb_pct  ? +(prev[m].mb_pct*100).toFixed(2)  : 0);
+  const mbPr= hasPres ? months.map(m => pres[m]?.mb_pct ? +(pres[m].mb_pct*100).toFixed(2) : 0) : [];
   const ds_mb = [
-    { label: `Real ${year}`, data: mbReal, borderColor: 'rgba(200,169,110,0.9)', backgroundColor: 'rgba(200,169,110,0.1)', fill: true, tension: 0.3, pointRadius: 4 },
-    { label: String(prevYear), data: mbPrev, borderColor: 'rgba(255,255,255,0.25)', fill: false, tension: 0.3, pointRadius: 3 },
+    { label:`Real ${year}`, data:mbR, borderColor:'rgba(200,169,110,0.9)', backgroundColor:'rgba(200,169,110,0.08)', fill:true, tension:0.3, pointRadius:4 },
+    { label:String(prevYear), data:mbPv, borderColor:'rgba(255,255,255,0.25)', fill:false, tension:0.3, pointRadius:3 },
   ];
-  if (showPres) ds_mb.push({ label: 'Presupuesto', data: mbPres, borderColor: 'rgba(90,159,212,0.6)', fill: false, tension: 0.3, borderDash: [4,4], pointRadius: 3 });
-  makeChart('chartMBpct', chartCfg('line', activeMonths.map(m=>m.substring(0,3)), ds_mb,
-    { scales: { ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { ...CHART_DEFAULTS.scales.y.ticks, callback: v => v.toFixed(1)+'%' } } } }
-  ));
+  if (hasPres) ds_mb.push({ label:'Presupuesto', data:mbPr, borderColor:'rgba(90,159,212,0.6)', fill:false, tension:0.3, borderDash:[4,4], pointRadius:3 });
+  mkChart('chartMBpct', { type:'line', data:{ labels:months.map(m=>m.substring(0,3)), datasets:ds_mb },
+    options: baseOpts({ scales:BASE_PCT_SCALES }) });
 }
 
-
+/* ════════════════════════════════════════════
+   SECCIÓN: CANALES
+════════════════════════════════════════════ */
 function buildCanales() {
-  const cards = document.getElementById('canal-cards');
   const maxIng = Math.max(...CANALES.map(c => DATA.canal_2026[c].ytd_ing));
-  
-  cards.innerHTML = CANALES.map((c, i) => {
-    const d = DATA.canal_2026[c];
-    const d25 = DATA.canal_2025[c];
-    const dIng = d25.ytd_ing > 0 ? delta(d.ytd_ing, d25.ytd_ing) : null;
-    const dMb = d25.ytd_mb_pct > 0 ? (d.ytd_mb_pct - d25.ytd_mb_pct)*100 : null;
-    const barW = d.ytd_ing > 0 ? Math.round(d.ytd_ing / maxIng * 100) : 0;
+  document.getElementById('canal-cards').innerHTML = CANALES.map((c,i) => {
+    const d = DATA.canal_2026[c]; const d25 = DATA.canal_2025[c];
+    const dIng = dlt(d.ytd_ing, d25.ytd_ing);
+    const dMb  = d.ytd_mb_pct - d25.ytd_mb_pct;
+    const bw   = d.ytd_ing > 0 ? Math.round(d.ytd_ing/maxIng*100) : 0;
     return `<div class="canal-card">
       <div class="canal-name">${c}</div>
-      <div class="canal-ing">${fmt(d.ytd_ing)}</div>
-      <div class="canal-row"><span>Costo</span><span>${fmt(d.ytd_costo)}</span></div>
-      <div class="canal-row"><span>Margen Bruto</span><span style="color:${CANAL_COLORS[i]}">${pct(d.ytd_mb_pct)}</span></div>
-      <div class="canal-bar"><div class="canal-bar-fill" style="width:${barW}%;background:${CANAL_COLORS[i]}"></div></div>
+      <div class="canal-ing">${fmtM(d.ytd_ing)}</div>
+      <div class="canal-row"><span>Costo</span><span>${fmtM(d.ytd_costo)}</span></div>
+      <div class="canal-row"><span>Margen Bruto</span><span style="color:${CCOLORS[i]}">${fmtP(d.ytd_mb_pct)}</span></div>
+      <div class="canal-bar"><div class="canal-bar-fill" style="width:${bw}%;background:${CCOLORS[i]}"></div></div>
       <div class="canal-delta">
-        ${dIng !== null ? `Ing: <span style="color:${dIng>=0?'var(--green)':'var(--red)'}">${dIng>=0?'▲':'▼'} ${pct(Math.abs(dIng))}</span> vs 2025` : '—'}
-        &nbsp;·&nbsp;
-        ${dMb !== null ? `MB: <span style="color:${dMb>=0?'var(--green)':'var(--red)'}">${dMb>=0?'+':''}${dMb.toFixed(1)}pp</span>` : '—'}
+        Ing: <span class="${dIng>=0?'pos':'neg'}">${dIng>=0?'▲':'▼'} ${fmtP(Math.abs(dIng))}</span> vs 2025 ·
+        MB: <span class="${dMb>=0?'pos':'neg'}">${(dMb*100>=0?'+':'')+( dMb*100).toFixed(1)}pp</span>
       </div>
     </div>`;
   }).join('');
-  
-  // Stacked bar chart
-  const activeMonths = ['ENERO','FEBRERO'];
-  const datasets = CANALES.map((c, i) => ({
-    label: c.replace('Tienda ','T.').replace('Pagina Web','Web'),
-    data: activeMonths.map(m => DATA.canal_2026[c].ing[MESES.indexOf(m)] || 0),
-    backgroundColor: CANAL_COLORS[i]+'CC', borderRadius: 2,
-  }));
-  makeChart('chartCanalesEvol', { type: 'bar', data: { labels: activeMonths.map(m=>m.substring(0,3)), datasets },
-    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: {
-      x: { ...CHART_DEFAULTS.scales.x, stacked: true },
-      y: { ...CHART_DEFAULTS.scales.y, stacked: true }
-    }}
+
+  const am = ['ENERO','FEBRERO'];
+  mkChart('chartCanalesEvol', {
+    type:'bar',
+    data:{ labels:am.map((_,i)=>MSHORT[i]), datasets:CANALES.map((c,i) => ({
+      label:c.replace('Tienda ','').replace('Pagina Web','Web'),
+      data:am.map(m => DATA.canal_2026[c].ing[MESES.indexOf(m)]||0),
+      backgroundColor:CCOLORS[i]+'BB', borderRadius:2
+    }))},
+    options: baseOpts({ scales:{ x:{...BASE_SCALES.x,stacked:true}, y:{...BASE_SCALES.y,stacked:true} } })
   });
-  
-  // Radar chart
-  const radar_2026 = CANALES.map(c => DATA.canal_2026[c].ytd_mb_pct * 100);
-  const radar_2025 = CANALES.map(c => DATA.canal_2025[c].ytd_mb_pct * 100);
-  const radarLabels = CANALES.map(c => c.replace('Tienda ','').replace('Pagina Web','Web'));
-  makeChart('chartRadar', {
-    type: 'radar',
-    data: { labels: radarLabels, datasets: [
-      { label: '2026', data: radar_2026, borderColor: 'rgba(200,169,110,0.8)', backgroundColor: 'rgba(200,169,110,0.1)', pointBackgroundColor: 'rgba(200,169,110,0.8)', borderWidth: 2 },
-      { label: '2025', data: radar_2025, borderColor: 'rgba(255,255,255,0.25)', backgroundColor: 'rgba(255,255,255,0.05)', borderWidth: 1.5 },
+
+  mkChart('chartRadar', {
+    type:'radar',
+    data:{ labels:CANALES.map(c=>c.replace('Tienda ','').replace('Pagina Web','Web')), datasets:[
+      { label:'2026', data:CANALES.map(c=>+(DATA.canal_2026[c].ytd_mb_pct*100).toFixed(1)),
+         borderColor:'rgba(200,169,110,0.8)', backgroundColor:'rgba(200,169,110,0.1)', borderWidth:2, pointRadius:4 },
+      { label:'2025', data:CANALES.map(c=>+(DATA.canal_2025[c].ytd_mb_pct*100).toFixed(1)),
+         borderColor:'rgba(255,255,255,0.3)', backgroundColor:'rgba(255,255,255,0.05)', borderWidth:1.5 },
     ]},
-    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins,
-      scales: { r: { ticks: { color: 'rgba(255,255,255,0.3)', font:{size:9}, backdropColor: 'transparent', callback: v => v+'%' },
-        grid: { color: 'rgba(255,255,255,0.06)' }, pointLabels: { color: 'rgba(255,255,255,0.5)', font:{size:10} },
-        angleLines: { color: 'rgba(255,255,255,0.08)' } } }
-    }
+    options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ labels:TXL } },
+      scales:{ r:{ ticks:{...TX,backdropColor:'transparent',callback:v=>v+'%'},
+        grid:{color:'rgba(255,255,255,0.07)'}, angleLines:{color:'rgba(255,255,255,0.08)'},
+        pointLabels:{color:'rgba(255,255,255,0.55)',font:{size:10}} } } }
   });
 }
 
-
+/* ════════════════════════════════════════════
+   SECCIÓN: COSTOS
+════════════════════════════════════════════ */
 function buildCostos() {
   const d = DATA.data_2026;
-  const activeMonths = MESES.filter(m => d[m] && d[m].ing > 0);
-  const ytd_ing_c = activeMonths.reduce((a,m) => a + (d[m].ing||0), 0);
-  const ytd_gav_c = activeMonths.reduce((a,m) => a + (d[m].gav||0), 0);
-  const ytd_gf_c = activeMonths.reduce((a,m) => a + (d[m].gf||0), 0);
-  const total_op = ytd_gav_c + ytd_gf_c;
-  
+  const am = MESES.filter(m => d[m] && d[m].ing > 0);
+  const sum = k => am.reduce((a,m) => a + (d[m][k]||0), 0);
+
+  const tIng = sum('ing'); const tGav = sum('gav'); const tGf = sum('gf');
+  const tDep = sum('dep'); const tGfin = sum('gfin');
+  const tTotal = tGav + tGf;
+
   document.getElementById('kpi-costos').innerHTML = [
-    { l: 'GAV Total YTD', v: fmt(-ytd_gav_c), pctv: pct(ytd_gav_c/ytd_ing_c), c: 'blue' },
-    { l: 'Gastos Fijos YTD', v: fmt(-ytd_gf_c), pctv: pct(ytd_gf_c/ytd_ing_c), c: '' },
-    { l: 'Total Operacional', v: fmt(-total_op), pctv: pct(total_op/ytd_ing_c), c: total_op/ytd_ing_c > 0.35 ? 'red' : '' },
-    { l: 'Margen Bruto', v: fmt(YTD.mb), pctv: pct(YTD.mb_pct), c: 'green' },
-    { l: 'EBITDA', v: fmt(YTD.ebitda), pctv: pct(YTD.ebitda_pct), c: YTD.ebitda >= 0 ? 'green' : 'red' },
-  ].map(k => `<div class="kpi ${k.c}">
-    <div class="kpi-label">${k.l}</div>
-    <div class="kpi-value ${k.c}">${k.v}</div>
-    <div class="kpi-delta"><span class="neutral">${k.pctv} sobre ingresos</span></div>
+    { lbl:'GAV Total YTD',     val:fmtM(-tGav),  sub:fmtP(tGav/tIng)+' / ingresos',  c:'blue' },
+    { lbl:'Gastos Fijos YTD',  val:fmtM(-tGf),   sub:fmtP(tGf/tIng)+' / ingresos',   c:'' },
+    { lbl:'Total Operacional',  val:fmtM(-tTotal),sub:fmtP(tTotal/tIng)+' / ingresos', c:tTotal/tIng>0.38?'red':'' },
+    { lbl:'Depreciación',       val:fmtM(-tDep),  sub:fmtP(tDep/tIng)+' / ingresos',  c:'' },
+    { lbl:'Gastos Financieros', val:fmtM(-tGfin), sub:fmtP(tGfin/tIng)+' / ingresos', c:'' },
+  ].map(k=>`<div class="kpi ${k.c}">
+    <div class="kpi-label">${k.lbl}</div>
+    <div class="kpi-value ${k.c}">${k.val}</div>
+    <div class="kpi-delta">${k.sub}</div>
   </div>`).join('');
-  
-  // Evolution chart
-  const ds_gastos = [
-    { label: 'GAV %', data: activeMonths.map(m => d[m]?.ing > 0 ? +(d[m].gav/d[m].ing*100).toFixed(1) : 0), borderColor: 'rgba(90,159,212,0.8)', fill: false, tension: 0.3, type: 'line', pointRadius: 4 },
-    { label: 'G. Fijos %', data: activeMonths.map(m => d[m]?.ing > 0 ? +(d[m].gf/d[m].ing*100).toFixed(1) : 0), borderColor: 'rgba(212,165,90,0.8)', fill: false, tension: 0.3, type: 'line', pointRadius: 4 },
-    { label: 'MB %', data: activeMonths.map(m => d[m]?.mb_pct ? +(d[m].mb_pct*100).toFixed(1) : 0), backgroundColor: 'rgba(200,169,110,0.15)', borderColor: 'rgba(200,169,110,0.5)', fill: true, tension: 0.3, type: 'line', pointRadius: 4 },
-  ];
-  makeChart('chartGastosEvol', { type: 'line', data: { labels: activeMonths.map(m=>m.substring(0,3)), datasets: ds_gastos },
-    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: {
-      ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { ...CHART_DEFAULTS.scales.y.ticks, callback: v => v.toFixed(0)+'%' } }
-    }}
+
+  // GAV % + GF % + MB% evolution
+  mkChart('chartGastosEvol', {
+    type:'line',
+    data:{ labels:am.map(m=>m.substring(0,3)), datasets:[
+      { label:'MB %',    data:am.map(m=>+(d[m].mb_pct*100).toFixed(1)),             borderColor:'rgba(200,169,110,0.8)', backgroundColor:'rgba(200,169,110,0.08)', fill:true,  tension:0.3, pointRadius:4 },
+      { label:'GAV %',   data:am.map(m=>d[m].ing?+(d[m].gav/d[m].ing*100).toFixed(1):0), borderColor:'rgba(90,159,212,0.8)',  fill:false, tension:0.3, pointRadius:4 },
+      { label:'GF %',    data:am.map(m=>d[m].ing?+(d[m].gf /d[m].ing*100).toFixed(1):0), borderColor:'rgba(212,165,90,0.8)',  fill:false, tension:0.3, pointRadius:4 },
+    ]},
+    options: baseOpts({ scales:BASE_PCT_SCALES })
   });
 
-  // GAV composition (approximate from known data)
-  makeChart('chartGAVComp', {
-    type: 'doughnut',
-    data: { labels: ['Arriendos Tiendas','Sueldos+RR.HH.','Marketing Digital','Asesorías','Comisión POS','Otros'],
-      datasets: [{ data: [39500000, 43000000, 11800000, 22900000, 7900000, 20000000],
-        backgroundColor: ['#c8a96e','#5a9fd4','#5ab585','#d4a55a','#a068c8','rgba(255,255,255,0.15)'],
-        borderColor: 'transparent', hoverOffset: 6 }]},
-    options: { responsive: true, maintainAspectRatio: true, cutout: '60%',
-      plugins: { legend: { position: 'bottom', labels: { color:'rgba(255,255,255,0.5)', font:{size:11}, boxWidth:12, padding:8 } } } }
+  // GAV composition donut (based on known structure)
+  const presENE = DATA.data_pres['ENERO']||{};
+  mkChart('chartGAVComp', {
+    type:'doughnut',
+    data:{ labels:['Arriendo Tiendas','Sueldos + RRHH','Marketing','Asesorías','Otros'],
+      datasets:[{ data:[38,31,9,15,7].map(p=>Math.round(tGav*p/100)),
+        backgroundColor:['#c8a96e','#5a9fd4','#5ab585','#d4a55a','rgba(255,255,255,0.15)'],
+        borderColor:'transparent', hoverOffset:6 }]},
+    options:{ responsive:true, maintainAspectRatio:true, cutout:'60%',
+      plugins:{ legend:{ position:'bottom', labels:{...TXL,padding:8} },
+        tooltip:{ callbacks:{ label:ctx=>' '+fmtM(ctx.raw)+' (~'+ctx.raw/tGav*100|0+'%)' } } } }
   });
 }
 
-
+/* ════════════════════════════════════════════
+   SECCIÓN: HISTÓRICO
+════════════════════════════════════════════ */
 let drillYear = 2025;
 
 function buildHistorico() {
-  const years = DATA.years.map(String);
-  const annuals = DATA.hist_annual;
-  
-  // Main historical chart
-  const ytd26 = { ing: YTD.ing * 6, mb_pct: YTD.mb_pct, ebitda_pct: YTD.ebitda_pct };
-  const allYears = [...years, '2026*'];
-  const allIngs = [...years.map(y => annuals[y].ing), ytd26.ing];
-  const allMBpct = [...years.map(y => annuals[y].mb_pct*100), ytd26.mb_pct*100];
-  const allEBpct = [...years.map(y => annuals[y].ebitda_pct*100), ytd26.ebitda_pct*100];
-  
-  makeChart('chartHistorico', {
-    type: 'bar',
-    data: { labels: allYears, datasets: [
-      { label: 'Ingresos', data: allIngs, backgroundColor: allYears.map(y => y === '2026*' ? 'rgba(200,169,110,0.4)' : 'rgba(200,169,110,0.65)'), borderRadius: 3, yAxisID: 'y' },
-      { label: 'Margen Bruto %', data: allMBpct, borderColor: 'rgba(90,181,133,0.8)', type: 'line', fill: false, tension: 0.3, pointRadius: 4, yAxisID: 'y2' },
-      { label: 'EBITDA %', data: allEBpct, borderColor: 'rgba(90,159,212,0.8)', type: 'line', fill: false, tension: 0.3, pointRadius: 4, borderDash: [4,3], yAxisID: 'y2' },
+  const yrs  = DATA.years.map(String);
+  const ann  = DATA.hist_annual;
+  const yAll = [...yrs, '2026*'];
+  const ings   = [...yrs.map(y=>ann[y].ing), YTD.ing*6];
+  const mbPcts = [...yrs.map(y=>+(ann[y].mb_pct*100).toFixed(1)), +(YTD.mb_pct*100).toFixed(1)];
+  const ebPcts = [...yrs.map(y=>+(ann[y].ebitda_pct*100).toFixed(1)), +(YTD.ebitda_pct*100).toFixed(1)];
+
+  mkChart('chartHistorico', {
+    type:'bar',
+    data:{ labels:yAll, datasets:[
+      { label:'Ingresos', data:ings,
+         backgroundColor:yAll.map(y=>y==='2026*'?'rgba(200,169,110,0.4)':'rgba(200,169,110,0.65)'),
+         borderRadius:3, yAxisID:'y' },
+      { label:'MB %', data:mbPcts, borderColor:'rgba(90,181,133,0.8)', type:'line', fill:false, tension:0.3, pointRadius:4, yAxisID:'y2' },
+      { label:'EBITDA %', data:ebPcts, borderColor:'rgba(90,159,212,0.8)', type:'line', fill:false, tension:0.3, pointRadius:4, borderDash:[4,3], yAxisID:'y2' },
     ]},
-    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins,
-      scales: {
-        x: CHART_DEFAULTS.scales.x,
-        y: { ...CHART_DEFAULTS.scales.y, position: 'left' },
-        y2: { position: 'right', grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)', font:{size:10}, callback: v => v.toFixed(0)+'%' } }
+    options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ labels:TXL } },
+      scales:{
+        x:BASE_SCALES.x,
+        y:{...BASE_SCALES.y, position:'left'},
+        y2:{ position:'right', grid:{display:false},
+          ticks:{...TX, callback:v=>v.toFixed(0)+'%'} }
       }
     }
   });
-  
-  // Historical summary table
-  const maxIng = Math.max(...Object.values(annuals).map(d => d.ing));
+
+  // Summary table
+  const maxI = Math.max(...Object.values(ann).map(d=>d.ing));
   let tbl = `<table class="data-table"><thead><tr>
-    <th>Año</th><th>Ingresos</th><th>MB%</th><th>EBITDA%</th><th>Result.</th></tr></thead><tbody>`;
-  years.forEach(y => {
-    const d = annuals[y];
-    const barW = Math.round(d.ing / maxIng * 60);
+    <th style="text-align:left">Año</th><th>Ingresos</th><th>MB%</th><th>EBITDA%</th><th>Resultado</th>
+  </tr></thead><tbody>`;
+  yrs.forEach(y => {
+    const d = ann[y]; const bw = Math.round(d.ing/maxI*55);
     tbl += `<tr>
-      <td><span style="font-family:var(--font-m);color:var(--gold)">${y}</span></td>
-      <td><span class="hist-bar" style="width:${barW}px"></span>${fmt(d.ing)}</td>
-      <td class="${d.mb_pct >= 0.4 ? 'pos' : ''}">${pct(d.mb_pct)}</td>
-      <td class="${d.ebitda_pct >= 0 ? 'pos' : 'neg'}">${pct(d.ebitda_pct)}</td>
-      <td class="${d.res >= 0 ? 'pos' : 'neg'}">${fmt(d.res)}</td>
+      <td style="font-family:var(--font-m);color:var(--gold)">${y}</td>
+      <td><span style="display:inline-block;width:${bw}px;height:6px;background:rgba(200,169,110,0.3);border-radius:2px;vertical-align:middle;margin-right:6px"></span>${fmtM(d.ing)}</td>
+      <td class="${d.mb_pct>=0.4?'pos':''}">${fmtP(d.mb_pct)}</td>
+      <td class="${d.ebitda_pct>=0?'pos':'neg'}">${fmtP(d.ebitda_pct)}</td>
+      <td class="${d.res>=0?'pos':'neg'}">${fmtM(d.res)}</td>
     </tr>`;
   });
-  // 2026 run-rate
-  tbl += `<tr class="total"><td>2026*</td><td>${fmt(YTD.ing*6)}</td><td>${pct(YTD.mb_pct)}</td><td>${pct(YTD.ebitda_pct)}</td><td>${fmt(YTD.res)}</td></tr>`;
-  tbl += '</tbody></table><div style="font-size:10px;color:var(--muted);margin-top:8px;">* 2026 = run-rate anualizado sobre datos Ene–Feb reales</div>';
+  tbl += `<tr class="total"><td>2026*</td><td>${fmtM(YTD.ing*6)}</td>
+    <td class="${YTD.mb_pct>=0.4?'pos':''}">${fmtP(YTD.mb_pct)}</td>
+    <td class="${YTD.ebitda_pct>=0?'pos':'neg'}">${fmtP(YTD.ebitda_pct)}</td>
+    <td class="${YTD.res>=0?'pos':'neg'}">${fmtM(YTD.res)}</td></tr>`;
+  tbl += `</tbody></table><p style="font-size:10px;color:var(--muted);margin-top:6px">* 2026 = run-rate anualizado sobre Ene–Feb real</p>`;
   document.getElementById('hist-table-wrap').innerHTML = tbl;
-  
+
   // Seasonality
-  makeChart('chartEstacional', chartCfg('bar', MESES_SHORT, [
-    { label: 'Participación % (prom. 2020–2025)', data: SEASONAL, backgroundColor: MESES_SHORT.map((_,i) => i >= 4 && i <= 5 ? 'rgba(200,169,110,0.8)' : i >= 9 && i <= 10 ? 'rgba(200,169,110,0.8)' : 'rgba(200,169,110,0.35)'), borderRadius: 3 }
-  ], { scales: { ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { ...CHART_DEFAULTS.scales.y.ticks, callback: v => v+'%' } } } }));
-  
-  // Year buttons for drilldown
-  const btnContainer = document.getElementById('year-btns');
-  btnContainer.innerHTML = DATA.years.map(y => `<button class="year-btn ${y===drillYear?'active':''}" onclick="setDrillYear(${y})">${y}</button>`).join('');
-  
-  buildDrilldown();
+  mkChart('chartEstacional', {
+    type:'bar',
+    data:{ labels:MSHORT, datasets:[{ label:'% ingreso anual (prom. 2020–2025)', data:SEASONAL,
+      backgroundColor:MSHORT.map((_,i)=>i===4||i===5||i===9||i===10?'rgba(200,169,110,0.85)':'rgba(200,169,110,0.35)'),
+      borderRadius:3 }]},
+    options: baseOpts({ scales:BASE_PCT_SCALES, plugins:{ legend:{ labels:TXL }, tooltip:{ callbacks:{ label:ctx=>' '+ctx.raw+'%' } } } })
+  });
+
+  // Year buttons
+  document.getElementById('year-btns').innerHTML = DATA.years.map(y =>
+    `<button class="year-btn ${y===drillYear?'active':''}" onclick="setDrill(${y},this)">${y}</button>`
+  ).join('');
+  buildDrill();
 }
 
-function setDrillYear(y) {
+function setDrill(y, btn) {
   drillYear = y;
-  document.querySelectorAll('.year-btn').forEach(b => b.classList.toggle('active', parseInt(b.textContent) === y));
-  buildDrilldown();
+  document.querySelectorAll('.year-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  buildDrill();
 }
 
-function buildDrilldown() {
-  const ym = DATA.hist_monthly[String(drillYear)] || {};
-  const months = MESES.filter(m => ym[m] && ym[m].ing > 0);
-  if (months.length === 0) return;
-  
-  document.getElementById('drilldown-title').textContent = `Ingresos Mensuales ${drillYear}`;
+function buildDrill() {
+  const ym = DATA.hist_monthly[String(drillYear)]||{};
+  const ms = MESES.filter(m=>ym[m]&&ym[m].ing>0);
+  if (!ms.length) return;
+  document.getElementById('drilldown-title').textContent  = `Ingresos Mensuales ${drillYear}`;
   document.getElementById('drilldown-title2').textContent = `EBITDA Mensual ${drillYear}`;
-  
-  const ings = months.map(m => ym[m].ing);
-  const ebitdas = months.map(m => ym[m].ebitda);
-  const ebColors = ebitdas.map(v => v >= 0 ? 'rgba(90,181,133,0.75)' : 'rgba(212,95,95,0.75)');
-  
-  // Compare with prev year
-  const prevYm = DATA.hist_monthly[String(drillYear-1)] || {};
-  const ingPrev = months.map(m => prevYm[m]?.ing || 0);
-  
-  makeChart('chartDrillIngresos', chartCfg('bar', months.map(m=>m.substring(0,3)), [
-    { label: String(drillYear), data: ings, backgroundColor: 'rgba(200,169,110,0.7)', borderRadius: 3 },
-    { label: String(drillYear-1), data: ingPrev, backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 3 },
-  ]));
-  makeChart('chartDrillEBITDA', { type: 'bar', data: { labels: months.map(m=>m.substring(0,3)),
-    datasets: [{ label: `EBITDA ${drillYear}`, data: ebitdas, backgroundColor: ebColors, borderRadius: 3 }]},
-    options: { responsive: true, maintainAspectRatio: true, plugins: CHART_DEFAULTS.plugins, scales: CHART_DEFAULTS.scales }
+  const py = DATA.hist_monthly[String(drillYear-1)]||{};
+  mkChart('chartDrillIngresos', {
+    type:'bar',
+    data:{ labels:ms.map(m=>m.substring(0,3)), datasets:[
+      { label:String(drillYear),   data:ms.map(m=>ym[m].ing),     backgroundColor:'rgba(200,169,110,0.7)', borderRadius:3 },
+      { label:String(drillYear-1), data:ms.map(m=>py[m]?.ing||0), backgroundColor:'rgba(255,255,255,0.1)', borderRadius:3 },
+    ]},
+    options: baseOpts()
+  });
+  const eb = ms.map(m=>ym[m].ebitda);
+  mkChart('chartDrillEBITDA', {
+    type:'bar',
+    data:{ labels:ms.map(m=>m.substring(0,3)), datasets:[{
+      label:`EBITDA ${drillYear}`, data:eb,
+      backgroundColor:eb.map(v=>v>=0?'rgba(90,181,133,0.75)':'rgba(212,95,95,0.75)'), borderRadius:3
+    }]},
+    options: baseOpts()
   });
 }
 
-
+/* ════════════════════════════════════════════
+   SECCIÓN: INSIGHTS
+════════════════════════════════════════════ */
 function buildInsights() {
-  const mbDrop = YTD.mb_pct - YTD.mb_pct_25;
-  const mbImpact = YTD.mb - YTD.mb_25 * (YTD.ing / YTD.ing_25);
+  const mbDiff = YTD.mb_pct - YTD.mb_pct_25;
+  const mbImpact = YTD.mb - YTD.mb_25*(YTD.ing/YTD.ing_25);
   const runRate = YTD.ing * 6;
-  const presAnual = Object.values(DATA.data_pres).reduce((a,d) => a + (d.ing||0), 0);
-  const gapVsPres = (runRate - presAnual) / presAnual;
-  
-  const insights = [
-    { type: mbDrop < -0.03 ? 'alert' : 'warn', icon: '📉',
-      tag: mbDrop < -0.03 ? 'CRÍTICO' : 'ATENCIÓN',
-      text: `Caída de margen bruto <strong>${(mbDrop*100).toFixed(1)}pp</strong> YTD: ${pct(YTD.mb_pct)} en 2026 vs ${pct(YTD.mb_pct_25)} en 2025. Impacto absoluto estimado <strong>${fmt(mbImpact)}</strong>. Causa requiere diagnóstico: mix de canales, tipo de cambio, política de descuentos.` },
-    { type: YTD.ebitda < 0 ? 'alert' : 'ok', icon: YTD.ebitda < 0 ? '⚠' : '✓',
-      tag: YTD.ebitda < 0 ? 'DÉFICIT OPERACIONAL' : 'EBITDA POSITIVO',
-      text: `EBITDA YTD: <strong>${fmt(YTD.ebitda)}</strong> (${pct(YTD.ebitda_pct)}). ${YTD.ebitda < 0 ? `Los gastos operacionales superan el margen bruto en <strong>${fmt(-YTD.ebitda)}</strong>. El patrón Q1 negativo es histórico — meses mayo y octubre son decisivos.` : `Positivo. Q1 históricamente es débil para Giani.`}` },
-    { type: 'ok', icon: '📈', tag: 'MEJORA VS 2025',
-      text: `EBITDA mejora <strong>${fmt(YTD.ebitda - YTD.ebitda_25)}</strong> vs mismo período 2025 (de ${fmt(YTD.ebitda_25)} a ${fmt(YTD.ebitda)}). Ingresos YTD crecen <strong>${pct(delta(YTD.ing, YTD.ing_25))}</strong>.` },
-    { type: 'info', icon: '🔁', tag: 'PALANCA OPERATIVA',
-      text: `Con gastos fijos estimados en <strong>$163M/mes</strong>, el leverage operativo es elevado. Cada +10% en ventas genera ~$14M adicional de EBITDA mensual. Los meses <strong>Mayo, Octubre y Noviembre</strong> concentran históricamente el 35–40% de los ingresos anuales.` },
-    { type: YTD.ing / YTD.ing_pres < 0.97 ? 'warn' : 'ok', icon: '🎯',
-      tag: YTD.ing / YTD.ing_pres < 0.97 ? 'BAJO PRESUPUESTO' : 'EN LÍNEA CON PRESUPUESTO',
-      text: `Ingresos YTD ${pct(delta(YTD.ing, YTD.ing_pres))} vs presupuesto (<strong>${fmt(YTD.ing_pres)}</strong> presupuestado vs <strong>${fmt(YTD.ing)}</strong> real). Run-rate anual implícito: <strong>${fmt(runRate)}</strong>.` },
-    { type: 'info', icon: '📦', tag: 'CANALES',
-      text: `Canal Web representa el <strong>${pct(DATA.canal_2026['Pagina Web'].ytd_ing / YTD.ing)}</strong> de los ingresos con margen ${pct(DATA.canal_2026['Pagina Web'].ytd_mb_pct)} — el más bajo de los canales activos. Tiendas físicas (Araucaria + Costanera) mantienen márgenes sobre <strong>48%</strong>.` },
-    { type: 'info', icon: '📅', tag: 'ESTACIONALIDAD',
-      text: `Datos 2020–2025 confirman que Enero y Febrero son los <strong>meses más débiles del año</strong> (7–8% del ingreso anual cada uno vs 12–13% en Mayo, Octubre y Noviembre). El EBITDA negativo en Q1 es estructural, no señal de deterioro aislado.` },
-    { type: 'info', icon: '💬', tag: 'USE EL CHAT',
-      text: `Haga clic en <strong>"Consultar IA"</strong> para analizar cualquier período, canal o partida en detalle. Puede preguntar en lenguaje natural: "¿cómo fue octubre 2021?", "¿cuánto creció Web en 2023?", "proyección si crecemos 15%".` },
+  const presAnual = MESES.reduce((a,m)=>(a+(DATA.data_pres[m]?.ing||0)),0);
+  const webPct = DATA.canal_2026['Pagina Web'].ytd_ing / YTD.ing;
+
+  const ins = [
+    { t: mbDiff < -0.03 ? 'alert' : 'warn', ic:'📉',
+      tag: mbDiff < -0.03 ? 'CRÍTICO — MARGEN BRUTO' : 'ATENCIÓN — MARGEN BRUTO',
+      txt:`Caída <strong>${(mbDiff*100).toFixed(1)}pp</strong>: ${fmtP(YTD.mb_pct)} en 2026 vs ${fmtP(YTD.mb_pct_25)} en 2025. Impacto absoluto: <strong>${fmtM(mbImpact)}</strong>. Verificar: mix canales, tipo de cambio, descuentos.` },
+    { t: YTD.ebitda < 0 ? 'alert' : 'ok', ic: YTD.ebitda<0?'⚠':'✓',
+      tag: YTD.ebitda < 0 ? 'DÉFICIT OPERACIONAL Q1' : 'EBITDA POSITIVO',
+      txt:`EBITDA YTD: <strong>${fmtM(YTD.ebitda)}</strong> (${fmtP(YTD.ebitda_pct)}). ${YTD.ebitda<0?`Déficit estructural Q1 — histórico. Mayo y Oct son los meses decisivos.`:`Q1 positivo. Fuerte señal para el año.`}` },
+    { t:'ok', ic:'📈', tag:'MEJORA VS 2025',
+      txt:`EBITDA mejora <strong>${fmtM(YTD.ebitda - YTD.ebitda_25)}</strong> vs mismo período 2025. Ingresos crecen <strong>${fmtSign(dlt(YTD.ing,YTD.ing_25))}</strong> YTD.` },
+    { t: YTD.ing < YTD.ing_pres*0.97 ? 'warn' : 'ok', ic:'🎯',
+      tag: YTD.ing < YTD.ing_pres*0.97 ? 'BAJO PRESUPUESTO' : 'EN LÍNEA CON PRESUPUESTO',
+      txt:`Real ${fmtM(YTD.ing)} vs Presupuesto ${fmtM(YTD.ing_pres)} (${fmtSign(dlt(YTD.ing,YTD.ing_pres))}). Run-rate anual implícito: <strong>${fmtM(runRate)}</strong> vs presupuesto anual ${fmtM(presAnual)}.` },
+    { t:'info', ic:'🏪', tag:'CANALES',
+      txt:`Web concentra <strong>${(webPct*100).toFixed(0)}%</strong> de ingresos con margen ${fmtP(DATA.canal_2026['Pagina Web'].ytd_mb_pct)}. Tiendas físicas mantienen márgenes sobre <strong>48%</strong>. Mayorista y Boutique con margen más bajo (~35%).` },
+    { t:'info', ic:'📅', tag:'ESTACIONALIDAD',
+      txt:`Ene–Feb históricamente representan <strong>14–16%</strong> del ingreso anual. Mayo, Oct y Nov concentran el <strong>35–40%</strong>. EBITDA negativo en Q1 es estructural para Giani.` },
+    { t:'info', ic:'📊', tag:'LEVERAGE OPERATIVO',
+      txt:`GAV + GF totalizan <strong>${fmtM(-(YTD.gav+YTD.gf))}</strong> YTD (${fmtP((YTD.gav+YTD.gf)/YTD.ing)} / ingresos). Base de costos fijos alta: cada punto porcentual adicional de margen genera ~${fmtM(YTD.ing*0.01)} de EBITDA.` },
+    { t:'info', ic:'💬', tag:'CFO ASSISTANT',
+      txt:`Use el botón <strong>"Consultar IA"</strong> para explorar cualquier período, canal o partida. Ejemplos: "¿Cómo fue octubre 2021?", "¿Cuánto creció Web en 2023?", "Proyección si Mayo crece 20%".` },
   ];
-  
-  document.getElementById('insights-grid').innerHTML = insights.map(ins => `
-    <div class="insight ${ins.type}">
-      <div class="insight-icon">${ins.icon}</div>
-      <div>
-        <div class="insight-tag">${ins.tag}</div>
-        <div class="insight-text">${ins.text}</div>
-      </div>
+
+  document.getElementById('insights-grid').innerHTML = ins.map(i=>`
+    <div class="insight ${i.t}">
+      <div class="insight-icon">${i.ic}</div>
+      <div><div class="insight-tag">${i.tag}</div><div class="insight-text">${i.txt}</div></div>
     </div>`).join('');
 }
 
-
+/* ════════════════════════════════════════════
+   CHAT — CFO ASSISTANT
+════════════════════════════════════════════ */
 function toggleChat() {
   document.getElementById('chat-panel').classList.toggle('open');
   document.getElementById('chat-overlay').classList.toggle('open');
 }
-
 function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); sendChat(); }
 }
-
-function sendSuggestion(btn) {
+function sendSugg(btn) {
   document.getElementById('chat-input').value = btn.textContent;
-  sendMessage();
+  sendChat();
 }
-
-function addMessage(role, html, time = null) {
+function addMsg(role, html) {
   const msgs = document.getElementById('chat-messages');
-  const t = time || new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
-  const div = document.createElement('div');
-  div.className = `msg ${role}`;
-  div.innerHTML = `<div class="msg-bubble">${html}</div><div class="msg-time">${t}</div>`;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-  return div;
+  const t = new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+  const d = document.createElement('div');
+  d.className = 'msg '+role;
+  d.innerHTML = `<div class="msg-bubble">${html}</div><div class="msg-time">${t}</div>`;
+  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
 }
-
 function showTyping() {
   const msgs = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = 'msg assistant';
-  div.id = 'typing-indicator';
-  div.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
+  const d = document.createElement('div');
+  d.className = 'msg assistant'; d.id = 'typing-ind';
+  d.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
 }
+function rmTyping() { const t=document.getElementById('typing-ind'); if(t)t.remove(); }
 
-function removeTyping() {
-  const t = document.getElementById('typing-indicator');
-  if (t) t.remove();
-}
-
-// Build compact data context for the AI
-function buildDataContext() {
-  const years = DATA.years;
-  const annuals = DATA.hist_annual;
-  
-  let ctx = `DATOS FINANCIEROS GIANI DAFIRENZE — CONTEXTO COMPLETO\n\n`;
-  ctx += `EMPRESA: Giani Dafirenze, empresa chilena de zapatos 100% cuero, diseño chileno.\n`;
-  ctx += `Canales de venta: Tienda Araucaria, Tienda Costanera, Página Web (e-commerce), Mayorista, Boutique, Marketplace.\n\n`;
-  
-  ctx += `═══ DATOS 2026 YTD (Enero-Febrero real) ═══\n`;
-  ctx += `Ingresos: $${(YTD.ing/1e6).toFixed(1)}M | Costo: $${(YTD.costo/1e6).toFixed(1)}M | Margen Bruto: $${(YTD.mb/1e6).toFixed(1)}M (${(YTD.mb_pct*100).toFixed(1)}%)\n`;
-  ctx += `EBITDA: $${(YTD.ebitda/1e6).toFixed(1)}M (${(YTD.ebitda_pct*100).toFixed(1)}%) | Resultado: $${(YTD.res/1e6).toFixed(1)}M\n\n`;
-  
-  ctx += `Enero 2026: Ing=$${(DATA.data_2026.ENERO.ing/1e6).toFixed(1)}M | MB=${(DATA.data_2026.ENERO.mb_pct*100).toFixed(1)}% | EBITDA=$${(DATA.data_2026.ENERO.ebitda/1e6).toFixed(1)}M\n`;
-  ctx += `Febrero 2026: Ing=$${(DATA.data_2026.FEBRERO.ing/1e6).toFixed(1)}M | MB=${(DATA.data_2026.FEBRERO.mb_pct*100).toFixed(1)}% | EBITDA=$${(DATA.data_2026.FEBRERO.ebitda/1e6).toFixed(1)}M\n\n`;
-  
-  ctx += `Presupuesto YTD: Ing=$${(YTD.ing_pres/1e6).toFixed(1)}M | MB=$${(YTD.mb_pres/1e6).toFixed(1)}M\n`;
-  ctx += `Vs 2025 YTD: Ing=$${(YTD.ing_25/1e6).toFixed(1)}M (${(delta(YTD.ing,YTD.ing_25)*100).toFixed(1)}%) | MB%=${(YTD.mb_pct_25*100).toFixed(1)}% (Δ${((YTD.mb_pct-YTD.mb_pct_25)*100).toFixed(1)}pp)\n\n`;
-  
-  ctx += `Canales YTD 2026:\n`;
-  CANALES.forEach(c => {
-    const d = DATA.canal_2026[c];
-    ctx += `  ${c}: Ing=$${(d.ytd_ing/1e6).toFixed(1)}M | MB=${(d.ytd_mb_pct*100).toFixed(1)}%\n`;
+function buildCtx() {
+  const ann = DATA.hist_annual;
+  let c = `GIANI DAFIRENZE — Inteligencia Financiera\n`;
+  c += `Empresa chilena, zapatos 100% cuero. Canales: Tiendas Araucaria y Costanera, Página Web, Mayorista, Boutique, Marketplace.\n\n`;
+  c += `═ YTD ENE-FEB 2026 (REAL) ═\n`;
+  c += `Ingresos: ${fmtM(YTD.ing)} (${fmtSign(dlt(YTD.ing,YTD.ing_25))} vs 2025)\n`;
+  c += `Margen Bruto: ${fmtM(YTD.mb)} = ${fmtP(YTD.mb_pct)} (era ${fmtP(YTD.mb_pct_25)} en 2025, Δ${((YTD.mb_pct-YTD.mb_pct_25)*100).toFixed(1)}pp)\n`;
+  c += `GAV: ${fmtM(-YTD.gav)} (${fmtP(YTD.gav/YTD.ing)} / ing) | Gastos Fijos: ${fmtM(-YTD.gf)} (${fmtP(YTD.gf/YTD.ing)} / ing)\n`;
+  c += `EBITDA: ${fmtM(YTD.ebitda)} = ${fmtP(YTD.ebitda_pct)} | Resultado: ${fmtM(YTD.res)}\n\n`;
+  c += `═ CANALES YTD 2026 ═\n`;
+  CANALES.forEach(can => {
+    const d=DATA.canal_2026[can], d25=DATA.canal_2025[can];
+    c += `${can}: Ing=${fmtM(d.ytd_ing)} MB=${fmtP(d.ytd_mb_pct)} (2025: ${fmtP(d25.ytd_mb_pct)})\n`;
   });
-  
-  ctx += `\n═══ HISTÓRICO ANUAL 2016-2025 ═══\n`;
-  years.forEach(y => {
-    const d = annuals[String(y)];
-    ctx += `${y}: Ing=$${(d.ing/1e6).toFixed(0)}M | MB%=${(d.mb_pct*100).toFixed(1)}% | EBITDA%=${(d.ebitda_pct*100).toFixed(1)}% | Res=$${(d.res/1e6).toFixed(0)}M\n`;
-  });
-  
-  ctx += `\n═══ DATOS MENSUALES 2025 (último año completo) ═══\n`;
-  const ym25 = DATA.hist_monthly['2025'] || {};
+  c += `\n═ PRESUPUESTO 2026 MENSUAL ═\n`;
   MESES.forEach(m => {
-    const d = ym25[m];
-    if (d) ctx += `  ${m.substring(0,3)}: Ing=$${(d.ing/1e6).toFixed(1)}M | MB%=${(d.mb_pct*100).toFixed(1)}% | EBITDA=$${(d.ebitda/1e6).toFixed(1)}M\n`;
+    const dp=DATA.data_pres[m];
+    if(dp) c+=`${m.substring(0,3)}: Ing=${fmtM(dp.ing)} MB=${fmtP(dp.mb_pct)} EBITDA=${fmtM(dp.ebitda)}\n`;
   });
-  
-  ctx += `\n═══ DATOS MENSUALES DISPONIBLES ═══\n`;
-  Object.keys(DATA.hist_monthly).sort().forEach(y => {
-    const months = Object.keys(DATA.hist_monthly[y]);
-    ctx += `  ${y}: ${months.length} meses con datos\n`;
+  c += `\n═ HISTÓRICO ANUAL 2016-2025 ═\n`;
+  DATA.years.forEach(y => {
+    const d=ann[String(y)];
+    c+=`${y}: Ing=${fmtM(d.ing)} MB%=${fmtP(d.mb_pct)} EBITDA%=${fmtP(d.ebitda_pct)} Res=${fmtM(d.res)}\n`;
   });
-  
-  return ctx;
+  c += `\n═ ÚLTIMO AÑO COMPLETO: 2025 MES A MES ═\n`;
+  const ym25=DATA.hist_monthly['2025']||{};
+  MESES.forEach(m=>{ const d=ym25[m]; if(d) c+=`${m.substring(0,3)}: Ing=${fmtM(d.ing)} MB=${fmtP(d.mb_pct)} EBITDA=${fmtM(d.ebitda)} GAV=${fmtM(-d.gav)} GF=${fmtM(-d.gf)}\n`; });
+  c += `\n═ ESTACIONALIDAD (% ingreso anual, prom 2020-2025) ═\n`;
+  MESES.forEach((m,i)=>{ c+=`${MSHORT[i]}=${SEASONAL[i]}% `; });
+  return c;
 }
 
-let chatHistory = [];
+let chatHist = [];
+async function sendChat() {
+  const inp = document.getElementById('chat-input');
+  const txt = inp.value.trim(); if (!txt) return;
+  const btn = document.getElementById('chat-send');
+  btn.disabled = true; inp.value = '';
+  addMsg('user', txt.replace(/</g,'&lt;')); showTyping();
 
-async function sendMessage() {
-  const input = document.getElementById('chat-input');
-  const text = input.value.trim();
-  if (!text) return;
-  
-  const sendBtn = document.getElementById('chat-send');
-  sendBtn.disabled = true;
-  input.value = '';
-  
-  addMessage('user', text);
-  showTyping();
-  
-  const dataContext = buildDataContext();
-  
-  // Build messages for API
-  const systemPrompt = `Eres el CFO Assistant de Giani Dafirenze, asistente de inteligencia financiera con acceso completo a los datos reales de la empresa.
+  const sys = `Eres el CFO Assistant de Giani Dafirenze. Tienes acceso completo a los datos financieros reales de la empresa y respondes preguntas con precisión de CFO Senior.
 
-Tu rol: analizar datos financieros, responder preguntas sobre períodos específicos, calcular proyecciones, comparar años, y entregar insights concretos. Eres directo, preciso y profesional. Sin relleno.
+DATOS:
+${buildCtx()}
 
-DATOS DISPONIBLES:
-${dataContext}
-
-Formato de respuesta:
+INSTRUCCIONES:
 - Responde siempre en español
-- Usa formato claro con <strong> para resaltar cifras clave
-- Sé conciso pero completo
-- Si te preguntan por un mes específico de un año, revisa los datos mensuales
-- Si calculan proyecciones, usa los datos históricos de estacionalidad
-- Montos en millones con 1 decimal (ej: $161.1M) o en pesos completos para análisis detallados
-- Siempre poner contexto: ¿es bueno o malo ese número? ¿vs qué referencia?`;
+- Usa <strong> para resaltar cifras clave
+- Sé conciso y preciso — sin relleno
+- Para montos usa millones con 1 decimal (ej: $161.1M) salvo que el contexto pida más detalle
+- Siempre da contexto: ¿es bueno o malo ese número?
+- Si calculan proyecciones, usa la estacionalidad histórica
+- Para datos mensuales de años históricos puedes referenciar los datos de hist_monthly que tienes`;
 
-  const messages = [
-    ...chatHistory.map(m => ({ role: m.role, content: m.content })),
-    { role: 'user', content: text }
-  ];
-  
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: messages
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system: sys,
+        messages:[...chatHist.map(m=>({'role':m.r,'content':m.c})), {'role':'user','content':txt}]
       })
     });
-    
-    const data = await response.json();
-    const reply = data.content?.[0]?.text || 'No se pudo obtener respuesta.';
-    
-    chatHistory.push({ role: 'user', content: text });
-    chatHistory.push({ role: 'assistant', content: reply });
-    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
-    
-    removeTyping();
-    addMessage('assistant', reply.replace(/\n/g, '<br>'));
-    
-  } catch (err) {
-    removeTyping();
-    addMessage('assistant', `<span style="color:var(--red)">Error conectando con la IA. Verifique conexión.</span>`);
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
+    const reply = data.content?.[0]?.text || '—';
+    chatHist.push({'r':'user','c':txt}, {'r':'assistant','c':reply});
+    if (chatHist.length > 20) chatHist = chatHist.slice(-20);
+    rmTyping();
+    addMsg('assistant', reply.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>'));
+  } catch(e) {
+    rmTyping();
+    addMsg('assistant', `<span style="color:var(--red)">Error: ${e.message}. Si el error persiste, verifique que la API key esté configurada.</span>`);
   }
-  
-  sendBtn.disabled = false;
+  btn.disabled = false;
 }
 
+/* ── INIT ──────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', buildResumen);
 
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('sec-' + id).classList.add('active');
-  event.target.classList.add('active');
-  
-  if (id === 'eerr') buildEERR();
-  if (id === 'canales') buildCanales();
-  if (id === 'costos') buildCostos();
-  if (id === 'historico') buildHistorico();
-  if (id === 'insights') buildInsights();
-}
-
-// Init
-document.addEventListener('DOMContentLoaded', () => {
-  buildResumen();
-});
 </script>
 </body>
 </html>
