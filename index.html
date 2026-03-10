@@ -490,11 +490,22 @@ function buildEERR() {
   if(hasPres) h+='<th>PRES YTD</th><th>Δ PRES</th>';
   h+='<th>'+py+' YTD</th><th>Δ '+py+'</th></tr></thead><tbody>';
 
+  // Keys stored WITH their natural sign (can be + or −):
+  var SIGNED_KEYS = {mb:1, otros_ing:1, ebitda:1, res:1};
+  // Keys stored as abs() in extractor (always costs, always shown negative):
+  var COST_KEYS   = {costo:1, otros_cv:1, gav:1, gf:1, regalos:1, robos:1, gastos_total:1, dep:1, gfin:1};
+
   ROWS.forEach(function(row){
     function gv(src,m){
       var d=src[m]; if(!d)return null;
       var v=d[row.k]; if(v===undefined||v===null)return null;
-      return Math.abs(v)===0?0:Math.abs(v)*row.s;
+      if(v===0)return 0;
+      // Signed keys: keep value exactly as stored (sign reflects gain/loss)
+      if(SIGNED_KEYS[row.k])return v;
+      // ing: always positive
+      if(row.k==='ing')return Math.abs(v);
+      // Cost keys: always negative (stored as abs, display as negative)
+      return -Math.abs(v);
     }
     var vals=ms.map(function(m){return gv(r,m);});
     var ytdV=vals.reduce(function(a,v){return a+(v||0);},0);
@@ -506,10 +517,11 @@ function buildEERR() {
     h+='<tr class="'+rc+'"><td>'+row.l+'</td>';
     vals.forEach(function(v){
       if(v===null){h+='<td class="mut">—</td>';return;}
-      var vc=row.t==='tot'&&row.k!=='ing'?(v>=0?'pos':'neg'):'';
+      // Color: only for result rows (mb, ebitda, res) — green if positive, red if negative
+      var vc = (SIGNED_KEYS[row.k] && row.k!=='ing' && row.k!=='otros_ing') ? (v>=0?'pos':'neg') : '';
       h+='<td class="'+vc+'">'+F(v)+'</td>';
     });
-    var yc=row.t==='tot'&&row.k!=='ing'?(ytdV>=0?'pos':'neg'):'';
+    var yc = (SIGNED_KEYS[row.k] && row.k!=='ing' && row.k!=='otros_ing') ? (ytdV>=0?'pos':'neg') : '';
     h+='<td class="'+yc+'">'+F(ytdV)+'</td>';
     if(hasPres){
       var dp=presV?dlt(ytdV,presV):null;
