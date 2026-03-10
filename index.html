@@ -725,37 +725,180 @@ function buildDrill() {
 }
 
 // ═══════════════════════════════════════════
-// INSIGHTS
+// INSIGHTS — CFO Grade
 // ═══════════════════════════════════════════
 function buildIns() {
-  var mbD=YTD.mb_pct-YTD.mb_pct_25;
-  var mbImp=YTD.mb-YTD.mb_25*(YTD.ing/YTD.ing_25);
-  var rr=YTD.ing*6;
-  var presAnual=MESES.reduce(function(a,m){return a+(D.data_pres[m]?D.data_pres[m].ing||0:0);},0);
-  var wPct=D.canal_2026['Pagina Web'].ytd_ing/YTD.ing;
-  var ins=[
-    {t:mbD<-.03?'alert':'warn',ic:'📉',tag:mbD<-.03?'CRÍTICO — MARGEN':'ATENCIÓN — MARGEN',
-      txt:'Caída <strong>'+(mbD*100).toFixed(1)+'pp</strong>: '+P(YTD.mb_pct)+' en 2026 vs '+P(YTD.mb_pct_25)+' en 2025. Impacto absoluto: <strong>'+M(mbImp)+'</strong>.'},
-    {t:YTD.ebitda<0?'alert':'ok',ic:YTD.ebitda<0?'⚠':'✓',
-      tag:YTD.ebitda<0?'DÉFICIT OPERACIONAL Q1':'EBITDA POSITIVO Q1',
-      txt:'EBITDA YTD: <strong>'+M(YTD.ebitda)+'</strong> ('+P(YTD.ebitda_pct)+'). '+(YTD.ebitda<0?'Q1 históricamente deficitario — mayo y octubre son los meses clave.':'Q1 positivo. Señal fuerte para el año.')},
-    {t:'ok',ic:'📈',tag:'TENDENCIA VS 2025',
-      txt:'Ingresos crecen <strong>'+P(Math.abs(dlt(YTD.ing,YTD.ing_25)))+' </strong> vs 2025. EBITDA mejora <strong>'+M(YTD.ebitda-YTD.ebitda_25)+'</strong>.'},
-    {t:YTD.ing<YTD.ing_pres*.97?'warn':'ok',ic:'🎯',
-      tag:YTD.ing<YTD.ing_pres*.97?'BAJO PRESUPUESTO':'EN LÍNEA CON PRESUPUESTO',
-      txt:'Real '+M(YTD.ing)+' vs Pres '+M(YTD.ing_pres)+'. Run-rate anual: <strong>'+M(rr)+'</strong> vs presupuesto '+M(presAnual)+'.'},
-    {t:'info',ic:'🏪',tag:'CANALES',
-      txt:'Web concentra <strong>'+(wPct*100).toFixed(0)+'%</strong> de ingresos con margen '+P(D.canal_2026['Pagina Web'].ytd_mb_pct)+'. Tiendas físicas sobre <strong>48%</strong>. Mayorista/Boutique ~35%.'},
-    {t:'info',ic:'📅',tag:'ESTACIONALIDAD',
-      txt:'Ene–Feb ~15% del ingreso anual histórico. Mayo, Oct y Nov concentran <strong>35–40%</strong>. EBITDA negativo Q1 es estructural para Giani.'},
-    {t:'info',ic:'📊',tag:'LEVERAGE OPERATIVO',
-      txt:'GAV+GF = <strong>'+M(-(YTD.gav+YTD.gf))+'</strong> YTD ('+P((YTD.gav+YTD.gf)/YTD.ing)+' sobre ingresos). Cada +1pp de margen genera ~'+M(YTD.ing*.01)+' de EBITDA adicional.'},
-    {t:'info',ic:'💬',tag:'CFO ASSISTANT',
-      txt:'Use <strong>"Consultar IA"</strong> para analizar cualquier período, canal o partida en lenguaje natural.'},
-  ];
-  document.getElementById('ins-grid').innerHTML=ins.map(function(i){
-    return '<div class="ins '+i.t+'"><div class="ins-ic">'+i.ic+'</div>'
-      +'<div><div class="ins-tag">'+i.tag+'</div><div class="ins-txt">'+i.txt+'</div></div></div>';
+  var ann = D.hist_annual;
+  var presAnual = MESES.reduce(function(a,m){return a+(D.data_pres[m]?D.data_pres[m].ing||0:0);},0);
+  var presEBITDA = MESES.reduce(function(a,m){return a+(D.data_pres[m]?D.data_pres[m].ebitda||0:0);},0);
+
+  // ── Key metrics ──────────────────────────────────────────────
+  var mbD       = YTD.mb_pct - YTD.mb_pct_25;         // MB% delta pp
+  var gt        = YTD.gav + YTD.gf;                   // total opex
+  var gt25      = D.data_2025['ENERO']&&D.data_2025['FEBRERO']
+                  ? (D.data_2025['ENERO'].gav||0)+(D.data_2025['ENERO'].gf||0)
+                    +(D.data_2025['FEBRERO'].gav||0)+(D.data_2025['FEBRERO'].gf||0) : 0;
+  var gt_pct    = gt / YTD.ing;
+  var gt_pct25  = gt25 / YTD.ing_25;
+  var gav_pct   = YTD.gav / YTD.ing;
+  var gf_pct    = YTD.gf  / YTD.ing;
+  var gav_pct25 = (D.data_2025['ENERO']&&D.data_2025['FEBRERO'])
+                  ? ((D.data_2025['ENERO'].gav||0)+(D.data_2025['FEBRERO'].gav||0)) / YTD.ing_25 : 0;
+  var gf_pct25  = gt_pct25 - gav_pct25;
+  var ebitda_delta = YTD.ebitda - YTD.ebitda_25;
+  var gfin_pct  = YTD.gfin / YTD.ing;
+
+  // Decompose MB variation: volume effect vs rate effect
+  var mb_efecto_vol  = (YTD.ing - YTD.ing_25) * YTD.mb_pct_25;
+  var mb_efecto_rate = YTD.ing_25 * mbD;
+
+  // Run-rate and break-even
+  var ene_feb_weight = (SEASONAL[0]+SEASONAL[1])/100;
+  var rr_estacional  = YTD.ing / ene_feb_weight;
+  var fixed_ann_est  = gt * 6;
+  var be_ing         = fixed_ann_est / YTD.mb_pct;
+  var seg_margin     = (presAnual - be_ing) / presAnual;
+
+  // Q1 EBITDA% history for context
+  var q1_hist = {2020:2.9, 2021:24.8, 2022:12.4, 2023:3.3, 2024:-3.6, 2025:1.4};
+  var q1_2026_ytd_pct = (YTD.ebitda / YTD.ing * 100).toFixed(1);
+
+  // Canal insights
+  var web   = D.canal_2026['Pagina Web'];   var web25  = D.canal_2025['Pagina Web'];
+  var arc   = D.canal_2026['Tienda Araucaria']; var arc25 = D.canal_2025['Tienda Araucaria'];
+  var cos_c = D.canal_2026['Tienda Costanera']; var cos25 = D.canal_2025['Tienda Costanera'];
+  var may   = D.canal_2026['Mayorista'];    var may25  = D.canal_2025['Mayorista'];
+  var bout  = D.canal_2026['Boutique'];     var bout25 = D.canal_2025['Boutique'];
+  var web_share = web.ytd_ing / YTD.ing;
+  var store_share = (arc.ytd_ing + cos_c.ytd_ing) / YTD.ing;
+  // Best and worst canal by margin
+  var cMBs = CANALES.map(function(c){return {c:c,mb:D.canal_2026[c].ytd_mb_pct};});
+  cMBs.sort(function(a,b){return b.mb-a.mb;});
+  var bestCanal = cMBs[0]; var worstCanal = cMBs[cMBs.length-1];
+
+  // Historical trend: GAV creep
+  var gav21pct = ann['2021'].gav / ann['2021'].ing;
+  var gav25pct = ann['2025'].gav / ann['2025'].ing;
+  var gavCreep = gav_pct - gav21pct;
+
+  // CAGR
+  var cagr = Math.pow(ann['2025'].ing / ann['2016'].ing, 1/9) - 1;
+
+  // ── Build insight cards ──────────────────────────────────────
+  var ins = [];
+
+  // 1. REVENUE PERFORMANCE
+  var ingDelta = dlt(YTD.ing, YTD.ing_25);
+  var ingVsPres = dlt(YTD.ing, YTD.ing_pres);
+  ins.push({
+    t: ingDelta > 0.1 ? 'ok' : ingDelta > 0 ? 'ok' : 'warn',
+    ic: ingDelta > 0 ? '📈' : '📉',
+    tag: 'INGRESOS — CRECIMIENTO ' + (ingDelta >= 0 ? '+' : '') + (ingDelta*100).toFixed(1) + '% vs 2025',
+    txt: 'YTD <strong>' + M(YTD.ing) + '</strong> vs <strong>' + M(YTD.ing_25) + '</strong> en 2025. '
+       + 'El volumen adicional generó <strong>' + M(mb_efecto_vol) + '</strong> de margen bruto adicional. '
+       + 'Respecto al presupuesto: <strong>' + (ingVsPres>=0?'+':'') + (ingVsPres*100).toFixed(1) + '%</strong> '
+       + '(' + M(YTD.ing - YTD.ing_pres) + '). '
+       + 'Run-rate estacional implica <strong>' + M(rr_estacional) + '</strong> para el año completo '
+       + 'vs presupuesto de <strong>' + M(presAnual) + '</strong>.'
+  });
+
+  // 2. MARGIN ANALYSIS — most important card
+  ins.push({
+    t: Math.abs(mbD) < 0.01 ? 'ok' : mbD > 0 ? 'ok' : mbD > -0.03 ? 'warn' : 'alert',
+    ic: mbD > 0 ? '✓' : '⚠',
+    tag: 'MARGEN BRUTO — ' + P(YTD.mb_pct) + ' YTD 2026 vs ' + P(YTD.mb_pct_25) + ' en 2025',
+    txt: 'Variación de <strong>' + (mbD*100>=0?'+':'') + (mbD*100).toFixed(1) + 'pp</strong>. '
+       + 'Descomposición: efecto volumen <strong>' + M(mb_efecto_vol) + '</strong>, '
+       + 'efecto precio/costo <strong>' + M(mb_efecto_rate) + '</strong>. '
+       + 'El margen actual de ' + P(YTD.mb_pct) + ' está '
+       + (YTD.mb_pct > 0.50 ? 'en línea con el peak 2021 (54.7%).' :
+          YTD.mb_pct > 0.44 ? 'en línea con el promedio 2022–2025 (50%).' :
+          'por debajo del rango histórico reciente (49–51%).')
+       + ' Contexto histórico: peak 54.7% (2021), promedio 2022–2025: 50.2%.'
+  });
+
+  // 3. OPEX EFFICIENCY — the structural story
+  ins.push({
+    t: gt_pct < 0.46 ? 'ok' : gt_pct < 0.52 ? 'warn' : 'alert',
+    ic: gt_pct < gt_pct25 ? '✓' : '⚠',
+    tag: 'EFICIENCIA OPERACIONAL — GAV+GF = ' + P(gt_pct) + ' / ing (era ' + P(gt_pct25) + ' en 2025)',
+    txt: 'Mejora de <strong>' + ((gt_pct25 - gt_pct)*100).toFixed(1) + 'pp</strong> en ratio de gastos sobre ingresos. '
+       + 'GAV: <strong>' + P(gav_pct) + '</strong> (2021: ' + P(gav21pct) + ' — ' + ((gav_pct-gav21pct)*100>=0?'+':'') + ((gav_pct-gav21pct)*100).toFixed(1) + 'pp de creep estructural). '
+       + 'Gastos Fijos: <strong>' + P(gf_pct) + '</strong>. '
+       + 'Punto de equilibrio estimado: <strong>' + M(be_ing) + '</strong> de ingresos anuales, '
+       + 'con margen de seguridad de <strong>' + P(seg_margin) + '</strong> sobre el presupuesto.'
+  });
+
+  // 4. EBITDA + Q1 context
+  var q1_mejor = YTD.ebitda_pct > -0.036;
+  ins.push({
+    t: YTD.ebitda > 0 ? 'ok' : YTD.ebitda > -10e6 ? 'warn' : 'alert',
+    ic: YTD.ebitda > 0 ? '✓' : '📊',
+    tag: 'EBITDA — ' + M(YTD.ebitda) + ' (' + P(YTD.ebitda_pct) + ') · Mejora ' + M(ebitda_delta) + ' vs 2025',
+    txt: 'Q1 2026: <strong>' + q1_2026_ytd_pct + '%</strong> EBITDA margin. '
+       + 'Patrón histórico Q1: 2020: +2.9%, 2021: +24.8%, 2022: +12.4%, 2023: +3.3%, 2024: <span class="neg">-3.6%</span>, 2025: +1.4%. '
+       + (q1_mejor ? 'El resultado actual mejora el déficit de 2024 y está <strong>cerca del nivel 2023</strong>.' : 'Resultado más débil que el promedio histórico Q1.')
+       + ' Gastos financieros representan <strong>' + P(gfin_pct) + '</strong> de ingresos — monitorear costo de deuda.'
+       + ' Resultado neto YTD: <strong>' + M(YTD.res) + '</strong> (mejora de ' + M(YTD.res - (D.data_2025['ENERO']&&D.data_2025['FEBRERO'] ? (D.data_2025['ENERO'].res||0)+(D.data_2025['FEBRERO'].res||0) : 0)) + ' vs 2025).'
+  });
+
+  // 5. CANAL STRATEGY
+  ins.push({
+    t: 'info',
+    ic: '🏪',
+    tag: 'CANALES — Tiendas física lideran con ~' + P(store_share) + ' de ingresos y margen ~49%',
+    txt: '<strong>Mejor margen: ' + bestCanal.c + '</strong> (' + P(bestCanal.mb) + '). '
+       + '<strong>Menor margen: ' + worstCanal.c + '</strong> (' + P(worstCanal.mb) + '). '
+       + 'Web genera <strong>' + P(web_share) + '</strong> de los ingresos con margen ' + P(web.ytd_mb_pct) + ' — el más bajo. '
+       + 'Araucaria creció <strong>+33.6%</strong> y Costanera <strong>+43.8%</strong> vs 2025 (señal positiva en físico). '
+       + 'Mayorista cayó <strong>-22.8%</strong> y Boutique <strong>-55.3%</strong> — revisar estrategia en estos canales.'
+  });
+
+  // 6. STRUCTURAL TREND — the 10-year story
+  ins.push({
+    t: 'info',
+    ic: '📅',
+    tag: 'TENDENCIA ESTRUCTURAL — CAGR 15.5% en ingresos (2016–2025), pero EBITDA% en compresión',
+    txt: 'Ingresos crecieron de <strong>$605M (2016) a $2.208B (2025)</strong> con CAGR de 15.5%. '
+       + 'Sin embargo, EBITDA% cayó de <strong>29.0% (2021) a 5.0% (2025)</strong>: el crecimiento de GAV '
+       + '(de 22.3% a 31.4% de ingresos) está consumiendo el margen bruto. '
+       + 'La pregunta estratégica central: <strong>¿La estructura de costos fijos escala con el negocio o lo frena?</strong>'
+  });
+
+  // 7. SEASONALITY — forward-looking
+  var mayoPct = SEASONAL[4]; var octPct = SEASONAL[9]; var novPct = SEASONAL[10];
+  ins.push({
+    t: 'info',
+    ic: '🗓',
+    tag: 'ESTACIONALIDAD — Mayo, Oct y Nov concentran el ' + (mayoPct+octPct+novPct).toFixed(1) + '% del ingreso anual',
+    txt: 'Distribución prom. 2020–2025: '
+       + 'Ene+Feb = <strong>' + (SEASONAL[0]+SEASONAL[1]).toFixed(1) + '%</strong>, '
+       + 'May = <strong>' + SEASONAL[4] + '%</strong>, '
+       + 'Oct = <strong>' + SEASONAL[9] + '%</strong>, '
+       + 'Nov = <strong>' + SEASONAL[10] + '%</strong>. '
+       + 'El déficit Q1 es estructural y se financia con el superávit de Q4. '
+       + 'Para cumplir presupuesto anual de <strong>' + M(presAnual) + '</strong>, '
+       + 'los meses de Oct–Nov deben entregar ~<strong>' + M(presAnual*(mayoPct+octPct+novPct)/100) + '</strong>.'
+  });
+
+  // 8. LEVERAGE & RISK
+  ins.push({
+    t: gfin_pct > 0.025 ? 'warn' : 'info',
+    ic: gfin_pct > 0.025 ? '⚠' : '💡',
+    tag: 'PALANCA FINANCIERA — Cada +1pp de MB genera ~' + M(YTD.ing * 0.01) + ' adicional de EBITDA (anualizado: ~' + M(YTD.ing*0.06) + ')',
+    txt: 'Base de costos fijos estimada en <strong>' + M(fixed_ann_est) + '</strong> anuales. '
+       + 'Punto de equilibrio: <strong>' + M(be_ing) + '</strong>. '
+       + 'Margen de seguridad vs presupuesto: <strong>' + P(seg_margin) + '</strong>. '
+       + 'Gastos financieros: <strong>' + M(-YTD.gfin) + '</strong> YTD (' + P(gfin_pct) + ' sobre ingresos). '
+       + (gfin_pct > 0.025 ? 'Nivel de deuda <strong>elevado</strong> — revisar calendario y costo de créditos activos.' : 'Nivel de deuda dentro de rangos aceptables.')
+       + ' Para el EERR anual: presupuesto EBITDA = <strong>' + M(presEBITDA) + '</strong>.'
+  });
+
+  document.getElementById('ins-grid').innerHTML = ins.map(function(i){
+    return '<div class="ins '+i.t+'">'
+      +'<div class="ins-ic">'+i.ic+'</div>'
+      +'<div><div class="ins-tag">'+i.tag+'</div><div class="ins-txt">'+i.txt+'</div></div>'
+      +'</div>';
   }).join('');
 }
 
